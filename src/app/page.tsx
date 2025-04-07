@@ -70,7 +70,7 @@ export default function Home() {
               href="ben.com"
               target="_blank"
             >
-              <GlobeIcon /> benjamingarcia.com
+              <GlobeIcon /> https://benjamin-garcia-v4.vercel.app/
             </a>
             <a
               className="flex items-center gap-2 hover:underline text-sm"

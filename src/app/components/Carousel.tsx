@@ -10,56 +10,56 @@ const projects = [
     title: "Benjamin Garcia",
     description: "Portfolio website built with Next.js and Tailwind CSS, highlighting performance and being as lightweight as possible.",
     imageSrc: "/static/project-previews/portfoliov5.png",
-    projectLink: "https://example.com",
+    projectLink: "https://benjamin-garcia-v4.vercel.app/",
     technologies: ["Next.js", "Typescript", "Tailwind"]
   },
   {
     title: "15th Annual Health Professions Conference Website",
     description: "Developed a mobile-first website for Mt. SAC's 15th Annual Health Professions Conference. Designed to help attendees quickly access and submit feedback forms for each session.",
     imageSrc: "/static/project-previews/caduceus.png",
-    projectLink: "https://example.com/ecommerce",
+    projectLink: "https://github.com/bgar324/caduceus-club-website",
     technologies: ["Next", "Typescript", "Tailwind", "Vercel"]
   },
   {
     title: "Mt. SAC Computer Science Club Website",
     description: "Redesigned and developed the Mt. SAC Computer Science Club website using React.JS and Bootstrap to improve functionality, accessibility, and responsiveness. The site serves as a hub for members, providing resources, event details, officer contacts, and Discord access.",
     imageSrc: "/static/project-previews/csclubwebsite-preview.png",
-    projectLink: "https://example.com/weather",
+    projectLink: "https://mtsaccs.netlify.app/",
     technologies: ["React", "Boostrap", "Netlify"]
   },
   {
     title: "logit",
     description: "A full-stack workout logging app designed for a minimal and efficient tracking experience. Users can log workouts, edit past sessions with a React-calendar, and track progress with Recharts visualizations. Workouts are stored in a PostgreSQL database, with support for tags, comments, and dropsets. Built with Next.js, Tailwind CSS, and Prisma, it streamlines workout management while enabling progressive overload tracking.",
     imageSrc: "/static/project-previews/logit-preview.png",
-    projectLink: "https://example.com/tasks",
+    projectLink: "https://github.com/bgar324/logit",
     technologies: ["Next", "React", "Tailwind", "react-calendar", "Recharts", "Supabase", "PostgreSQL", "Prisma"]
   },
   {
     title: "Roadmap Maker",
     description: "Built a CRUD web app using Next.js, Tailwind, and an MUI Timeline for visualizing tasks throughout the year. Users pick a month, define date ranges, and enter a title with an optional description, automatically placing tasks on the timeline. Integrated pdfmake enables generating a downloadable PDF of the entire roadmap.",
     imageSrc: "/static/project-previews/image.png",
-    projectLink: "https://example.com/tasks",
+    projectLink: "https://github.com/bgar324/roadmapMaker",
     technologies: ["Next", "Tailwind", "Material UI", "pdfmake"]
   },
   {
     title: "Tea Spots",
     description: "Collaborated with video production and graphic design teams to redesign a client's website using Square Online, integrating custom CSS, embedded code, and POS systems to support high traffic and dozens of weekly orders. Optimized multimedia assets for a cohesive, brand-aligned experience, resulting in thousands of page views and 200+ unique visits in the first week.",
     imageSrc: "/static/project-previews/teaspots.png",
-    projectLink: "https://example.com/tasks",
+    projectLink: "https://www.myteaspots.com/",
     technologies: ["Square Online", "Square Sites", "Photopea", "Graphic Design", "Video Production"]
   },
   {
     title: "Suika Remake",
     description: "Developed a physics-driven puzzle game featuring realistic ball dynamics using Pymunk, with color-coded merging mechanics and interactive player controls. Integrated gameplay elements like a scoring system, cooldown mechanics, and responsive visuals. Built with Pygame for rendering and Python for game logic and functionality.",
     imageSrc: "/static/project-previews/suika-preview.png",
-    projectLink: "https://example.com/tasks",
+    projectLink: "https://github.com/bgar324/suika",
     technologies: ["Python", "Pygame", "Pymunk"]
   },
   {
     title: "Weather Display",
     description: "Used OpenWeather's API in order to retrieve live data within the week based on the user's location. Created a simple front end with HTML & CSS, while using JavaScript to fetch the data and display it on the page.",
     imageSrc: "/static/project-previews/weather-preview.jfif",
-    projectLink: "https://example.com/tasks",
+    projectLink: "https://beautiful-gumption-a0ca0e.netlify.app/",
     technologies: ["HTML", "CSS", "JavaScript", "OpenWeather API"]
   },
 ];
