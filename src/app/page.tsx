@@ -16,6 +16,7 @@ import {
   XIcon,
 } from "./svgs/Icons";
 import { useState } from "react";
+import './globals.css'
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

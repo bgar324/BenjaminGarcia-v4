@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url("../../fonts/CabinetGrotesk_Complete/Fonts/WEB/css/cabinet-grotesk.css");
+@import url("/public/fonts/CabinetGrotesk_Complete/Fonts/WEB/css/cabinet-grotesk.css");
 
 :root {
   --background: #ffffff;
