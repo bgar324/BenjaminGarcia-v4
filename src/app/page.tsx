@@ -16,6 +16,7 @@ import {
   XIcon,
 } from "./svgs/Icons";
 import { useState, useEffect } from "react";
+import PastVersions from "./components/PastVersions";
 import './globals.css'
 
 export default function Home() {
@@ -102,8 +103,8 @@ export default function Home() {
               <MailIcon /> bentgarcia05@gmail.com
             </a>
           </div>
-          <div className = "items-center flex flex-col md:-mt-6 lg:mt-0">
-            <div className="flex flex-row items-center justify-center gap-6 mb-2">
+          <div className = "items-center flex flex-col md:-mt-6 lg:-mt-1">
+            <div className="flex flex-row items-center justify-center gap-6 mb-3">
               <a href="https://www.linkedin.com/in/btgarcia05/" target="_blank">
                 <LinkedInIcon />
               </a>
@@ -128,40 +129,36 @@ export default function Home() {
         </div>
         
         <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:mt-1 bg-white rounded-xl shadow-md p-3">
-          <a 
-            href="#about" 
-            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "about" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
-          >
-            About
-          </a>
-          <a 
-            href="#experience" 
-            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "experience" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
-          >
-            Experience
-          </a>
-          <a 
-            href="#tech-stack" 
-            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "tech-stack" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
-          >
-            Tech Stack
-          </a>
-          <a 
-            href="#projects" 
-            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "projects" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
-          >
-            Projects
-          </a>
+          <div>
+            <a 
+              href="#about" 
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "about" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            >
+              About
+            </a>
+            <a 
+              href="#experience" 
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "experience" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            >
+              Experience
+            </a>
+          </div>
+          <div>
+            <a 
+              href="#tech-stack" 
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "tech-stack" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            >
+              Tech Stack
+            </a>
+            <a 
+              href="#projects" 
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "projects" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            >
+              Projects
+            </a>
+          </div>
         </div>
       </header>
-
-      {/* <div className="flex flex-wrap gap-2 bg-white rounded-md shadow-md p-2 mt-4 text-xs">
-        <a className="uppercase border px-2 py-1 rounded-lg">about</a>
-        <a className="uppercase border px-2 py-1 rounded-lg">experience</a>
-        <a className="uppercase border px-2 py-1 rounded-lg">tech stack</a>
-        <a className="uppercase border px-2 py-1 rounded-lg">projects</a>
-        <a className="uppercase border px-2 py-1 rounded-lg">education</a>
-      </div> */}
 
       <main className="flex-1 flex-col lg:w-2/3 lg:py-13">
         <section id="about" className="flex flex-col">
@@ -169,14 +166,10 @@ export default function Home() {
             about
           </p>
           <p className="text-gray-600 lg:text-lg leading-snug mt-4">
-            I'm Benjamin Garcia, a second-year Computer Science major at Mt. San
-            Antonio College, preparing to transfer to a four-year institution
-            this fall. I'm a Web Developer focused on speed, responsiveness, and
-            clean design.
+          I'm Benjamin Garcia, a second-year Computer Science major at Mt. San Antonio College, preparing to transfer to a four-year institution this fall. Currently a <span className = "font-medium">Backend Software Developer Intern at Todd</span>, I build fast, scalable websites that bridge design and functionality. 
           </p>
           <p className="mt-2 text-gray-600 lg:text-lg leading-snug ">
-            Currently a Backend Software Developer Intern at TODD, I build fast,
-            scalable websites that bridge design and functionality.
+          Outside of coding, you can find me lifting at the gym, hanging out with my dog, or exploring the Lands Between.
           </p>
         </section>
 
@@ -187,7 +180,7 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <Dropdown
               role="Backend Software Development Intern"
-              position="TODD"
+              position="Todd"
               startDate="Apr 2025"
               endDate="Present"
               src="/static/companies/todd.jfif"
@@ -271,6 +264,15 @@ export default function Home() {
               src="/static/schools/whs.png"
             />
           </div>
+        </section>
+        <section id = "past-iterations">
+          <p className="w-fit border border-gray-300 rounded-md px-2 py-1 text-xs uppercase mt-10 mb-5 font-semibold tracking-wider lg:py-[.5px] lg:text-sm">
+            past versions
+          </p>
+          <div className="flex mx-auto items-center justify-center">
+            <PastVersions />
+          </div>
+
         </section>
       </main>
     </div>

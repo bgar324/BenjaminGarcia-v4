@@ -17,16 +17,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   projectLink,
   technologies
 }) => {
-  // Convert technologies to array if it's a string
   const techArray = Array.isArray(technologies) ? technologies : [technologies];
   
-  // State to track if description is expanded
   const [isExpanded, setIsExpanded] = useState(false);
   
-  // Maximum characters to show in collapsed state
   const maxChars = 100;
   
-  // Truncate description if needed
   const isTruncated = description.length > maxChars;
   const truncatedDescription = isTruncated && !isExpanded 
     ? `${description.substring(0, maxChars)}...` 
@@ -46,11 +42,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="flex flex-row gap-2 items-center mt-2">
         {projectLink ? (
           <a href={projectLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
-            <h1 className = "font-medium hover:underline lg:text-lg">{title}</h1>
+            <h1 className = "font-medium hover:underline lg:text-base">{title}</h1>
             <ArrowUpRight />
           </a>
         ) : (
-          <h1 className = "font-medium hover:underline lg:text-lg">{title}</h1>
+          <h1 className = "font-medium hover:underline lg:text-base">{title}</h1>
         )}
       </div>
       <div className="text-sm lg:text-base text-gray-600">
@@ -68,7 +64,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         {techArray.map((tech, index) => (
           <span 
             key={index} 
-            className="text-xs lg:text-sm bg-gray-100 px-2 py-1 rounded-lg"
+            className="text-xs bg-gray-100 px-2 py-1 rounded-lg"
           >
             {tech}
           </span>

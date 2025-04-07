@@ -52,7 +52,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               {hasExpandableContent && (
                 <button 
                   onClick={toggleDropdown}
-                  className={`ml-2 transition-transform duration-300 hover:bg-gray-200 ease-in-out rounded-3xl ${
+                  className={`ml-2 transition-all duration-300 hover:bg-gray-200 ease-in-out rounded-3xl ${
                     isOpen ? 'rotate-180' : ''
                   }`}
                 >

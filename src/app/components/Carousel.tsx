@@ -7,20 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const projects = [
   {
-    title: "Benjamin Garcia",
-    description: "Portfolio website built with Next.js and Tailwind CSS, highlighting performance and being as lightweight as possible.",
-    imageSrc: "/static/project-previews/portfoliov5.png",
-    projectLink: "https://benjamin-garcia-v4.vercel.app/",
-    technologies: ["Next.js", "Typescript", "Tailwind"]
-  },
-  {
-    title: "15th Annual Health Professions Conference Website",
-    description: "Developed a mobile-first website for Mt. SAC's 15th Annual Health Professions Conference. Designed to help attendees quickly access and submit feedback forms for each session.",
-    imageSrc: "/static/project-previews/caduceus.png",
-    projectLink: "https://github.com/bgar324/caduceus-club-website",
-    technologies: ["Next", "Typescript", "Tailwind", "Vercel"]
-  },
-  {
     title: "Mt. SAC Computer Science Club Website",
     description: "Redesigned and developed the Mt. SAC Computer Science Club website using React.JS and Bootstrap to improve functionality, accessibility, and responsiveness. The site serves as a hub for members, providing resources, event details, officer contacts, and Discord access.",
     imageSrc: "/static/project-previews/csclubwebsite-preview.png",
@@ -35,13 +21,6 @@ const projects = [
     technologies: ["Next", "React", "Tailwind", "react-calendar", "Recharts", "Supabase", "PostgreSQL", "Prisma"]
   },
   {
-    title: "Roadmap Maker",
-    description: "Built a CRUD web app using Next.js, Tailwind, and an MUI Timeline for visualizing tasks throughout the year. Users pick a month, define date ranges, and enter a title with an optional description, automatically placing tasks on the timeline. Integrated pdfmake enables generating a downloadable PDF of the entire roadmap.",
-    imageSrc: "/static/project-previews/image.png",
-    projectLink: "https://github.com/bgar324/roadmapMaker",
-    technologies: ["Next", "Tailwind", "Material UI", "pdfmake"]
-  },
-  {
     title: "Tea Spots",
     description: "Collaborated with video production and graphic design teams to redesign a client's website using Square Online, integrating custom CSS, embedded code, and POS systems to support high traffic and dozens of weekly orders. Optimized multimedia assets for a cohesive, brand-aligned experience, resulting in thousands of page views and 200+ unique visits in the first week.",
     imageSrc: "/static/project-previews/teaspots.png",
@@ -54,6 +33,28 @@ const projects = [
     imageSrc: "/static/project-previews/suika-preview.png",
     projectLink: "https://github.com/bgar324/suika",
     technologies: ["Python", "Pygame", "Pymunk"]
+  },
+  {
+    title: "Benjamin Garcia",
+    description: "Portfolio website built with Next.js and Tailwind CSS, highlighting performance and being as lightweight as possible.",
+    imageSrc: "/static/project-previews/portfoliov5.png",
+    projectLink: "https://benjamin-garcia-v4.vercel.app/",
+    technologies: ["Next.js", "Typescript", "Tailwind"]
+  },
+  {
+    title: "15th Annual Health Professions Conference Website",
+    description: "Developed a mobile-first website for Mt. SAC's 15th Annual Health Professions Conference. Designed to help attendees quickly access and submit feedback forms for each session.",
+    imageSrc: "/static/project-previews/caduceus.png",
+    projectLink: "https://github.com/bgar324/caduceus-club-website",
+    technologies: ["Next", "Typescript", "Tailwind", "Vercel"]
+  },
+
+  {
+    title: "Roadmap Maker",
+    description: "Built a CRUD web app using Next.js, Tailwind, and an MUI Timeline for visualizing tasks throughout the year. Users pick a month, define date ranges, and enter a title with an optional description, automatically placing tasks on the timeline. Integrated pdfmake enables generating a downloadable PDF of the entire roadmap.",
+    imageSrc: "/static/project-previews/image.png",
+    projectLink: "https://github.com/bgar324/roadmapMaker",
+    technologies: ["Next", "Tailwind", "Material UI", "pdfmake"]
   },
   {
     title: "Weather Display",
@@ -90,7 +91,7 @@ const Carousel: React.FC = () => {
         <div className="flex justify-between mb-4">
           <button 
             onClick={goToPrevSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 duration-300 ease-in-out transition-all"
             aria-label="Previous projects"
           >
             <div className="transform rotate-90">
@@ -100,7 +101,7 @@ const Carousel: React.FC = () => {
           
           <button 
             onClick={goToNextSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 duration-300 ease-in-out transition-all"
             aria-label="Next projects"
           >
             <div className="transform -rotate-90">
