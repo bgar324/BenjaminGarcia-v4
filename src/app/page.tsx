@@ -15,15 +15,36 @@ import {
   Hamburger,
   XIcon,
 } from "./svgs/Icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './globals.css'
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["about", "experience", "tech-stack", "projects", "education"];
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="pt-2 pb-8 lg:p-0 max-w-3xl mx-auto flex flex-col min-h-screen lg:flex lg:flex-row lg:gap-7 lg:justify-between lg:px-8 md:px-20 sm:px-24 px-4">
@@ -48,7 +69,7 @@ export default function Home() {
             </h3>
             <div className="flex flex-row gap-1 items-center mt-2">
               <LocationIcon />
-              <p className="text-sm text-gray-500">Los Angeles, California</p>
+              <p className="text-sm text-gray-500 hover:underline">Los Angeles, California</p>
             </div>
             <button
               onClick={toggleMenu}
@@ -74,7 +95,7 @@ export default function Home() {
               <GlobeIcon /> https://benjamin-garcia-v4.vercel.app/
             </a>
             <a
-              className="flex items-center gap-2 hover:underline text-sm"
+              className="flex items-center gap-2 hover:underline transition duration-300 ease-in-out text-sm"
               href="mailto:bentgarcia05@gmail.com"
               target="_blank"
             >
@@ -105,6 +126,39 @@ export default function Home() {
             </a>
           </div>
         </div>
+        
+        <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:mt-1 bg-white rounded-xl shadow-md p-3">
+          <a 
+            href="#about" 
+            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "about" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+          >
+            About
+          </a>
+          <a 
+            href="#experience" 
+            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "experience" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+          >
+            Experience
+          </a>
+          <a 
+            href="#tech-stack" 
+            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "tech-stack" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+          >
+            Tech Stack
+          </a>
+          <a 
+            href="#projects" 
+            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "projects" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+          >
+            Projects
+          </a>
+          <a 
+            href="#education" 
+            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "education" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+          >
+            Education
+          </a>
+        </div>
       </header>
 
       {/* <div className="flex flex-wrap gap-2 bg-white rounded-md shadow-md p-2 mt-4 text-xs">
@@ -123,7 +177,7 @@ export default function Home() {
           <p className="text-gray-600 lg:text-lg leading-snug mt-4">
             I'm Benjamin Garcia, a second-year Computer Science major at Mt. San
             Antonio College, preparing to transfer to a four-year institution
-            this fall. I’m a Web Developer focused on speed, responsiveness, and
+            this fall. I'm a Web Developer focused on speed, responsiveness, and
             clean design.
           </p>
           <p className="mt-2 text-gray-600 lg:text-lg leading-snug ">
@@ -180,7 +234,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experience" className="flex flex-col">
+        <section id="tech-stack" className="flex flex-col">
           <p className="w-fit border border-gray-300 rounded-md px-2 py-1 text-xs uppercase my-10 font-semibold tracking-wider lg:py-[.5px] lg:text-sm">
             tech stack
           </p>

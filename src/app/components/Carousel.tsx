@@ -66,8 +66,7 @@ const projects = [
 
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  // Calculate the number of sections (2 projects per section)
+
   const totalSections = Math.ceil(projects.length / 2);
   
   const goToNextSlide = () => {
@@ -82,7 +81,6 @@ const Carousel: React.FC = () => {
     );
   };
   
-  // Get current projects to display (2 per section)
   const startIdx = currentIndex * 2;
   const currentProjects = projects.slice(startIdx, startIdx + 2);
   

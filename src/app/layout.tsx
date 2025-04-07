@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Benjamin Garcia",
   description: "Personal portfolio of Benjamin Garcia",
+  icons: {
+    icon: "/static/favicon.svg",
+  },
 };
 
 export default function RootLayout({
