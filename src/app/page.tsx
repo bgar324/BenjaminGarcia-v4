@@ -152,12 +152,6 @@ export default function Home() {
           >
             Projects
           </a>
-          <a 
-            href="#education" 
-            className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "education" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
-          >
-            Education
-          </a>
         </div>
       </header>
 
