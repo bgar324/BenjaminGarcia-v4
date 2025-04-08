@@ -49,7 +49,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="pt-2 pb-8 lg:p-0 max-w-3xl mx-auto flex flex-col min-h-screen lg:flex lg:flex-row lg:gap-7 lg:justify-between lg:px-8 md:px-20 sm:px-24 px-4">
+    <div className="pt-2 pb-8 lg:p-0 max-w-lg sm:max-w-3xl md:max-w-3xl lg:max-w-5xl mx-auto flex flex-col min-h-screen lg:flex lg:flex-row lg:gap-7 lg:justify-between lg:px-8 md:px-20 sm:px-24 px-7">
       <header
         className="lg:sticky lg:top-0 flex flex-col lg:max-h-screen md:flex md:flex-row lg:flex-col z-50 lg:w-[204px] lg:shrink-0 lg:gap-y-3 lg:py-10 md:gap-3 md:mx-0 
       mx-auto"
@@ -57,7 +57,7 @@ export default function Home() {
         <div className="bg-white rounded-xl shadow-md p-2 flex sm:flex-row lg:flex-col lg:gap-3 relative">
           <img
             src="/static/ben_pfp22.png"
-            className="h-auto w-32 md:w-44 lg:w-48 rounded-xl"
+            className="h-auto w-32 md:w-28 lg:w-48 rounded-xl"
           />
           <div className="ml-2 pt-2 pr-2 lg:ml-1 lg:pt-0 lg:pr-0">
             <h1 className="text-gray-900 text-2xl lg:text-2xl font-semibold lg:font-semibold tracking-tight leading-none">
@@ -90,9 +90,9 @@ export default function Home() {
               ${isMenuOpen ? "flex" : "hidden"} 
               top-full left-0 right-0 mt-2 z-50 md:flex md:flex-col lg:flex lg:flex-col lg:mt-0 md:mt-0`}
         >
-          <div className="flex flex-col gap-2 mt-3 md:mt-0 lg:mt-0 md:gap-1 lg:gap-1 w-full">
+          <div className="flex flex-col gap-2 mt-3 md:mt-0 lg:mt-0 md:gap-1 lg:gap-1 w-full sm:pl-6 md:pl-0 lg:pl-0">
             <a
-              className="flex items-center gap-2 hover:underline text-sm md:-mt-2 md:mb-1 lg:mt-0 lg:mb-0 truncate"
+              className="flex items-center gap-2 hover:underline text-sm mb-1 truncate"
               href="https://benjamingarcia.vercel.app"
               target="_blank"
             >
@@ -106,7 +106,7 @@ export default function Home() {
               <MailIcon /> <span className="truncate">bentgarcia05@gmail.com</span>
             </a>
           </div>
-          <div className = "items-center flex flex-col md:-mt-6 lg:-mt-1">
+          <div className="items-center flex flex-col mt-2 lg:mt-0 md:mt-0 sm:pr-12 md:pr-0 lg:pr-0">
             <div className="flex flex-row items-center justify-center gap-6 mb-3">
               <a href="https://www.linkedin.com/in/btgarcia05/" target="_blank">
                 <LinkedInIcon />

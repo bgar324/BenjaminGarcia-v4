@@ -91,7 +91,7 @@ const Carousel: React.FC = () => {
         <div className="flex justify-between mb-4">
           <button 
             onClick={goToPrevSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 duration-300 ease-in-out transition-all"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 duration-300 ease-in-out transition-all hover:cursor-pointer"
             aria-label="Previous projects"
           >
             <div className="transform rotate-90">
@@ -101,7 +101,7 @@ const Carousel: React.FC = () => {
           
           <button 
             onClick={goToNextSlide}
-            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 duration-300 ease-in-out transition-all"
+            className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 duration-300 ease-in-out transition-all hover:cursor-pointer"
             aria-label="Next projects"
           >
             <div className="transform -rotate-90">

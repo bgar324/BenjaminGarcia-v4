@@ -21,13 +21,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   
   const [isExpanded, setIsExpanded] = useState(false);
   
-  const maxChars = 100;
-  
-  const isTruncated = description.length > maxChars;
-  const truncatedDescription = isTruncated && !isExpanded 
-    ? `${description.substring(0, maxChars)}...` 
-    : description;
-  
   return (
     <div className="bg-white rounded-xl shadow-sm w-auto h-auto flex flex-col p-2">
       <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
@@ -50,15 +43,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
       </div>
       <div className="text-sm lg:text-base text-gray-600">
-        <p>{truncatedDescription}</p>
-        {isTruncated && (
-          <button 
-            onClick={() => setIsExpanded(!isExpanded)} 
-            className="text-blue-500 hover:text-blue-700 text-xs mt-1 font-medium"
-          >
-            {isExpanded ? 'Show less' : 'Read more'}
-          </button>
-        )}
+        <p className={`${isExpanded ? '' : 'line-clamp-3'}`}>{description}</p>
+        <button 
+          onClick={() => setIsExpanded(!isExpanded)} 
+          className="text-blue-500 hover:text-blue-700 text-xs mt-1 font-medium"
+        >
+          {isExpanded ? 'Show less' : 'Read more'}
+        </button>
       </div>
       <div className="flex flex-wrap gap-2 mt-3">
         {techArray.map((tech, index) => (

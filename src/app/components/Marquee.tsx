@@ -8,13 +8,12 @@ interface MarqueeProps {
 }
 
 const Marquee: React.FC<MarqueeProps> = ({ 
-  speed = -30, // Reduced default speed from 50 to 25 to move slower
+  speed = -30,
   className = ""
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Hard-coded tech images
   const techImages = [
     { src: "/static/tech/react.png", alt: "React" },
     { src: "/static/tech/next.svg", alt: "Next.js" },
@@ -31,8 +30,7 @@ const Marquee: React.FC<MarqueeProps> = ({
     
     const container = containerRef.current;
     const content = contentRef.current;
-    
-    // Clone the content to create a seamless loop
+
     const clone = content.cloneNode(true) as HTMLDivElement;
     container.appendChild(clone);
     
@@ -43,7 +41,7 @@ const Marquee: React.FC<MarqueeProps> = ({
       const delta = timestamp - lastTimestamp;
       lastTimestamp = timestamp;
     
-      position += speed * (delta / 1000); // speed is pixels per second
+      position += speed * (delta / 1000);
     
       if (position <= -content.offsetWidth) {
         position = 0;
@@ -63,7 +61,6 @@ const Marquee: React.FC<MarqueeProps> = ({
 
   return (
     <div className={`overflow-hidden whitespace-nowrap relative ${className}`}>
-      {/* Left gradient overlay */}
       <div className="absolute -left-0.5 top-0 h-full w-24 bg-gradient-to-r from-[#f7f6f7] to-transparent z-10"></div>
       
       <div 
@@ -77,13 +74,12 @@ const Marquee: React.FC<MarqueeProps> = ({
               key={index}
               src={image.src}
               alt={image.alt}
-              className="inline-block h-12 w-auto mx-8" // Increased margin from mx-4 to mx-8 for wider gaps
+              className="inline-block h-12 w-auto mx-8" 
             />
           ))}
         </div>
       </div>
-      
-      {/* Right gradient overlay */}
+
       <div className="absolute -right-0.5 top-0 h-full w-24 bg-gradient-to-l from-[#f7f6f7] to-transparent z-10"></div>
     </div>
   );
