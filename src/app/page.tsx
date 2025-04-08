@@ -56,16 +56,16 @@ export default function Home() {
         <div className="bg-white rounded-xl shadow-md p-2 flex sm:flex-row lg:flex-col lg:gap-3 relative">
           <img
             src="/static/ben_pfp22.png"
-            className="h-auto w-40 md:w-44 lg:w-48 rounded-xl"
+            className="h-auto w-32 md:w-44 lg:w-48 rounded-xl"
           />
           <div className="ml-2 pt-2 pr-2 lg:ml-1 lg:pt-0 lg:pr-0">
-            <h1 className="text-gray-900 text-3xl lg:text-2xl font-medium lg:font-semibold tracking-tight leading-none">
+            <h1 className="text-gray-900 text-2xl lg:text-2xl font-semibold lg:font-semibold tracking-tight leading-none">
               Hello I'm
             </h1>
-            <h1 className="text-gray-900 text-3xl lg:text-2xl font-medium lg:font-semibold tracking-tight">
+            <h1 className="text-gray-900 text-2xl lg:text-2xl font-semibold lg:font-semibold tracking-tight">
               Benjamin Garcia
             </h1>
-            <h3 className="text-gray-700 text-base lg:text-lg leading-tight mt-2">
+            <h3 className="text-gray-700 text-base lg:text-lg leading-tight mt-2 font-normal">
               I turn code into meaningful creations.
             </h3>
             <div className="flex flex-row gap-1 items-center mt-2">
