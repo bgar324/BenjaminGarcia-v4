@@ -17,7 +17,8 @@ import {
 } from "./svgs/Icons";
 import { useState, useEffect } from "react";
 import PastVersions from "./components/PastVersions";
-import './globals.css'
+import './globals.css';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,9 +73,11 @@ export default function Home() {
               <LocationIcon />
               <p className="text-sm text-gray-500 hover:underline">Los Angeles, California</p>
             </div>
-            <button
+            <button 
               onClick={toggleMenu}
-              className="absolute top-2 right-2 block md:hidden lg:hidden"
+              className={`absolute top-2 right-2 md:hidden transition-all duration-300 hover:bg-gray-200 ease-in-out rounded-3xl ${
+                isMenuOpen ? 'rotate-180' : ''
+              }`}
             >
               {isMenuOpen ? <XIcon /> : <Hamburger />}
             </button>
