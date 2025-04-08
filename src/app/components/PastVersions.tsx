@@ -5,7 +5,7 @@ const PastVersions = () => {
   const versions = [
     "https://v1benjamingarcia.vercel.app/",
     "https://v2benjamingarcia.vercel.app/",
-    "https://benjamin-garcia-v3.vercel.app/"
+    "https://v3benjamingarcia.vercel.app/"
   ]
 
   return (
