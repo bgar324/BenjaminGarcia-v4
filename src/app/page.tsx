@@ -169,7 +169,7 @@ export default function Home() {
           I'm Benjamin Garcia, a second-year Computer Science major at Mt. San Antonio College, preparing to transfer to a four-year institution this fall. Currently a <span className = "font-medium">Backend Software Developer Intern at Todd</span>, I build fast, scalable websites that bridge design and functionality. 
           </p>
           <p className="mt-2 text-gray-600 lg:text-lg leading-snug ">
-          Outside of coding, you can find me lifting at the gym, hanging out with my dog, or exploring the Lands Between.
+          Outside of coding, you can find me at the gym, hanging out with my dog, or exploring the Lands Between.
           </p>
         </section>
 
