@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useState } from 'react';
-import ProjectCard from './ProjectCard';
-import { NavDown } from '../svgs/Icons';
+import React, { useState } from 'react'
+import ProjectCard from './ProjectCard'
+import { NavDown } from '../svgs/Icons'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const projects = [
@@ -48,7 +48,6 @@ const projects = [
     projectLink: "https://github.com/bgar324/caduceus-club-website",
     technologies: ["Next", "Typescript", "Tailwind", "Vercel"]
   },
-
   {
     title: "Roadmap Maker",
     description: "Built a CRUD web app using Next.js, Tailwind, and an MUI Timeline for visualizing tasks throughout the year. Users pick a month, define date ranges, and enter a title with an optional description, automatically placing tasks on the timeline. Integrated pdfmake enables generating a downloadable PDF of the entire roadmap.",
@@ -62,29 +61,43 @@ const projects = [
     imageSrc: "/static/project-previews/weather-preview.png",
     projectLink: "https://beautiful-gumption-a0ca0e.netlify.app/",
     technologies: ["HTML", "CSS", "JavaScript", "OpenWeather API"]
+  }
+]
+
+const variants = {
+  enter: (direction: "left" | "right") => ({
+    x: direction === "right" ? 100 : -100,
+    opacity: 0
+  }),
+  center: {
+    x: 0,
+    opacity: 1
   },
-];
+  exit: (direction: "left" | "right") => ({
+    x: direction === "right" ? -100 : 100,
+    opacity: 0
+  })
+}
 
 const Carousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [direction, setDirection] = useState<"left" | "right">("right")
 
-  const totalSections = Math.ceil(projects.length / 2);
-  
+  const totalSections = Math.ceil(projects.length / 2)
+
   const goToNextSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === totalSections - 1 ? 0 : prevIndex + 1
-    );
-  };
-  
+    setDirection("right")
+    setCurrentIndex((prevIndex) => prevIndex === totalSections - 1 ? 0 : prevIndex + 1)
+  }
+
   const goToPrevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? totalSections - 1 : prevIndex - 1
-    );
-  };
-  
-  const startIdx = currentIndex * 2;
-  const currentProjects = projects.slice(startIdx, startIdx + 2);
-  
+    setDirection("left")
+    setCurrentIndex((prevIndex) => prevIndex === 0 ? totalSections - 1 : prevIndex - 1)
+  }
+
+  const startIdx = currentIndex * 2
+  const currentProjects = projects.slice(startIdx, startIdx + 2)
+
   return (
     <div className="relative w-full">
       {totalSections > 1 && (
@@ -98,7 +111,7 @@ const Carousel: React.FC = () => {
               <NavDown />
             </div>
           </button>
-          
+
           <button 
             onClick={goToNextSlide}
             className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 duration-300 ease-in-out transition-all hover:cursor-pointer"
@@ -110,14 +123,16 @@ const Carousel: React.FC = () => {
           </button>
         </div>
       )}
-      
-      <AnimatePresence mode="wait">
+
+      <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={currentIndex}
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -100, opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.3, ease: "easeInOut" }}
           className="flex flex-row gap-3 my-4"
         >
           {currentProjects.map((project, index) => (
@@ -133,7 +148,7 @@ const Carousel: React.FC = () => {
           ))}
         </motion.div>
       </AnimatePresence>
-      
+
       {totalSections > 1 && (
         <div className="flex justify-center mt-4">
           <div className="flex gap-2 items-center">
@@ -147,7 +162,7 @@ const Carousel: React.FC = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Carousel;
+export default Carousel
