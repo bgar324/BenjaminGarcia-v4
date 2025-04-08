@@ -59,7 +59,7 @@ const projects = [
   {
     title: "Weather Display",
     description: "Used OpenWeather's API in order to retrieve live data within the week based on the user's location. Created a simple front end with HTML & CSS, while using JavaScript to fetch the data and display it on the page.",
-    imageSrc: "/static/project-previews/weather-preview.jfif",
+    imageSrc: "/static/project-previews/weather-preview.png",
     projectLink: "https://beautiful-gumption-a0ca0e.netlify.app/",
     technologies: ["HTML", "CSS", "JavaScript", "OpenWeather API"]
   },
