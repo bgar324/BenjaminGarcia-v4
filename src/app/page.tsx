@@ -50,7 +50,10 @@ export default function Home() {
 
   return (
     <div className="pt-2 pb-8 lg:p-0 max-w-lg sm:max-w-3xl md:max-w-3xl lg:max-w-5xl mx-auto flex flex-col min-h-screen lg:flex lg:flex-row lg:gap-7 lg:justify-between lg:px-8 md:px-20 sm:px-24 px-7">
-      <header
+      <motion.header
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="lg:sticky lg:top-0 flex flex-col lg:max-h-screen md:flex md:flex-row lg:flex-col z-50 lg:w-[204px] lg:shrink-0 lg:gap-y-3 lg:py-10 md:gap-3 md:mx-0 
       mx-auto"
       >
@@ -161,9 +164,14 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </header>
+      </motion.header>
 
-      <main className="flex-1 flex-col lg:w-2/3 lg:py-13">
+      <motion.main 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex-1 flex-col lg:w-2/3 lg:py-13"
+      >
         <section id="about" className="flex flex-col">
           <p className="w-fit border border-gray-300 rounded-md px-2 py-1 lg:py-[.5px] text-xs lg:text-sm uppercase mt-10 lg:mt-0 lg:mb-5 font-semibold tracking-wider">
             about
@@ -277,7 +285,7 @@ export default function Home() {
           </div>
 
         </section>
-      </main>
+      </motion.main>
     </div>
   );
 }
