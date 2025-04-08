@@ -86,24 +86,24 @@ export default function Home() {
 
         <div
           id="socials"
-          className={`bg-white rounded-xl shadow-md p-2 flex flex-col gap-3 lg:p-3
+          className={`bg-white rounded-xl shadow-md p-2 flex flex-row gap-3 lg:p-3
               ${isMenuOpen ? "flex" : "hidden"} 
-              top-full left-0 right-0 mt-2 z-50 flex flex-row justify-around items-center py-4 md:flex md:flex-col lg:flex lg:flex-col lg:mt-0 md:mt-0`}
+              top-full left-0 right-0 mt-2 z-50 md:flex md:flex-col lg:flex lg:flex-col lg:mt-0 md:mt-0`}
         >
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2 mt-3 md:mt-0 lg:mt-0 md:gap-1 lg:gap-1 w-full">
             <a
-              className="flex items-center gap-2 hover:underline text-sm md:-mt-2 md:mb-1 lg:mt-0 lg:mb-0"
-              href="https://benjamin-garcia-v4.vercel.app/"
+              className="flex items-center gap-2 hover:underline text-sm md:-mt-2 md:mb-1 lg:mt-0 lg:mb-0 truncate"
+              href="https://benjamingarcia.vercel.app"
               target="_blank"
             >
-              <GlobeIcon /> https://benjamin-garcia-v4.vercel.app/
+              <GlobeIcon /> <span className="truncate">benjamingarcia.vercel.app</span>
             </a>
             <a
-              className="flex items-center gap-2 hover:underline transition duration-300 ease-in-out text-sm"
+              className="flex items-center gap-2 hover:underline transition duration-300 ease-in-out text-sm truncate"
               href="mailto:bentgarcia05@gmail.com"
               target="_blank"
             >
-              <MailIcon /> bentgarcia05@gmail.com
+              <MailIcon /> <span className="truncate">bentgarcia05@gmail.com</span>
             </a>
           </div>
           <div className = "items-center flex flex-col md:-mt-6 lg:-mt-1">
