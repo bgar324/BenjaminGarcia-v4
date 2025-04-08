@@ -29,7 +29,10 @@ const PastVersions = () => {
           href={item.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-x-2 text-gray-900 hover:bg-[#f6f7f7] transition-colors duration-300 bg-white border border-dotted border-gray-300 rounded-lg px-4 py-2"
+          className="flex items-center justify-center gap-x-2 text-gray-900 hover:bg-[#f6f7f7] transition-colors duration-300 bg-white border border-dotted border-gray-300 rounded-lg px-4 py-2 cursor-pointer touch-manipulation"
+          onClick={(e) => {
+            window.open(item.link, '_blank', 'noopener,noreferrer');
+          }}
         >
           <span className="flex items-center">
             <Image
@@ -48,7 +51,10 @@ const PastVersions = () => {
         href={versions[2].link}
         target="_blank"
         rel="noopener noreferrer"
-        className="col-span-2 flex items-center justify-center gap-x-2 text-gray-900 hover:bg-[#f6f7f7] transition-colors duration-300 bg-white border border-dotted border-gray-300 rounded-lg px-4 py-2"
+        className="col-span-2 flex items-center justify-center gap-x-2 text-gray-900 hover:bg-[#f6f7f7] transition-colors duration-300 bg-white border border-dotted border-gray-300 rounded-lg px-4 py-2 cursor-pointer touch-manipulation"
+        onClick={(e) => {
+          window.open(versions[2].link, '_blank', 'noopener,noreferrer');
+        }}
       >
         <span className="flex items-center">
           <Image
