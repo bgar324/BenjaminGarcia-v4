@@ -45,10 +45,10 @@ const Dropdown: React.FC<DropdownProps> = ({
           <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row items-center">
               <p className="text-sm text-gray-600 lg:text-base">{position}</p>
-              <p className="text-sm text-gray-600 ml-2 md:hidden">| <span className = "ml-1">{startDate} - {endDate}</span></p>
+              <p className="text-sm text-gray-600 ml-2 block sm:hidden">| <span className = "ml-1">{startDate} - {endDate}</span></p>
             </div>
             <div className="flex flex-row items-center">
-              <p className="text-sm text-gray-600 hidden md:block lg:text-base">{startDate} - {endDate}</p>
+              <p className="text-sm text-gray-600 hidden sm:block lg:text-base">{startDate} - {endDate}</p>
               {hasExpandableContent && (
                 <button 
                   onClick={toggleDropdown}
