@@ -17,8 +17,8 @@ import {
 } from "./svgs/Icons";
 import { useState, useEffect } from "react";
 import PastVersions from "./components/PastVersions";
-import './globals.css';
-import { motion } from 'framer-motion';
+import "./globals.css";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,8 +30,14 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "experience", "tech-stack", "projects", "education"];
-      
+      const sections = [
+        "about",
+        "experience",
+        "tech-stack",
+        "projects",
+        "education",
+      ];
+
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -49,8 +55,7 @@ export default function Home() {
   }, []);
 
   return (
-<div className="px-5 pt-2 pb-8 lg:px-8 md:px-20 sm:px-6 max-w-5xl mx-auto flex flex-col min-h-screen lg:flex-row lg:gap-7 lg:justify-between">
-
+    <div className="px-5 pt-2 pb-8 lg:px-8 md:px-20 sm:px-6 max-w-5xl mx-auto flex flex-col min-h-screen lg:flex-row lg:gap-7 lg:justify-between">
       <motion.header
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -75,12 +80,14 @@ export default function Home() {
             </h3>
             <div className="flex flex-row gap-1 items-center mt-2">
               <LocationIcon />
-              <p className="text-sm text-gray-500 hover:underline">Los Angeles, California</p>
+              <p className="text-sm text-gray-500 hover:underline">
+                Los Angeles, California
+              </p>
             </div>
-            <button 
+            <button
               onClick={toggleMenu}
               className={`absolute top-2 right-2 md:hidden transition-all duration-300 hover:bg-gray-200 ease-in-out rounded-3xl ${
-                isMenuOpen ? 'rotate-180' : ''
+                isMenuOpen ? "rotate-180" : ""
               }`}
             >
               {isMenuOpen ? <XIcon /> : <Hamburger />}
@@ -97,17 +104,18 @@ export default function Home() {
           <div className="flex flex-col gap-2 mt-3 md:mt-0 lg:mt-0 md:gap-1 lg:gap-1 w-full sm:pl-6 md:pl-0 lg:pl-0">
             <a
               className="flex items-center gap-2 hover:underline text-sm mb-1 truncate"
-              href="https://benjamingarcia.vercel.app"
+              href="https://www.bentgarcia.com/"
               target="_blank"
             >
-              <GlobeIcon /> <span className="truncate">benjamingarcia.vercel.app</span>
+              <GlobeIcon /> <span className="truncate">www.bentgarcia.com</span>
             </a>
             <a
               className="flex items-center gap-2 hover:underline transition duration-300 ease-in-out text-sm truncate"
               href="mailto:bentgarcia05@gmail.com"
               target="_blank"
             >
-              <MailIcon /> <span className="truncate">bentgarcia05@gmail.com</span>
+              <MailIcon />{" "}
+              <span className="truncate">bentgarcia05@gmail.com</span>
             </a>
           </div>
           <div className="items-center flex flex-col mt-2 lg:mt-0 md:mt-0 sm:pr-12 md:pr-0 lg:pr-0">
@@ -134,32 +142,48 @@ export default function Home() {
             </a>
           </div>
         </div>
-        
+
         <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:mt-1 bg-white rounded-xl shadow-md p-3">
           <div>
-            <a 
-              href="#about" 
-              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "about" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            <a
+              href="#about"
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${
+                activeSection === "about"
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+              }`}
             >
               About
             </a>
-            <a 
-              href="#experience" 
-              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "experience" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            <a
+              href="#experience"
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${
+                activeSection === "experience"
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+              }`}
             >
               Experience
             </a>
           </div>
           <div>
-            <a 
-              href="#tech-stack" 
-              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "tech-stack" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            <a
+              href="#tech-stack"
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${
+                activeSection === "tech-stack"
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+              }`}
             >
               Tech Stack
             </a>
-            <a 
-              href="#projects" 
-              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${activeSection === "projects" ? "bg-gray-100 text-gray-900" : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"}`}
+            <a
+              href="#projects"
+              className={`text-sm font-medium px-3 py-1.5 rounded-md transition-colors ${
+                activeSection === "projects"
+                  ? "bg-gray-100 text-gray-900"
+                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+              }`}
             >
               Projects
             </a>
@@ -167,7 +191,7 @@ export default function Home() {
         </div>
       </motion.header>
 
-      <motion.main 
+      <motion.main
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -178,10 +202,18 @@ export default function Home() {
             about
           </p>
           <p className="text-gray-600 lg:text-lg leading-snug mt-4">
-          I'm Benjamin Garcia, a second-year Computer Science major at Mt. San Antonio College, preparing to transfer to a four-year institution this fall. Currently a <span className = "font-medium">Backend Software Developer Intern at Todd</span>, I build fast, scalable websites that bridge design and functionality. 
+            I'm Benjamin Garcia, a second-year Computer Science major at Mt. San
+            Antonio College, preparing to transfer to a four-year institution
+            this fall. Currently a{" "}
+            <span className="font-medium">
+              Backend Software Developer Intern at Todd
+            </span>
+            , I build fast, scalable websites that bridge design and
+            functionality.
           </p>
           <p className="mt-2 text-gray-600 lg:text-lg leading-snug ">
-          Outside of coding, you can find me at the gym, hanging out with my dog, or exploring the Lands Between.
+            Outside of coding, you can find me at the gym, hanging out with my
+            dog, or exploring the Lands Between.
           </p>
         </section>
 
@@ -277,14 +309,13 @@ export default function Home() {
             />
           </div>
         </section>
-        <section id = "past-iterations">
+        <section id="past-iterations">
           <p className="w-fit border border-gray-300 rounded-md px-2 py-1 text-xs uppercase mt-10 mb-5 font-semibold tracking-wider lg:py-[.5px] lg:text-sm">
             past versions
           </p>
           <div className="flex mx-auto items-center justify-center">
             <PastVersions />
           </div>
-
         </section>
       </motion.main>
     </div>
