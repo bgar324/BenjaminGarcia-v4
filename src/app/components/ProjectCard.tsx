@@ -30,6 +30,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           fill
           style={{ objectFit: 'cover' }}
           className="rounded-lg"
+          priority
         />
       </div>
       <div className="flex flex-row gap-2 items-center mt-2">

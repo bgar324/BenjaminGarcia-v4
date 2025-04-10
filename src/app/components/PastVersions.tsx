@@ -6,17 +6,17 @@ const PastVersions = () => {
   const versions = [
     {
       link: "https://v1benjamingarcia.vercel.app/",
-      favicon: "/static/previous favicons/faviconv1.png",
+      favicon: "/static/previous favicons/faviconv1.webp",
       version: 1,
     },
     {
       link: "https://v2benjamingarcia.vercel.app/",
-      favicon: "/static/previous favicons/faviconv2.png",
+      favicon: "/static/previous favicons/faviconv2.webp",
       version: 2,
     },
     {
       link: "https://v3benjamingarcia.vercel.app/",
-      favicon: "/static/previous favicons/faviconv3.png",
+      favicon: "/static/previous favicons/faviconv3.webp",
       version: 3,
     },
   ];

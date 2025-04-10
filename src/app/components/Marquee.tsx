@@ -15,12 +15,12 @@ const Marquee: React.FC<MarqueeProps> = ({
   const contentRef = useRef<HTMLDivElement>(null);
 
   const techImages = [
-    { src: "/static/tech/react.png", alt: "React" },
-    { src: "/static/tech/next.svg", alt: "Next.js" },
-    { src: "/static/tech/javascript.png", alt: "JavaScript" },
-    { src: "/static/tech/tailwind.png", alt: "Tailwind CSS" },
-    { src: "/static/tech/bootstrap.png", alt: "Bootstrap" },
-    { src: "/static/tech/c++.png", alt: "C++" },
+    { src: "/static/tech/react.webp", alt: "React" },
+    { src: "/static/tech/next.webp", alt: "Next.js" },
+    { src: "/static/tech/javascript.webp", alt: "JavaScript" },
+    { src: "/static/tech/tailwind.webp", alt: "Tailwind CSS" },
+    { src: "/static/tech/bootstrap.webp", alt: "Bootstrap" },
+    { src: "/static/tech/c++.webp", alt: "C++" },
     { src: "/static/tech/html.webp", alt: "HTML5" },
     { src: "/static/tech/python.webp", alt: "Python" }
   ];

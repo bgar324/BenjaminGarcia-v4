@@ -65,7 +65,7 @@ export default function Home() {
       >
         <div className="bg-white rounded-xl shadow-md p-2 flex sm:flex-row lg:flex-col lg:gap-3 relative">
           <img
-            src="/static/ben_pfp22.png"
+            src="/static/ben_pfp22.webp"
             className="h-auto w-32 md:w-28 lg:w-48 rounded-xl"
           />
           <div className="ml-2 pt-2 pr-2 lg:ml-1 lg:pt-0 lg:pr-0">
@@ -227,7 +227,7 @@ export default function Home() {
               position="Todd"
               startDate="Apr 2025"
               endDate="Present"
-              src="/static/companies/todd.jfif"
+              src="/static/companies/todd.webp"
               description="Developing backend solutions that leverage AI and machine learning to automate large-scale agricultural data analysis and optimization."
             />
             <Dropdown
@@ -235,7 +235,7 @@ export default function Home() {
               position="Mt. SAC CS Club"
               startDate="Sep 2024"
               endDate="Present"
-              src="/static/companies/mtsaccs.png"
+              src="/static/companies/mtsaccs.webp"
               description="Redesigned and rebuilt the Mt. SAC CS Club website using React and Bootstrap, enhancing UX, responsiveness, and access to events, officers, and contact info for 900+ members."
             />
             <Dropdown
@@ -243,7 +243,7 @@ export default function Home() {
               position="Reality AI Lab"
               startDate="Feb"
               endDate="Apr 2025"
-              src="/static/companies/realityai.png"
+              src="/static/companies/realityai.webp"
               description="Building full-stack systems for Marvel AI and Sky AI, using React, Node.js, and Python with Firestore, Firebase, and Redis to manage data and real-time workflows."
             />
             <Dropdown
@@ -251,7 +251,7 @@ export default function Home() {
               position="AdeptEye"
               startDate="Sep 2024"
               endDate="Apr 2025"
-              src="/static/companies/adepteye.jfif"
+              src="/static/companies/adepteye.webp"
               description="Revamped and optimized client websites on Shopify and Squarespace, improving UX, reducing load times by 40–50%, and launching scalable e-commerce platforms with POS integration and 1,800+ page views in the first week."
             />
             <Dropdown
@@ -259,7 +259,7 @@ export default function Home() {
               position="Outlier AI"
               startDate="Mar 2024"
               endDate="Apr 2025"
-              src="/static/companies/outlier.png"
+              src="/static/companies/outlier.webp"
               description="Developed a recursive self-improvement method that reduced trend-based LLM errors by 15–20%, enhancing reasoning through failure-based prompt refinement. Optimized AI response pipelines by analyzing 30–50 outputs per session, leveraging A/B testing, hallucination detection, and effectiveness evaluation to boost accuracy."
             />
           </div>
@@ -290,14 +290,14 @@ export default function Home() {
               position="Junior Level Transfer"
               startDate="Sep 2025"
               endDate="Present"
-              src="/static/schools/ucla.png"
+              src="/static/schools/ucla.webp"
             />
             <Dropdown
               role="Mount San Antonio College"
               position="Honors Student"
               startDate="Jun 2023"
               endDate="Jun 2025"
-              src="/static/schools/mtsac.png"
+              src="/static/schools/mtsac.webp"
               description="Outreach Officer & Front-End Developer for the Computer Science Club."
             />
             <Dropdown
@@ -305,7 +305,7 @@ export default function Home() {
               position="High School Diploma"
               startDate="Aug 2019"
               endDate="May 2023"
-              src="/static/schools/whs.png"
+              src="/static/schools/whs.webp"
             />
           </div>
         </section>
