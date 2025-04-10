@@ -55,7 +55,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="px-5 pt-2 pb-8 lg:px-8 md:px-20 sm:px-6 max-w-5xl mx-auto flex flex-col min-h-screen lg:flex-row lg:gap-7 lg:justify-between">
+    <div className="px-5 pt-2 md:pt-4 lg:pt-0 pb-8 lg:px-8 md:px-20 sm:px-6 max-w-5xl mx-auto flex flex-col min-h-screen lg:flex-row lg:gap-7 lg:justify-between">
       <motion.header
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
