@@ -317,6 +317,82 @@ export default function Home() {
             <PastVersions />
           </div>
         </section>
+
+        <section id="closing-note">
+          <div className="sm:text-right max-w-full sm:max-w-[365px] sm:ml-auto text-gray-600 pt-16 text-sm">
+            <p>
+              Loosely inspired by{" "}
+              <a
+                className="font-medium hover:cursor-pointer ease-in-out duration-300 hover:text-[#d87474]"
+                href="https://www.framer.com/marketplace/templates/monocv/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                MonoCV
+              </a>{" "}
+              and coded in{" "}
+              <a
+                className="font-medium hover:cursor-pointer ease-in-out duration-300 hover:text-[#d87474]"
+                href="https://code.visualstudio.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visual Studio Code
+              </a>
+              . Built with{" "}
+              <a
+                className="font-medium hover:cursor-pointer ease-in-out duration-300 hover:text-[#d87474]"
+                href="https://nextjs.org/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Next.js
+              </a>{" "}
+              and{" "}
+              <a
+                className="font-medium hover:cursor-pointer ease-in-out duration-300 hover:text-[#d87474]"
+                href="https://tailwindcss.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Tailwind CSS
+              </a>
+              , deployed with{" "}
+              <a
+                className="font-medium hover:cursor-pointer ease-in-out duration-300 hover:text-[#d87474]"
+                href="https://vercel.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Vercel
+              </a>
+              . <span className = "sm:hidden">All text is in</span>{" "}
+              <span className = "sm:hidden">
+                <a
+                  className="font-medium hover:cursor-pointer ease-in-out duration-300 hover:text-[#d87474]"
+                  href="https://www.fontshare.com/fonts/cabinet-grotesk"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Cabinet Grotesk
+                </a>{" "}
+                typeface.
+              </span>
+            </p>
+            <p className="hidden sm:block">
+              All text is in{" "}
+              <a
+                className="font-medium hover:cursor-pointer ease-in-out duration-300 hover:text-[#d87474]"
+                href="https://www.fontshare.com/fonts/cabinet-grotesk"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Cabinet Grotesk
+              </a>{" "}
+              typeface.
+            </p>
+          </div>
+        </section>
       </motion.main>
     </div>
   );
