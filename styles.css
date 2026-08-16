@@ -324,9 +324,11 @@ a:focus-visible {
 }
 
 .not-found-code {
-  margin: 0 0 1rem;
-  color: var(--muted);
-  font-size: var(--text-sm);
+  margin: 0 0 1.5rem;
+  color: var(--soft);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
 }
 
 .not-found .text-arrow-link {
