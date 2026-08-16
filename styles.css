@@ -5,7 +5,6 @@
   --muted: color-mix(in srgb, var(--foreground) 75%, var(--background));
   --subtle: color-mix(in srgb, var(--foreground) 64%, var(--background));
   --line: color-mix(in srgb, var(--foreground) 16%, var(--background));
-  --focus: var(--foreground);
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -78,8 +77,13 @@ a:any-link:focus-visible {
 
 a:focus-visible {
   border-radius: 2px;
-  outline: 2px solid var(--focus);
-  outline-offset: 4px;
+}
+
+@media (forced-colors: active) {
+  a:focus-visible {
+    outline: 2px solid LinkText;
+    outline-offset: 4px;
+  }
 }
 
 ::selection {
@@ -131,7 +135,6 @@ a:focus-visible {
   max-width: 610px;
   margin: 2rem 0 0;
   color: var(--muted);
-  font-size: var(--text-base);
   line-height: var(--leading-relaxed);
 }
 
@@ -281,11 +284,14 @@ a:focus-visible {
   padding-block: 3rem 6rem;
 }
 
+.text-arrow-link {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
 .projects-header .text-arrow-link {
   display: inline-block;
   margin-bottom: 6rem;
-  color: var(--muted);
-  font-size: var(--text-sm);
 }
 
 .projects-header h1,
@@ -335,8 +341,6 @@ a:focus-visible {
 .not-found .text-arrow-link {
   width: fit-content;
   margin-top: 2rem;
-  color: var(--muted);
-  font-size: var(--text-sm);
 }
 
 @media (max-width: 620px) {
