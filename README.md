@@ -36,8 +36,14 @@ sitemap.xml
 robots.txt
 policyc.pdf
 resume.pdf
-vercel.json           Clean URLs and cache headers
+vercel.json           Buildless deploy overrides, clean URLs, cache headers
 ```
+
+`vercel.json` pins `framework`, `buildCommand`, `installCommand`, and
+`outputDirectory` to `null`. The Vercel project predates this rewrite and still
+carries the old Astro framework preset, so those keys are what force a buildless
+static deploy. Removing them makes Vercel fall back to the preset and the
+deployment fails with no `package.json` to build.
 
 ## Local Development
 
