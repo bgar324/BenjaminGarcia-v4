@@ -1,9 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "buildCommand": null,
-  "installCommand": null,
-  "outputDirectory": null,
   "cleanUrls": true,
   "redirects": [
     {
@@ -14,16 +10,7 @@
   ],
   "headers": [
     {
-      "source": "/fonts/(.*)\\.woff2",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/static/(.*)\\.(webp|avif|png|jpg|jpeg|svg|woff2)",
+      "source": "/static/(.*)\\.(png|svg|ico)",
       "headers": [
         {
           "key": "Cache-Control",
