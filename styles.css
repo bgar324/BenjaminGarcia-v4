@@ -24,7 +24,7 @@
    lead      --text-base / 400 / muted       hero paragraph
    body      --text-sm  / 400 / muted        prose (610px measure), standalone nav
    subtitle  --text-sm  / 500 / soft         experience role
-   meta      --text-xs                       dates, years, tech, footer, in-row links
+   meta      --text-xs                       dates, years, tech, in-row links
                                              static: subtle | interactive: muted */
 
 html {
@@ -269,21 +269,6 @@ a:focus-visible {
   margin-top: 1.25rem;
 }
 
-.site-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-block: 2.25rem 4rem;
-  border-top: 1px solid var(--line);
-  color: var(--subtle);
-  font-size: var(--text-xs);
-  text-align: center;
-}
-
-.site-footer p {
-  margin: 0;
-}
-
 .projects-header {
   padding-block: 3rem 6rem;
 }
@@ -316,10 +301,6 @@ a:focus-visible {
 .projects-links {
   align-items: baseline;
   white-space: nowrap;
-}
-
-.projects-page .site-footer {
-  margin-top: 6rem;
 }
 
 .not-found {
