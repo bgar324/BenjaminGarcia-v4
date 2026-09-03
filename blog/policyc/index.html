@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Building PolicyC, a policy compiler | Benjamin Garcia</title>
+    <meta name="description" content="How PolicyC evolved across three frozen compilers, what each failure exposed, and why prompt reduction became a problem of preserving program semantics." />
+    <meta name="color-scheme" content="light" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    <meta name="author" content="Benjamin Garcia" />
+    <link rel="canonical" href="https://bentgarcia.com/blog/policyc" />
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png?v=2" />
+    <link rel="manifest" href="/manifest.webmanifest?v=2" />
+    <link rel="stylesheet" href="/styles.css?v=18" />
+    <meta name="theme-color" content="#fcfcfb" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://bentgarcia.com/blog/policyc" />
+    <meta property="og:title" content="Building PolicyC, a policy compiler" />
+    <meta property="og:description" content="How PolicyC evolved across three frozen compilers, what each failure exposed, and why prompt reduction became a problem of preserving program semantics." />
+    <meta property="og:site_name" content="Benjamin Garcia" />
+    <meta property="og:image" content="https://bentgarcia.com/static/og.png?v=3" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Benjamin Garcia — I build software that turns complex systems into simple experiences." />
+    <meta property="article:published_time" content="2026-09-03" />
+    <meta property="article:author" content="Benjamin Garcia" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Building PolicyC, a policy compiler" />
+    <meta name="twitter:description" content="How PolicyC evolved across three frozen compilers, what each failure exposed, and why prompt reduction became a problem of preserving program semantics." />
+    <meta name="twitter:image" content="https://bentgarcia.com/static/og.png?v=3" />
+    <meta name="format-detection" content="address=no,email=no,telephone=no" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Building PolicyC, a policy compiler",
+        "description": "How PolicyC evolved across three frozen compilers, what each failure exposed, and why prompt reduction became a problem of preserving program semantics.",
+        "url": "https://bentgarcia.com/blog/policyc",
+        "mainEntityOfPage": "https://bentgarcia.com/blog/policyc",
+        "datePublished": "2026-09-03",
+        "dateModified": "2026-09-03",
+        "inLanguage": "en-US",
+        "image": "https://bentgarcia.com/static/og.png?v=3",
+        "keywords": ["PolicyC", "policy compilation", "LLM", "prompt engineering", "TypeScript", "Python", "OpenAI", "evaluation"],
+        "author": {
+          "@type": "Person",
+          "name": "Benjamin Garcia",
+          "url": "https://bentgarcia.com"
+        },
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Benjamin Garcia",
+          "url": "https://bentgarcia.com"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="article-page">
+      <nav class="article-nav" aria-label="Article navigation">
+        <a class="text-arrow-link" href="/">Benjamin Garcia</a>
+      </nav>
+
+      <article>
+        <header class="article-header">
+          <h1>Building PolicyC, a policy compiler.</h1>
+          <p class="article-meta">
+            <a href="https://github.com/bgar324/policyc" target="_blank" rel="noopener noreferrer">View source code</a>
+            <a href="/policyc.pdf" target="_blank" rel="noopener noreferrer">Read the paper</a>
+          </p>
+        </header>
+
+        <fieldset class="article-chart-switcher">
+          <legend class="visually-hidden">PolicyC compiler progression charts</legend>
+          <input class="article-chart-control" type="radio" name="policyc-chart" id="policyc-chart-input" checked />
+          <input class="article-chart-control" type="radio" name="policyc-chart" id="policyc-chart-preservation" />
+          <input class="article-chart-control" type="radio" name="policyc-chart" id="policyc-chart-cost" />
+          <input class="article-chart-control" type="radio" name="policyc-chart" id="policyc-chart-latency" />
+
+          <div class="article-chart-tabs">
+            <label for="policyc-chart-input">Input reduction</label>
+            <label for="policyc-chart-preservation">Preservation</label>
+            <label for="policyc-chart-cost">Cost reduction</label>
+            <label for="policyc-chart-latency">Latency</label>
+          </div>
+
+          <div class="article-chart-panels">
+            <figure class="article-chart-panel" data-chart="input">
+              <a href="/static/policyc-input-reduction.svg?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC input-reduction chart at full size">
+                <img src="/static/policyc-input-reduction.svg?v=2" width="1130" height="762" decoding="async" alt="Mean actual input-token reduction by compiler: 98.23 percent for 0.5, 89.69 percent for 0.6, and 93.75 percent for 0.7." />
+              </a>
+              <figcaption>Every frozen compiler removed most input context. Each version used a new held-out set, so the line shows the study sequence rather than a controlled causal comparison.</figcaption>
+            </figure>
+
+            <figure class="article-chart-panel" data-chart="preservation">
+              <a href="/static/policyc-preservation.svg?v=3" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC preservation chart at full size">
+                <img src="/static/policyc-preservation.svg?v=3" width="1130" height="762" decoding="async" alt="Conditional critical-obligation preservation by compiler: 85.98 percent for 0.5 with a 78.15 to 91.32 percent trial-level Wilson interval, 86.49 percent for 0.6 with a 76.88 to 92.49 percent interval, and 79.75 percent for 0.7 with a 72.93 to 85.21 percent interval. All three are below the 95 percent target." />
+              </a>
+              <figcaption>No frozen study reached the 95% preservation target. The Wilson intervals are trial-level and descriptive because each case contributed three samples.</figcaption>
+            </figure>
+
+            <figure class="article-chart-panel" data-chart="cost">
+              <a href="/static/policyc-cost-reduction.svg?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC cost-reduction chart at full size">
+                <img src="/static/policyc-cost-reduction.svg?v=2" width="1130" height="762" decoding="async" alt="Actual billed-cost reduction was 23.01 percent for compiler 0.5, 24.50 percent for 0.6, and 12.14 percent for 0.7. Uncached-equivalent cost reduction was 67.80, 55.36, and 59.46 percent." />
+              </a>
+              <figcaption>Prompt caching and tool fees narrowed the observed bill even while uncached-equivalent cost fell by at least 55.36% in every study.</figcaption>
+            </figure>
+
+            <figure class="article-chart-panel" data-chart="latency">
+              <a href="/static/policyc-latency.svg?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC latency chart at full size">
+                <img src="/static/policyc-latency.svg?v=2" width="1130" height="762" decoding="async" alt="Latency change relative to the full policy: compiler 0.5 was 19.95 percent faster, 0.6 was 0.39 percent slower, and 0.7 was 14.63 percent slower." />
+              </a>
+              <figcaption>Less input did not guarantee less wall-clock time: 0.5 was faster, 0.6 was effectively unchanged, and 0.7 was slower.</figcaption>
+            </figure>
+          </div>
+        </fieldset>
+
+        <div class="article-body">
+          <section aria-labelledby="origin-heading">
+            <h2 id="origin-heading">The request was small. The prompt was not</h2>
+            <p>At Lindy, I could inspect the system prompts behind several agents. Each prompt mixed rules about safety, privacy, tools, formatting, and behavior.</p>
+            <p>The mismatch was obvious on ordinary requests. An email accepting lunch did not need every sensitive-data rule in the system. Those rules were still present on requests that could never activate them.</p>
+            <p>During the launch of Lindy Teammate, I watched a trivial greeting pull in an enormous amount of input context. Some of that may have been an internal accounting problem, but the prompts themselves contained plenty that the request could never activate.</p>
+            <p>This was my first time working this close to an agent's instructions. It led to the question that became PolicyC:</p>
+            <blockquote><p>Given a policy prompt P and request x, can I construct a much smaller prompt P<sub>x</sub> without losing any critical obligations?</p></blockquote>
+          </section>
+
+          <section aria-labelledby="system-heading">
+            <h2 id="system-heading">I made the policy explicit before I tried to compile it</h2>
+            <p>Starting from an arbitrary natural-language prompt would have combined three research problems: extracting policies, selecting the relevant ones, and emitting them without changing their meaning. When an answer failed, I would not know which layer caused it.</p>
+            <p>I isolated the compiler instead with a synthetic enterprise-agent policy system and synthetic requests. No private production data entered the studies. Compiler 0.5 began with 39 manually structured policy nodes. By 0.7, the graph contained 43 nodes across six domains. Each node has a stable ID, activation triggers, dependencies, severity, obligations, prohibitions, and model-visible instructions.</p>
+            <p>Given a request, artifact context, and available tools, the TypeScript compiler detects intents, activates matching policies, conservatively retains high-impact safeguards, adds every transitive dependency, and emits the selected nodes in a stable order.</p>
+            <figure class="article-dashboard policyc-research-figure" aria-labelledby="policyc-pipeline-caption">
+              <a href="/static/policyc-compiler-pipeline.svg?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC compiler pipeline figure at full size">
+                <img src="/static/policyc-compiler-pipeline.svg?v=2" width="1130" height="520" loading="lazy" decoding="async" alt="PolicyC takes structured policy P, request x, artifact context, and available tools; matches and retains policies; adds transitive dependencies; orders the selected nodes; and emits compact slice P x. Exact closure retains every declared dependency but cannot prove that emitted language preserves policy semantics." />
+              </a>
+              <figcaption id="policyc-pipeline-caption"><strong>Figure 1.</strong> The deterministic compiler closes the active policy graph before emitting P<sub>x</sub>. Structural closure cannot guarantee semantic preservation.</figcaption>
+            </figure>
+            <p>The manual graph is a deliberate boundary, and a real limitation. PolicyC does not yet parse any production prompt into a policy graph. That let me study selection and semantic preservation without confusing them with mistakes from an extraction model.</p>
+          </section>
+
+          <section aria-labelledby="evidence-heading">
+            <h2 id="evidence-heading">Three frozen studies, three new held-out sets</h2>
+            <p>Once I inspected a frozen study, its cases became development evidence and were never reused as fresh held-out evidence. Compiler 0.5, 0.6, and 0.7 therefore faced different case sets. Their sequence shows what each version exposed, not a controlled causal comparison between versions.</p>
+            <p>Every case declared its request, context, obligations, prohibitions, tool expectations, and semantic rubric independently of the candidate prompt. The same request ran under the full policy and compiled slice three times using one pinned GPT-5 mini snapshot.</p>
+            <figure class="article-dashboard policyc-research-figure" aria-labelledby="policyc-protocol-caption">
+              <a href="/static/policyc-study-protocol.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC held-out study table at full size">
+                <img src="/static/policyc-study-protocol.svg?v=1" width="1130" height="620" loading="lazy" decoding="async" alt="Three frozen studies used 160 cases and 960 model executions. Compiler 0.5 used 50 cases, 300 executions, 129 of 150 complete pairs, no provider tools, and cost 0.6881 dollars. Compiler 0.6 used 50 cases, 300 executions, 139 of 150 complete pairs, 41 web searches, and cost 1.0357 dollars. Compiler 0.7 used 60 cases, 360 executions, 180 of 180 complete pairs, 20 web searches, and cost 0.9333 dollars. Compiler 0.6 had 136 determinate pairs and three ungradable complete pairs." />
+              </a>
+              <figcaption id="policyc-protocol-caption"><strong>Figure 2.</strong> The three frozen studies totaled 160 cases, 960 model executions, and $2.6570 in recorded cost. Each compiler received a newly authored held-out set.</figcaption>
+            </figure>
+            <p>The execution system evolved with the compiler. A separate Python runtime bounded paid calls, tokens, tool use, and cost; persisted raw responses before parsing; resumed completed trials without paying twice; and tied artifacts together with hashes. Truncation, provider-schema rejection, accounting, and resume failures stayed in the audit trail instead of disappearing from the final numbers.</p>
+            <p>For 0.7, I built anonymous packets that removed strategy, prompt size, token count, latency, cost, and the private answer map. Three isolated Codex reviewers graded the packets against independently authored obligations. I hash-locked the merged grades before restoring strategy identities.</p>
+            <blockquote><p>I designed, enforced, and audited the strategy-blind evaluation; isolated Codex reviewers performed the grading.</p></blockquote>
+          </section>
+
+          <section aria-labelledby="compiler-05-heading">
+            <h2 id="compiler-05-heading">Compiler 0.5 proved that the active slice could be tiny</h2>
+            <p>The first frozen study used 50 held-out cases, three samples per condition, and 300 model executions. It had no provider tools. Compiler 0.5 introduced a compact universal kernel for rules that every request still needed.</p>
+            <p>Mean actual input tokens fell by 98.23%. Uncached-equivalent cost fell by 67.80%, actual billed cost fell by 23.01%, and latency was 19.95% lower than under the full policy.</p>
+            <p>The behavioral result was weaker. Conditional critical-obligation preservation reached 85.98%, below the 95% target. Fifteen paired outputs passed under the full policy and failed under the compiled slice.</p>
+            <p>Eleven of those regressions shared one defect: a machine-oriented directive resembling <code>report_unavailable_tool:web</code> leaked into model-visible text. The model copied or acted on an internal control token that should never have become an instruction. The run also produced 26 incomplete responses at its 2,048-token output cap, leaving 129 of 150 complete pairs.</p>
+            <p>Compiler 0.5 established both sides of the project. Most policy text was inactive for a given request, but a very small slice could still preserve the wrong thing.</p>
+          </section>
+
+          <section aria-labelledby="compiler-06-heading">
+            <h2 id="compiler-06-heading">Compiler 0.6 showed that equal averages could hide losses</h2>
+            <p>Compiler 0.6 removed the leaked directive, added policies derived from confirmed 0.5 regressions, and expanded the study to web and synthetic function-tool cases. Its fresh 50-case run again used 300 model executions.</p>
+            <p>Input reduction reached 89.69%, and conditional preservation reached 86.49%. The full and compiled conditions both had marginal pass rates of about 53.6%. Three complete pairs were semantically ungradable, so the strategy pass-rate denominators differ. Read alone, the averages still looked like parity.</p>
+            <p>Among 136 determinate pairs, 64 passed in both conditions, ten passed only under the full policy, nine passed only under the compiler, and 53 failed in both. A compiler-only success on one request could not cancel the loss of a critical behavior on another.</p>
+            <p>The regressions moved into tool and scope handling: calendar clarification and confirmation, image-tool availability, external-forwarding scope and privacy consequences, and a missing visible rationale. Two current-information failures looked primarily stochastic. Compiler 0.6 changed what I considered evidence. Similar averages were not preservation.</p>
+          </section>
+
+          <section aria-labelledby="compiler-07-heading">
+            <h2 id="compiler-07-heading">Compiler 0.7 found the semantic gap</h2>
+            <p>Compiler 0.7 grew the graph to 43 nodes, hardened tool-availability handling, and incorporated selected regressions from 0.6. I froze a new 60-case set and ran three samples through the full and compiled conditions, producing 360 model executions and all 180 complete pairs.</p>
+            <p>Mean input fell by 93.75%, but the compiled condition preserved only 130 of 163 full-policy successes, or 79.75%. Across 180 pairs, 130 passed in both conditions, 33 passed only under the full policy, 11 passed only under the compiler, and six failed in both. The version passed only two of its six preregistered gates.</p>
+            <figure class="article-dashboard policyc-research-figure" aria-labelledby="policyc-outcomes-caption">
+              <a href="/static/policyc-paired-outcomes.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC paired-outcomes chart at full size">
+                <img src="/static/policyc-paired-outcomes.svg?v=1" width="1130" height="700" loading="lazy" decoding="async" alt="Raw strategy-blind paired outcomes. Compiler 0.5 had 129 pairs: 92 both pass, 15 full-policy only, 9 compiler only, and 13 both fail. Compiler 0.6 had 136 determinate pairs: 64 both pass, 10 full-policy only, 9 compiler only, and 53 both fail, plus 3 ungradable complete pairs. Compiler 0.7 had 180 pairs: 130 both pass, 33 full-policy only, 11 compiler only, and 6 both fail. Each version used a different held-out set." />
+              </a>
+              <figcaption id="policyc-outcomes-caption"><strong>Figure 3.</strong> Raw strategy-blind paired outcomes. Different datasets and denominators make the bars descriptive study results, not a controlled version comparison.</figcaption>
+            </figure>
+            <p>Post-lock attribution made the 0.7 failure concrete: 21 regressions came from emitter wording or semantic loss, seven from selector errors, two from a context-interface asymmetry, and three primarily from model variance.</p>
+            <p>The largest cluster involved confirmation. A selected policy could mean, "Ask before deleting something unless the user has already confirmed." The emitter flattened it into an unconditional command:</p>
+            <dl class="article-log" aria-label="Compiler 0.7 confirmation policy semantic loss">
+              <div><dt>policy</dt><dd><code>ask before deleting unless already confirmed</code></dd></div>
+              <div><dt>state</dt><dd><code>confirmation already supplied</code></dd></div>
+              <div><dt>emitted</dt><dd><code>Required actions: ask_confirmation</code></dd></div>
+              <div><dt>result</dt><dd><code>asks again instead of executing</code></dd></div>
+            </dl>
+            <blockquote><p>I was treating the prompt like a document that could be filtered. In reality, it behaved more like a program.</p></blockquote>
+            <p>Words such as "if," "unless," "only when," and "already confirmed" are control flow. Selecting the right node was not enough if the emitter dropped its predicate, state, negation, or precedence.</p>
+            <blockquote><p>It changed the project from a demo I was trying to prove successful into an experiment that was allowed to tell me I was wrong.</p></blockquote>
+          </section>
+
+          <section aria-labelledby="economics-heading">
+            <h2 id="economics-heading">Compression was stable. Economics were not</h2>
+            <p>Input reduction was the most stable result across the project: every compiler removed between 89.69% and 98.23% of mean actual input. Uncached-equivalent cost fell between 55.36% and 67.80%.</p>
+            <p>The observed bill moved less. Actual billed-cost reduction was 23.01% for 0.5, 24.50% for 0.6, and 12.14% for 0.7. Repeated full prompts benefited from prompt caching, while request-specific slices changed. Tool fees mattered too: in the 0.7 study, the compiled condition made 11 paid searches and the full condition made nine.</p>
+            <p>Latency moved in every direction. Compiler 0.5 was 19.95% faster, 0.6 was effectively unchanged at 0.39% slower, and 0.7 was 14.63% slower. Smaller context was useful, but it was not a direct proxy for the bill or wall-clock speed.</p>
+          </section>
+
+          <section aria-labelledby="future-heading">
+            <h2 id="future-heading">Compiler 0.8 is next. Compiler 1.0 is the finish line</h2>
+            <p>The immediate next version is compiler 0.8. It needs an intermediate representation for activation predicates, required preconditions, evidence that a precondition is already satisfied, permitted and forbidden actions, negated cues, instruction priority, and format overrides.</p>
+            <p>All 33 full-only failures from 0.7 can become development regressions. They cannot become the proof that 0.8 works. After the compiler is frozen, it needs a newly and independently authored held-out-v4 set.</p>
+            <p>Compiler 1.0 is the larger finish line I want to reach: roughly the same 90%-plus context reduction, at least 95% conditional preservation with a convincing lower bound, results that hold at the case level, and no systematic failure category hiding under the average. Then the result needs to reproduce across multiple models and policy domains.</p>
+            <p>PolicyC has already answered one question. Large policy prompts contain substantial request-irrelevant structure. The open problem is whether a compiler can specialize their predicates and priorities without changing the obligations they impose.</p>
+          </section>
+        </div>
+
+        <footer class="article-footer">
+          <a href="/projects">All projects</a>
+          <a href="/policyc.pdf" target="_blank" rel="noopener noreferrer">Read the paper</a>
+        </footer>
+      </article>
+    </main>
+  </body>
+</html>

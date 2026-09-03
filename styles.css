@@ -306,7 +306,8 @@ a {
 }
 
 .article-example figcaption,
-.article-dashboard figcaption {
+.article-dashboard figcaption,
+.article-chart-panel figcaption {
   margin-top: 0.75rem;
   color: var(--subtle);
   font-size: var(--text-xs);
@@ -322,6 +323,95 @@ a {
   width: 100%;
   height: auto;
   background: #1c1c1e;
+}
+
+.article-chart-switcher {
+  min-width: 0;
+  margin: 0;
+  padding: 1rem 0 1.5rem;
+  border: 0;
+  border-block: 1px solid var(--line);
+}
+
+.article-chart-switcher .visually-hidden,
+.article-chart-control {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.article-chart-tabs {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.article-chart-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.article-chart-tabs label {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--subtle);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: var(--leading-normal);
+  user-select: none;
+}
+
+.article-chart-tabs label:hover {
+  color: var(--muted);
+}
+
+#policyc-chart-input:checked ~ .article-chart-tabs label[for="policyc-chart-input"],
+#policyc-chart-preservation:checked ~ .article-chart-tabs label[for="policyc-chart-preservation"],
+#policyc-chart-cost:checked ~ .article-chart-tabs label[for="policyc-chart-cost"],
+#policyc-chart-latency:checked ~ .article-chart-tabs label[for="policyc-chart-latency"] {
+  color: var(--foreground);
+}
+
+#policyc-chart-input:focus-visible ~ .article-chart-tabs label[for="policyc-chart-input"],
+#policyc-chart-preservation:focus-visible ~ .article-chart-tabs label[for="policyc-chart-preservation"],
+#policyc-chart-cost:focus-visible ~ .article-chart-tabs label[for="policyc-chart-cost"],
+#policyc-chart-latency:focus-visible ~ .article-chart-tabs label[for="policyc-chart-latency"] {
+  outline: 2px solid var(--foreground);
+  outline-offset: -2px;
+}
+
+.article-chart-panel {
+  display: none;
+  margin: 0;
+}
+
+#policyc-chart-input:checked ~ .article-chart-panels [data-chart="input"],
+#policyc-chart-preservation:checked ~ .article-chart-panels [data-chart="preservation"],
+#policyc-chart-cost:checked ~ .article-chart-panels [data-chart="cost"],
+#policyc-chart-latency:checked ~ .article-chart-panels [data-chart="latency"] {
+  display: block;
+}
+
+.article-chart-panel a,
+.article-chart-panel img {
+  display: block;
+}
+
+.article-chart-panel img {
+  width: 100%;
+  height: auto;
+  background: var(--background);
 }
 
 .article-body {
@@ -413,6 +503,11 @@ a {
   background: #151515;
 }
 
+.policyc-research-figure img {
+  border-color: var(--foreground);
+  background: var(--background);
+}
+
 
 .article-body blockquote {
   max-width: 610px;
@@ -482,6 +577,15 @@ a {
   }
 
 
+
+  .article-chart-tabs {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .article-chart-tabs label {
+    font-size: var(--text-xs);
+  }
 
   .article-footer {
     align-items: flex-start;

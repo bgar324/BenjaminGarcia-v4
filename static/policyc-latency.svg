@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="35 83 1130 762" role="img" aria-labelledby="title description">
+  <title id="title">PolicyC latency change across compiler versions</title>
+  <desc id="description">Relative to the full policy, compiler 0.5 was 19.95 percent faster, compiler 0.6 was 0.39 percent slower, and compiler 0.7 was 14.63 percent slower. Each compiler used a newly authored held-out set, so the connected points show a descriptive study sequence rather than controlled version-to-version gains.</desc>
+  <rect x="35" y="83" width="1130" height="762" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#1c1c1a">
+    <rect x="36" y="84" width="1128" height="760" fill="none" stroke="#1c1c1a" stroke-width="1.5" />
+    <text x="72" y="142" font-size="30" font-weight="650">End-to-end latency</text>
+    <text x="1128" y="142" text-anchor="end" fill="#67645f" font-size="25">Change vs full policy</text>
+    <text x="1128" y="188" text-anchor="end" fill="#67645f" font-size="19">Different held-out set per version; sequence is descriptive</text>
+
+    <g stroke="#cfcdc7" stroke-width="1.5">
+      <line x1="190" y1="250" x2="1090" y2="250" />
+      <line x1="190" y1="348" x2="1090" y2="348" />
+      <line x1="190" y1="446" x2="1090" y2="446" />
+      <line x1="190" y1="543" x2="1090" y2="543" />
+      <line x1="190" y1="641" x2="1090" y2="641" />
+      <line x1="190" y1="690" x2="1090" y2="690" />
+    </g>
+    <line x1="190" y1="446" x2="1090" y2="446" stroke="#67645f" stroke-width="2" stroke-dasharray="9 8" />
+    <text x="1080" y="430" text-anchor="end" fill="#67645f" font-size="20">same latency as full policy</text>
+    <g fill="#67645f" font-size="23" text-anchor="end">
+      <text x="168" y="258">+20</text>
+      <text x="168" y="356">+10</text>
+      <text x="168" y="454">0</text>
+      <text x="168" y="551">−10</text>
+      <text x="168" y="649">−20</text>
+      <text x="168" y="698">−25</text>
+    </g>
+    <line x1="190" y1="250" x2="190" y2="690" stroke="#1c1c1a" stroke-width="2" />
+    <line x1="190" y1="690" x2="1090" y2="690" stroke="#1c1c1a" stroke-width="2" />
+
+    <path d="M330 641 L640 442 L950 303" fill="none" stroke="#1c1c1a" stroke-width="3" />
+    <g fill="#d7a18d" stroke="#1c1c1a" stroke-width="2">
+      <circle cx="330" cy="641" r="13" />
+      <circle cx="640" cy="442" r="13" />
+      <circle cx="950" cy="303" r="13" />
+    </g>
+    <g font-size="22" text-anchor="middle">
+      <text x="330" y="607">19.95% faster</text>
+      <text x="640" y="489">0.39% slower</text>
+      <text x="950" y="269">14.63% slower</text>
+    </g>
+    <g font-size="24" font-weight="600" text-anchor="middle">
+      <text x="330" y="742">0.5</text>
+      <text x="640" y="742">0.6</text>
+      <text x="950" y="742">0.7</text>
+    </g>
+    <text x="640" y="814" text-anchor="middle" font-size="25">Compiler version</text>
+    <text x="90" y="495" text-anchor="middle" font-size="25" transform="rotate(-90 90 495)">Latency change (%)</text>
+  </g>
+</svg>

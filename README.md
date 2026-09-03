@@ -6,11 +6,12 @@ Live site: [bentgarcia.com](https://bentgarcia.com)
 
 ## Overview
 
-This repository contains a deliberately minimal, static portfolio with three public routes:
+This repository contains a deliberately minimal, static portfolio with four public routes:
 
 - `/` - introduction, experience, selected work, about, and contact links
 - `/projects` - a chronological collection of projects with live-site and source links
 - `/blog/annie` - a case study about building Annie, a personal iMessage assistant
+- `/blog/policyc` - a case study about testing request-specific policy compilation
 
 The interface uses a single-column charcoal layout, a conventional system-font scale, and underline-to-fill link interactions. There is no JavaScript, build step, framework, theme toggle, navigation shell, or UI state to maintain.
 
@@ -29,11 +30,20 @@ The interface uses a single-column charcoal layout, a conventional system-font s
 ```text
 index.html            Home page
 projects/index.html   Complete project collection
-blog/annie/index.html Blog article about Annie
+blog/annie/index.html   Blog article about Annie
+blog/policyc/index.html Blog article about PolicyC
 404.html              Custom 404 page
 styles.css            Layout, typography, and interaction styles
 static/favicon.svg
+static/annie-imessage-conversation.webp
 static/annie-deepseek-usage.webp
+static/policyc-input-reduction.svg
+static/policyc-preservation.svg
+static/policyc-cost-reduction.svg
+static/policyc-latency.svg
+static/policyc-compiler-pipeline.svg
+static/policyc-study-protocol.svg
+static/policyc-paired-outcomes.svg
 manifest.webmanifest
 sitemap.xml
 robots.txt
@@ -63,6 +73,7 @@ Open [localhost:8000](http://localhost:8000).
 - Update homepage structure and copy in `index.html`.
 - Update the project collection in `projects/index.html`.
 - Update global visual styling and motion in `styles.css`.
+- Add portfolio articles under `blog/<slug>/index.html` and their images under `static/`.
 - Replace `resume.pdf` or `policyc.pdf` to publish newer document versions at the same URLs.
 
 No environment variables are required.

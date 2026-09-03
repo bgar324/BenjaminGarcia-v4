@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="35 83 1130 762" role="img" aria-labelledby="title description">
+  <title id="title">PolicyC cost reduction across compiler versions</title>
+  <desc id="description">Actual billed-cost reduction was 23.01 percent for compiler 0.5, 24.50 percent for compiler 0.6, and 12.14 percent for compiler 0.7. Uncached-equivalent cost reduction was 67.80, 55.36, and 59.46 percent, respectively. Each compiler used a newly authored held-out set, so the connected points show a descriptive study sequence rather than controlled version-to-version gains.</desc>
+  <rect x="35" y="83" width="1130" height="762" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#1c1c1a">
+    <rect x="36" y="84" width="1128" height="760" fill="none" stroke="#1c1c1a" stroke-width="1.5" />
+    <text x="72" y="142" font-size="30" font-weight="650">Observed and uncached cost</text>
+    <text x="1128" y="142" text-anchor="end" fill="#67645f" font-size="25">Reduction vs full policy</text>
+    <text x="72" y="198" fill="#67645f" font-size="19">Different held-out set per version; sequence is descriptive</text>
+
+    <g font-size="22" font-weight="600">
+      <rect x="620" y="181" width="18" height="18" fill="#cad2b9" stroke="#1c1c1a" stroke-width="1.5" />
+      <text x="652" y="198">Uncached-equivalent</text>
+      <rect x="885" y="181" width="18" height="18" fill="#c6d6e5" stroke="#1c1c1a" stroke-width="1.5" />
+      <text x="917" y="198">Actual billed</text>
+    </g>
+
+    <g stroke="#cfcdc7" stroke-width="1.5">
+      <line x1="190" y1="250" x2="1090" y2="250" />
+      <line x1="190" y1="360" x2="1090" y2="360" />
+      <line x1="190" y1="470" x2="1090" y2="470" />
+      <line x1="190" y1="580" x2="1090" y2="580" />
+      <line x1="190" y1="690" x2="1090" y2="690" />
+    </g>
+    <g fill="#67645f" font-size="23" text-anchor="end">
+      <text x="168" y="258">80</text>
+      <text x="168" y="368">60</text>
+      <text x="168" y="478">40</text>
+      <text x="168" y="588">20</text>
+      <text x="168" y="698">0</text>
+    </g>
+    <line x1="190" y1="250" x2="190" y2="690" stroke="#1c1c1a" stroke-width="2" />
+    <line x1="190" y1="690" x2="1090" y2="690" stroke="#1c1c1a" stroke-width="2" />
+
+    <path d="M330 317 L640 386 L950 363" fill="none" stroke="#1c1c1a" stroke-width="3" />
+    <path d="M330 563 L640 555 L950 623" fill="none" stroke="#1c1c1a" stroke-width="3" />
+    <g fill="#cad2b9" stroke="#1c1c1a" stroke-width="2">
+      <circle cx="330" cy="317" r="13" />
+      <circle cx="640" cy="386" r="13" />
+      <circle cx="950" cy="363" r="13" />
+    </g>
+    <g fill="#c6d6e5" stroke="#1c1c1a" stroke-width="2">
+      <circle cx="330" cy="563" r="13" />
+      <circle cx="640" cy="555" r="13" />
+      <circle cx="950" cy="623" r="13" />
+    </g>
+    <g font-size="21" text-anchor="middle">
+      <text x="330" y="286">67.80%</text>
+      <text x="640" y="355">55.36%</text>
+      <text x="950" y="332">59.46%</text>
+      <text x="330" y="603">23.01%</text>
+      <text x="640" y="595">24.50%</text>
+      <text x="950" y="663">12.14%</text>
+    </g>
+    <g font-size="24" font-weight="600" text-anchor="middle">
+      <text x="330" y="742">0.5</text>
+      <text x="640" y="742">0.6</text>
+      <text x="950" y="742">0.7</text>
+    </g>
+    <text x="640" y="814" text-anchor="middle" font-size="25">Compiler version</text>
+    <text x="90" y="495" text-anchor="middle" font-size="25" transform="rotate(-90 90 495)">Cost reduction (%)</text>
+  </g>
+</svg>
