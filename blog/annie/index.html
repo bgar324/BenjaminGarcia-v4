@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Building Annie, an iMessage assistant | Benjamin Garcia</title>
+    <meta name="description" content="Why I rebuilt the assistant I used at Lindy with Google, Notion, and DeepSeek, and why I intend to keep it small." />
+    <meta name="color-scheme" content="light" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    <meta name="author" content="Benjamin Garcia" />
+    <link rel="canonical" href="https://bentgarcia.com/blog/annie" />
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png?v=2" />
+    <link rel="manifest" href="/manifest.webmanifest?v=2" />
+    <link rel="stylesheet" href="/styles.css?v=11" />
+    <meta name="theme-color" content="#fcfcfb" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://bentgarcia.com/blog/annie" />
+    <meta property="og:title" content="Building Annie, an iMessage assistant" />
+    <meta property="og:description" content="Why I rebuilt the assistant I used at Lindy with Google, Notion, and DeepSeek, and why I intend to keep it small." />
+    <meta property="og:site_name" content="Benjamin Garcia" />
+    <meta property="og:image" content="https://bentgarcia.com/static/og.png?v=2" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Building Annie, an iMessage assistant" />
+    <meta property="article:published_time" content="2026-09-02" />
+    <meta property="article:author" content="Benjamin Garcia" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Building Annie, an iMessage assistant" />
+    <meta name="twitter:description" content="Why I rebuilt the assistant I used at Lindy with Google, Notion, and DeepSeek, and why I intend to keep it small." />
+    <meta name="twitter:image" content="https://bentgarcia.com/static/og.png?v=2" />
+    <meta name="format-detection" content="address=no,email=no,telephone=no" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Building Annie, an iMessage assistant",
+        "description": "Why I rebuilt the assistant I used at Lindy with Google, Notion, and DeepSeek, and why I intend to keep it small.",
+        "url": "https://bentgarcia.com/blog/annie",
+        "mainEntityOfPage": "https://bentgarcia.com/blog/annie",
+        "datePublished": "2026-09-02",
+        "dateModified": "2026-09-02",
+        "inLanguage": "en-US",
+        "image": "https://bentgarcia.com/static/og.png?v=2",
+        "keywords": ["Annie", "iMessage", "DeepSeek", "TypeScript", "SQLite", "Sendblue", "Railway"],
+        "author": {
+          "@type": "Person",
+          "name": "Benjamin Garcia",
+          "url": "https://bentgarcia.com"
+        },
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Benjamin Garcia",
+          "url": "https://bentgarcia.com"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="article-page">
+      <nav class="article-nav" aria-label="Article navigation">
+        <a class="text-arrow-link" href="/">Benjamin Garcia</a>
+      </nav>
+
+      <article>
+        <header class="article-header">
+          <h1>Building Annie, an iMessage assistant</h1>
+          <p class="article-lead">Annie sends my calendar and inbox to iMessage every morning. I built it when my Lindy internship ended.</p>
+          <p class="article-meta">
+            <time datetime="2026-09-02">September 2, 2026</time>
+            <a href="https://github.com/bgar324/annie" target="_blank" rel="noopener noreferrer">View source code</a>
+          </p>
+        </header>
+
+        <figure class="article-example" aria-labelledby="morning-brief-caption">
+          <figcaption id="morning-brief-caption">A redacted version of the brief Annie sends me at 8:00 a.m.</figcaption>
+          <div class="article-message">
+            <div class="article-message-heading">
+              <strong>Annie</strong>
+              <time datetime="08:00">8:00 a.m.</time>
+            </div>
+            <p class="article-message-label">today</p>
+            <ul>
+              <li>3:00 to 4:00 p.m. project meeting</li>
+              <li>8:00 to 8:15 p.m. advising</li>
+            </ul>
+            <p class="article-message-label">inbox</p>
+            <ul>
+              <li><strong>needs attention:</strong> new account sign-in</li>
+              <li><strong>worth a peek:</strong> campus building access update</li>
+              <li><strong>ignore:</strong> store promotions</li>
+            </ul>
+            <p class="article-message-question">what do you have to do today?</p>
+          </div>
+        </figure>
+
+        <div class="article-body">
+          <section aria-labelledby="origin-heading">
+            <h2 id="origin-heading">The assistant I lost when my internship ended</h2>
+            <p>I spent my first two weeks at Lindy on the email and meetings team. When work started on Lindy Teammate, Lindy's assistant for Slack, my work shifted to integrations, guardrails, MCP support, migration infrastructure, and the new dashboard.</p>
+            <p>I used Lindy's executive assistant enough that opening Gmail started to feel unnecessary. Its daily brief merged my calendar and inbox into a short list of what needed attention. A few weeks in, I wanted the brief to ask what I planned to do that day and add my answer to a Notion task list I share with a friend. I wanted one loop: get the brief, answer one question, and update the shared list without leaving Messages.</p>
+            <p>When the internship ended, my access ended too. Keeping the phone assistant cost $50 a month. I liked the product, but I did not need a platform built for many customers. I needed Google and Notion.</p>
+            <p>The code was new, but the product decisions were not. Lindy had taught me to treat integrations, permissions, migrations, and traces as product work, not plumbing. Annie came together quickly because I was shrinking a system I already understood to one user, one phone, and the tools I needed.</p>
+          </section>
+
+          <section aria-labelledby="smaller-heading">
+            <h2 id="smaller-heading">I did not need thirty integrations</h2>
+            <p>At Lindy, I learned that breadth has a cost. While debugging bug reports, I often found that the model was not the part that failed. It had been given several versioned actions with nearly identical names. A correct interpretation could still end with the wrong tool.</p>
+            <p>Put those actions beside more than thirty integrations and the model has to choose among tools that look interchangeable. More context did not make it smarter. It gave the model more ways to be wrong.</p>
+            <p>Pi's approach to coding helped me make the opposite choice. I removed anything I did not use. Annie has Google and Notion because those are the two integrations I need. The provider registry contains eight tools, and only two can write.</p>
+
+            <p>In daily use, a cold request returns in under 20 seconds, a warm request returns in under 10, and the first week cost about $0.20.</p>
+            <p>The smaller catalog gives DeepSeek fewer ambiguous choices and less context to read.</p>
+            <p>Lindy's hard problem is serving many users with different accounts, tools, and expectations. Annie has one user and one phone. I can make choices that would never work for a product at that scale.</p>
+          </section>
+
+          <section aria-labelledby="notion-heading">
+            <h2 id="notion-heading">The Notion guard guarded too much</h2>
+            <p>Notion took the most work to get right. My first guard stored one connection-wide snapshot of every Notion tool Annie allowed. If any one of those schemas changed, Annie would stop every valid Notion request and tell me to reconnect my account.</p>
+            <p>The old guard's drift fixture shows the failure. Adding an optional filter to <code>notion-search</code> changed its SHA-256 fingerprint. A request for <code>notion-update-page</code> would still stop, although that tool and the credentials were unchanged.</p>
+            <dl class="article-log" aria-label="Reproduction of the retired Notion schema guard">
+              <div><dt>request</dt><dd><code>notion-update-page</code></dd></div>
+              <div><dt>changed</dt><dd><code>notion-search</code></dd></div>
+              <div><dt>before</dt><dd><code>a2c799262a3ce3c19ef5cdd983bf3d12b43ab3c426227091b909dcb7054738c0</code></dd></div>
+              <div><dt>after</dt><dd><code>1334b022cc5ca9485754eb529c50f557b45052e9c51176eec71068d5adbbc942</code></dd></div>
+              <div><dt>result</dt><dd><code>reconnect_required / schema_drift</code></dd></div>
+            </dl>
+            <p>I had written a safety check broad enough to turn a compatible change in one tool into an authentication problem for all four.</p>
+            <p>I narrowed the check instead of removing it. Annie now reads the live catalog, keeps the four Notion tools it allows, and validates only the selected tool against its current input schema. A changed parameter, name, or type blocks that call. A change to some other tool does not break the request or mark the connection unhealthy.</p>
+            <blockquote><p>A guard should fail only the operation whose assumptions changed.</p></blockquote>
+          </section>
+
+          <section aria-labelledby="model-heading">
+            <h2 id="model-heading">The cheapest model was enough</h2>
+            <p>I tried Gemini first because the free tier was convenient. The rate limits interrupted normal use often enough that I moved on. I did not run a formal model comparison. I picked the next inexpensive option, DeepSeek V4 Flash, and it handled the work.</p>
+            <p>I bought $2 of credit. After the first week, Annie had used about $0.20. At that pace, $2 lasts roughly two months, or about $12 a year. The Lindy phone experience would have cost $50 each month.</p>
+            <figure class="article-dashboard">
+              <a href="/static/annie-deepseek-usage.webp?v=3" target="_blank" rel="noopener noreferrer" aria-label="Open the DeepSeek usage dashboard at full size">
+                <img src="/static/annie-deepseek-usage.webp?v=3" width="1750" height="1020" decoding="async" alt="DeepSeek usage dashboard showing $0.17 in cost, 245 API requests, and 1,121,674 tokens for deepseek-v4-flash" />
+              </a>
+              <figcaption>DeepSeek usage after about four days: $0.17 across 245 API requests and 1,121,674 tokens. Much of that activity came from automated benchmarks for latency, prompt and response quality, and failures I wanted to catch before deployment.</figcaption>
+            </figure>
+            <p>I do not need the most expensive model available to triage an inbox and choose among eight tools. Current models infer ordinary intent with much less instruction than they needed a year ago.</p>
+            <p>I still do not ask the model to define its own permissions. Gmail is read-only because Annie has no email-write tool. The code limits Notion writes. Removing a capability is cheaper and safer than spending prompt tokens asking a model not to use it.</p>
+          </section>
+
+          <section aria-labelledby="voice-heading">
+            <h2 id="voice-heading">I wanted her to be a little annoyed</h2>
+            <p>I chose the name Annie because I think it is beautiful. The acronym came later: Assistant for Notion, Notifications, iMessage, and Email.</p>
+            <p>I did not want the polished customer-support voice that most assistants default to.</p>
+            <blockquote><p>I wanted Annie to sound like someone who wanted to help, but was honestly a little annoyed that you asked.</p></blockquote>
+            <p>Her prompt asks for casual, concise lowercase prose. The morning brief separates what needs attention from what is worth a peek and what is safe to ignore. She answers the question, offers the next useful action, and does not pretend every email matters.</p>
+          </section>
+
+          <section aria-labelledby="trace-heading">
+            <h2 id="trace-heading">A failure should leave a trace</h2>
+            <p>An agent can fail in too many places for its own explanation to be trustworthy. The model can choose the wrong tool, a provider can reject the call, or a worker can stop halfway through. Agents also invent plausible explanations for failures they did not understand.</p>
+            <p>I designed Annie around a durable trace instead. Every inbound message gets a trace ID. Events from the queue, model, tool calls, providers, and outbound delivery are written to SQLite in order with sensitive values redacted. If a run cannot finish, the fallback comes from code, not the model:</p>
+            <blockquote aria-label="Deterministic failure reply"><p>I couldn't complete that request. Trace: <code>tr_3d5e93de1fd84326b04fe3b932d6b65b</code></p></blockquote>
+            <p>I can give that ID to a coding agent and reconstruct the run with <code>pnpm trace -- &lt;trace-id&gt;</code>. I learned this trace-first pattern while building SoulPlayer and working at Lindy. A failed request becomes a reproducible debugging case instead of a conversation about what the model thinks happened.</p>
+          </section>
+
+          <section aria-labelledby="reliability-heading">
+            <h2 id="reliability-heading">Reliability comes before another integration</h2>
+            <p>I tend to pad products with capabilities. I added a nutrition tab to Logit because I wanted it to exist, even though I barely use it. Annie has made me resist that habit.</p>
+            <p>I think Annie is finished for now. I do not have a list of integrations waiting to be added. Staying small is part of the point.</p>
+            <p>The code still does unglamorous work. The Sendblue receiver rereads a 60-second overlap so a restart does not miss a message. SQLite records each accepted message and queue job together. Annie never retries a provider write when the provider may already have accepted it.</p>
+            <p>I want to stop thinking about development and use the thing. Agents feel magical while they work. One failed ordinary request breaks that feeling fast, so reliability is the priority now. Daily use will show me the few gaps worth fixing. Until then, Google, Notion, and eight tools are enough.</p>
+          </section>
+        </div>
+
+        <footer class="article-footer">
+          <a href="/projects">All projects</a>
+          <a href="https://github.com/bgar324/annie" target="_blank" rel="noopener noreferrer">Read the source on GitHub</a>
+        </footer>
+      </article>
+    </main>
+  </body>
+</html>

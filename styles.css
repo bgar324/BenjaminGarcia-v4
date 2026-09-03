@@ -23,7 +23,7 @@
    title     --text-base / 600               section headings, entry titles
    lead      --text-base / 400 / muted       hero paragraph
    body      --text-sm  / 400 / muted        prose (610px measure), standalone nav
-   subtitle  --text-sm  / 500 / soft         experience role
+   subtitle  --text-sm  / 500 / soft         experience roles, project subtitles
    meta      --text-xs                       dates, years, tech, in-row links
                                              static: subtle | interactive: muted */
 
@@ -61,6 +61,7 @@ a {
 
 .site-page,
 .projects-page,
+.article-page,
 .not-found {
   width: min(100% - 2.5rem, 700px);
   margin-inline: auto;
@@ -204,7 +205,6 @@ a {
   min-width: 0;
 }
 
-.project .project-tech,
 .projects-entry p,
 .experience-heading > p,
 .projects-year {
@@ -218,10 +218,12 @@ a {
   margin: 0;
 }
 
-.experience-role {
+.experience-role,
+.project > .project-subtitle {
   margin: 0.65rem 0 0;
   color: var(--soft);
   font-size: var(--text-sm);
+  line-height: var(--leading-normal);
   font-weight: 500;
 }
 
@@ -267,6 +269,251 @@ a {
   white-space: nowrap;
 }
 
+.article-nav {
+  padding-top: 2rem;
+}
+
+
+.article-header {
+  padding-block: clamp(4rem, 9vw, 5.5rem) 3rem;
+}
+
+.article-header h1 {
+  max-width: 17ch;
+  margin: 0;
+  font-size: clamp(2.35rem, 7vw, 4rem);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.05;
+}
+
+.article-lead {
+  max-width: 650px;
+  margin: 1.5rem 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: var(--leading-relaxed);
+}
+
+.article-meta {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 1.25rem 0 0;
+  color: var(--subtle);
+  font-size: var(--text-xs);
+}
+
+.article-meta a {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.article-example {
+  margin: 0;
+  padding-block: 2.5rem;
+  border-block: 1px solid var(--line);
+}
+
+.article-example figcaption {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.article-message {
+  max-width: 610px;
+  padding: 1.4rem 1.5rem 1.5rem;
+  border-radius: 1.25rem 1.25rem 1.25rem 0.35rem;
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.article-message-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--background) 22%, var(--foreground));
+}
+
+.article-message-heading strong {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.article-message-heading time {
+  color: color-mix(in srgb, var(--background) 70%, var(--foreground));
+  font-size: var(--text-xs);
+}
+
+.article-message-label {
+  margin: 1rem 0 0;
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.article-message ul {
+  margin: 0.4rem 0 0;
+  padding: 0;
+  color: color-mix(in srgb, var(--background) 84%, var(--foreground));
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  list-style: none;
+}
+
+.article-message li + li {
+  margin-top: 0.25rem;
+}
+
+.article-message li::before {
+  display: inline-block;
+  width: 1rem;
+  color: color-mix(in srgb, var(--background) 62%, var(--foreground));
+  content: "›";
+}
+
+.article-message li strong {
+  color: var(--background);
+  font-weight: 600;
+}
+
+.article-message-question {
+  margin: 1.25rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--background) 22%, var(--foreground));
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+
+.article-body {
+  padding-block: 4.5rem;
+}
+
+.article-body section {
+  max-width: 640px;
+}
+
+.article-body section + section {
+  margin-top: 4rem;
+}
+
+.article-body h2 {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.35;
+}
+
+.article-body p {
+  margin: 1.1rem 0 0;
+  color: var(--muted);
+  font-size: var(--text-base);
+  line-height: 1.75;
+}
+
+.article-body code {
+  padding: 0.08rem 0.28rem;
+  border-radius: 0.15rem;
+  background: color-mix(in srgb, var(--foreground) 6%, var(--background));
+  color: var(--foreground);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+}
+
+.article-log {
+  margin: 1.75rem 0;
+  padding-block: 1rem;
+  border-block: 1px solid var(--line);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.article-log > div {
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.article-log > div + div {
+  margin-top: 0.4rem;
+}
+
+.article-log dt {
+  color: var(--subtle);
+}
+
+.article-log dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--soft);
+}
+
+.article-log code {
+  padding: 0;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+  overflow-wrap: anywhere;
+}
+.article-dashboard {
+  margin: 2rem 0 2.25rem;
+}
+
+.article-dashboard a,
+.article-dashboard img {
+  display: block;
+}
+
+.article-dashboard img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #151515;
+}
+
+.article-dashboard figcaption {
+  margin-top: 0.75rem;
+  color: var(--subtle);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+}
+
+
+
+.article-body blockquote {
+  max-width: 610px;
+  margin: 2rem 0;
+  padding: 0.1rem 0 0.1rem 1.25rem;
+  border-left: 2px solid var(--foreground);
+}
+
+.article-body blockquote p {
+  margin: 0;
+  color: var(--soft);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: var(--leading-relaxed);
+}
+
+.article-footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 2rem 5rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
 .not-found {
   display: flex;
   min-height: 100svh;
@@ -282,8 +529,38 @@ a {
 @media (max-width: 620px) {
   .site-page,
   .projects-page,
+  .article-page,
   .not-found {
     width: min(100% - 2rem, 700px);
+  }
+
+  .article-nav {
+    padding-top: 1.5rem;
+  }
+
+  .article-header {
+    padding-block: 3.5rem 2.75rem;
+  }
+
+  .article-header h1 {
+    max-width: none;
+  }
+
+
+  .article-body {
+    padding-block: 3.75rem;
+  }
+
+  .article-body section + section {
+    margin-top: 3.5rem;
+  }
+
+
+
+  .article-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .intro {

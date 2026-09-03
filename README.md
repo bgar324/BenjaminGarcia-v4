@@ -6,10 +6,11 @@ Live site: [bentgarcia.com](https://bentgarcia.com)
 
 ## Overview
 
-This repository contains a deliberately minimal, static portfolio with two public routes:
+This repository contains a deliberately minimal, static portfolio with three public routes:
 
 - `/` - introduction, experience, selected work, about, and contact links
 - `/projects` - a chronological collection of projects with live-site and source links
+- `/blog/annie` - a case study about building Annie, a personal iMessage assistant
 
 The interface uses a single-column charcoal layout, a conventional system-font scale, and underline-to-fill link interactions. There is no JavaScript, build step, framework, theme toggle, navigation shell, or UI state to maintain.
 
@@ -28,9 +29,11 @@ The interface uses a single-column charcoal layout, a conventional system-font s
 ```text
 index.html            Home page
 projects/index.html   Complete project collection
+blog/annie/index.html Blog article about Annie
 404.html              Custom 404 page
 styles.css            Layout, typography, and interaction styles
 static/favicon.svg
+static/annie-deepseek-usage.webp
 manifest.webmanifest
 sitemap.xml
 robots.txt
