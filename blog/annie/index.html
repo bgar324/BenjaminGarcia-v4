@@ -158,7 +158,7 @@
             <p>An agent can fail in too many places for its own explanation to be trustworthy. The model can choose the wrong tool, a provider can reject the call, or a worker can stop halfway through. Agents also invent plausible explanations for failures they did not understand.</p>
             <p>I designed Annie around a durable trace instead. Every inbound message gets a trace ID. Events from the queue, model, tool calls, providers, and outbound delivery are written to SQLite in order with sensitive values redacted. If a run cannot finish, the fallback comes from code, not the model:</p>
             <blockquote aria-label="Deterministic failure reply"><p>I couldn't complete that request. Trace: <code>tr_3d5e93de1fd84326b04fe3b932d6b65b</code></p></blockquote>
-            <p>I can give that ID to a coding agent and reconstruct the run with <code>pnpm trace -- &lt;trace-id&gt;</code>. I learned this trace-first pattern while building SoulPlayer and working at Lindy. A failed request becomes a reproducible debugging case instead of a conversation about what the model thinks happened.</p>
+            <p>I can give that ID to a coding agent and reconstruct the run with <code>pnpm trace -- &lt;trace-id&gt;</code>. I learned this trace-first pattern while working at Lindy. A failed request becomes a reproducible debugging case instead of a conversation about what the model thinks happened.</p>
           </section>
 
           <section aria-labelledby="reliability-heading">
