@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="620" viewBox="0 0 1130 620" role="img" aria-labelledby="title description">
+  <title id="title">Logit's current logged-today invariant</title>
+  <desc id="description">A backdated Monday Push workout is compared with Tuesday's Pull plan. The record has neither the same Pacific date nor the same normalized workout type, so the conjunction is false and Tuesday's Pull workout remains available.</desc>
+  <rect width="1130" height="620" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
+    <text x="40" y="58" font-size="29" font-weight="650">“Logged today” requires both facts to match</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="21">Current dashboard invariant</text>
+
+    <g transform="translate(40 115)">
+      <rect width="430" height="170" fill="none" stroke="#2c2826" stroke-width="2" />
+      <text x="28" y="42" fill="#6b6763" font-size="17">BACKDATED RECORD</text>
+      <text x="28" y="88" font-size="25" font-weight="650">Monday · Push</text>
+      <text x="28" y="126" fill="#6b6763" font-size="18">Saved on Tuesday for the missed day</text>
+    </g>
+
+    <g transform="translate(660 115)">
+      <rect width="430" height="170" fill="none" stroke="#2c2826" stroke-width="2" />
+      <text x="28" y="42" fill="#6b6763" font-size="17">TODAY'S PLAN</text>
+      <text x="28" y="88" font-size="25" font-weight="650">Tuesday · Pull</text>
+      <text x="28" y="126" fill="#6b6763" font-size="18">The workout the home screen should offer</text>
+    </g>
+
+    <g text-anchor="middle">
+      <text x="255" y="330" font-size="19" font-weight="650">same Pacific date?</text>
+      <text x="875" y="330" font-size="19" font-weight="650">same workout type?</text>
+      <text x="255" y="369" fill="#8f684e" font-size="24" font-weight="650">No</text>
+      <text x="875" y="369" fill="#8f684e" font-size="24" font-weight="650">No</text>
+    </g>
+    <path d="M255 385 V410 H545" fill="none" stroke="#2c2826" stroke-width="2" />
+    <path d="M875 385 V410 H585" fill="none" stroke="#2c2826" stroke-width="2" />
+    <path d="M565 410 V432" fill="none" stroke="#2c2826" stroke-width="2" />
+    <path d="M558 424 L565 436 L572 424 Z" fill="#2c2826" />
+
+    <g text-anchor="middle">
+      <text x="565" y="467" fill="#6b6763" font-size="18">sameDate &amp;&amp; sameWorkoutType</text>
+      <text x="565" y="500" font-size="28" font-weight="650">false</text>
+    </g>
+
+    <line x1="40" y1="528" x2="1090" y2="528" stroke="#d4d1cb" stroke-width="1.5" />
+    <circle cx="64" cy="575" r="14" fill="#cad2b9" stroke="#2c2826" stroke-width="2" />
+    <text x="96" y="582" font-size="21" font-weight="650">Keep Tuesday's Pull workout available.</text>
+    <text x="1090" y="582" text-anchor="end" fill="#6b6763" font-size="18">A backdated save cannot finish today's plan.</text>
+  </g>
+</svg>

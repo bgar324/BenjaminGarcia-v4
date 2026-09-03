@@ -6,12 +6,13 @@ Live site: [bentgarcia.com](https://bentgarcia.com)
 
 ## Overview
 
-This repository contains a deliberately minimal, static portfolio with four public routes:
+This repository contains a deliberately minimal, static portfolio with five public routes:
 
 - `/` - introduction, experience, selected work, about, and contact links
 - `/projects` - a chronological collection of projects with live-site and source links
 - `/blog/annie` - a case study about building Annie, a personal iMessage assistant
 - `/blog/policyc` - a case study about testing request-specific policy compilation
+- `/blog/logit` - a case study about designing a workout logger that gets out of the way
 
 The interface uses a single-column charcoal layout, a conventional system-font scale, and underline-to-fill link interactions. There is no JavaScript, build step, framework, theme toggle, navigation shell, or UI state to maintain.
 
@@ -32,11 +33,16 @@ index.html            Home page
 projects/index.html   Complete project collection
 blog/annie/index.html   Blog article about Annie
 blog/policyc/index.html Blog article about PolicyC
+blog/logit/index.html  Blog article about Logit
 404.html              Custom 404 page
 styles.css            Layout, typography, and interaction styles
 static/favicon.svg
 static/annie-imessage-conversation.webp
 static/annie-deepseek-usage.webp
+static/logit-workout.webp
+static/logit-workout-square.webp
+static/logit-iterations.png
+static/logit-logged-today.svg
 static/policyc-input-reduction.svg
 static/policyc-preservation.svg
 static/policyc-cost-reduction.svg

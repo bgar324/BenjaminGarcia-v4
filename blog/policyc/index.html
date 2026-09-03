@@ -12,7 +12,7 @@
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg?v=2" />
     <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png?v=2" />
     <link rel="manifest" href="/manifest.webmanifest?v=2" />
-    <link rel="stylesheet" href="/styles.css?v=18" />
+    <link rel="stylesheet" href="/styles.css?v=25" />
     <meta name="theme-color" content="#fcfcfb" />
     <meta property="og:type" content="article" />
     <meta property="og:locale" content="en_US" />
@@ -132,7 +132,7 @@
             <p>Starting from an arbitrary natural-language prompt would have combined three research problems: extracting policies, selecting the relevant ones, and emitting them without changing their meaning. When an answer failed, I would not know which layer caused it.</p>
             <p>I isolated the compiler instead with a synthetic enterprise-agent policy system and synthetic requests. No private production data entered the studies. Compiler 0.5 began with 39 manually structured policy nodes. By 0.7, the graph contained 43 nodes across six domains. Each node has a stable ID, activation triggers, dependencies, severity, obligations, prohibitions, and model-visible instructions.</p>
             <p>Given a request, artifact context, and available tools, the TypeScript compiler detects intents, activates matching policies, conservatively retains high-impact safeguards, adds every transitive dependency, and emits the selected nodes in a stable order.</p>
-            <figure class="article-dashboard policyc-research-figure" aria-labelledby="policyc-pipeline-caption">
+            <figure class="article-dashboard article-diagram" aria-labelledby="policyc-pipeline-caption">
               <a href="/static/policyc-compiler-pipeline.svg?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC compiler pipeline figure at full size">
                 <img src="/static/policyc-compiler-pipeline.svg?v=2" width="1130" height="520" loading="lazy" decoding="async" alt="PolicyC takes structured policy P, request x, artifact context, and available tools; matches and retains policies; adds transitive dependencies; orders the selected nodes; and emits compact slice P x. Exact closure retains every declared dependency but cannot prove that emitted language preserves policy semantics." />
               </a>
@@ -145,7 +145,7 @@
             <h2 id="evidence-heading">Three frozen studies, three new held-out sets</h2>
             <p>Once I inspected a frozen study, its cases became development evidence and were never reused as fresh held-out evidence. Compiler 0.5, 0.6, and 0.7 therefore faced different case sets. Their sequence shows what each version exposed, not a controlled causal comparison between versions.</p>
             <p>Every case declared its request, context, obligations, prohibitions, tool expectations, and semantic rubric independently of the candidate prompt. The same request ran under the full policy and compiled slice three times using one pinned GPT-5 mini snapshot.</p>
-            <figure class="article-dashboard policyc-research-figure" aria-labelledby="policyc-protocol-caption">
+            <figure class="article-dashboard article-diagram" aria-labelledby="policyc-protocol-caption">
               <a href="/static/policyc-study-protocol.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC held-out study table at full size">
                 <img src="/static/policyc-study-protocol.svg?v=1" width="1130" height="620" loading="lazy" decoding="async" alt="Three frozen studies used 160 cases and 960 model executions. Compiler 0.5 used 50 cases, 300 executions, 129 of 150 complete pairs, no provider tools, and cost 0.6881 dollars. Compiler 0.6 used 50 cases, 300 executions, 139 of 150 complete pairs, 41 web searches, and cost 1.0357 dollars. Compiler 0.7 used 60 cases, 360 executions, 180 of 180 complete pairs, 20 web searches, and cost 0.9333 dollars. Compiler 0.6 had 136 determinate pairs and three ungradable complete pairs." />
               </a>
@@ -177,7 +177,7 @@
             <h2 id="compiler-07-heading">Compiler 0.7 found the semantic gap</h2>
             <p>Compiler 0.7 grew the graph to 43 nodes, hardened tool-availability handling, and incorporated selected regressions from 0.6. I froze a new 60-case set and ran three samples through the full and compiled conditions, producing 360 model executions and all 180 complete pairs.</p>
             <p>Mean input fell by 93.75%, but the compiled condition preserved only 130 of 163 full-policy successes, or 79.75%. Across 180 pairs, 130 passed in both conditions, 33 passed only under the full policy, 11 passed only under the compiler, and six failed in both. The version passed only two of its six preregistered gates.</p>
-            <figure class="article-dashboard policyc-research-figure" aria-labelledby="policyc-outcomes-caption">
+            <figure class="article-dashboard article-diagram" aria-labelledby="policyc-outcomes-caption">
               <a href="/static/policyc-paired-outcomes.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC paired-outcomes chart at full size">
                 <img src="/static/policyc-paired-outcomes.svg?v=1" width="1130" height="700" loading="lazy" decoding="async" alt="Raw strategy-blind paired outcomes. Compiler 0.5 had 129 pairs: 92 both pass, 15 full-policy only, 9 compiler only, and 13 both fail. Compiler 0.6 had 136 determinate pairs: 64 both pass, 10 full-policy only, 9 compiler only, and 53 both fail, plus 3 ungradable complete pairs. Compiler 0.7 had 180 pairs: 130 both pass, 33 full-policy only, 11 compiler only, and 6 both fail. Each version used a different held-out set." />
               </a>

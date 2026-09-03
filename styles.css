@@ -325,6 +325,27 @@ a {
   background: #1c1c1e;
 }
 
+.logit-hero {
+  padding: 0;
+  border-top: 0;
+}
+
+.logit-hero > a,
+.logit-hero figcaption {
+  width: min(100%, 440px);
+  margin-inline: auto;
+}
+
+.logit-hero figcaption {
+  padding-bottom: 1.25rem;
+}
+
+.logit-hero img {
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .article-chart-switcher {
   min-width: 0;
   margin: 0;
@@ -503,7 +524,7 @@ a {
   background: #151515;
 }
 
-.policyc-research-figure img {
+.article-diagram img {
   border-color: var(--foreground);
   background: var(--background);
 }
