@@ -7,6 +7,28 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/static/resume.pdf",
+      "has": [
+        {
+          "type": "host",
+          "value": "v3.bentgarcia.com"
+        }
+      ],
+      "destination": "https://bentgarcia.com/resume.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "v3.bentgarcia.com"
+        }
+      ],
+      "destination": "https://bentgarcia.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/archive",
       "destination": "/projects",
       "permanent": true

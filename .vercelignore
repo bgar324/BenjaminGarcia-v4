@@ -1,0 +1,9 @@
+.git
+.vercel
+.worktrees
+.agents
+.conductor
+.env*
+.DS_Store
+note.txt
+resume-fall.pdf

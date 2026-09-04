@@ -9,3 +9,4 @@ note.txt
 /resume-fall.pdf
 
 old-settings.json
+.env*.local
