@@ -47,6 +47,7 @@ static/logit-logged-today.svg
 static/policyc-input-reduction.svg
 static/policyc-preservation.svg
 static/policyc-cost-reduction.svg
+static/policyc-billed-cost.svg
 static/policyc-latency.svg
 static/policyc-compiler-pipeline.svg
 static/policyc-compiler-pipeline-v09.svg

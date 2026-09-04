@@ -53,6 +53,16 @@ STUDIES = (
     Study("0.9", 60, 360, 177, 180, 26, 1.17901190, 92.99, 75.91, 68.11, 82.30, 137, 17.21, 58.69, 13.36, 104, 33, 21, 19),
 )
 
+# Actual billed dollars per execution on each frozen audit's reported efficiency basis.
+# Versions 0.5–0.7 use all planned executions; 0.8–0.9 use complete pairs.
+BILLED_COST_PER_EXECUTION = {
+    "0.5": (0.002591718667, 0.001995421667),
+    "0.6": (0.003934319667, 0.002970252333),
+    "0.7": (0.002760036944, 0.002424847222),
+    "0.8": (0.002884990491, 0.002364964417),
+    "0.9": (0.003426609040, 0.002836842655),
+}
+
 V09_EXTRACTION_READS = 60
 V09_EXTRACTION_COST = 0.26783625
 
@@ -99,18 +109,26 @@ def chart_frame(title_value: str, kicker: str, note: str) -> list[str]:
         text(1090, 105, note, text_anchor="end", fill=MUTED, font_size=18),
     ]
 
-def add_direction_labels(body: list[str], *, more_is_better: bool) -> None:
+def add_direction_labels(body: list[str], *, more_is_better: bool, bottom_y: float = 590) -> None:
     top_label = "↑ More is better" if more_is_better else "↑ More is worse"
     bottom_label = "↓ Less is worse" if more_is_better else "↓ Less is better"
     body.extend(
         [
             text(1080, 142, top_label, text_anchor="end", fill=RUST, font_size=18, font_weight=600),
-            text(1080, 590, bottom_label, text_anchor="end", fill=RUST, font_size=18, font_weight=600),
+            text(1080, bottom_y, bottom_label, text_anchor="end", fill=RUST, font_size=18, font_weight=600),
         ]
     )
 
 
-def chart_axes(y_min: float, y_max: float, ticks: tuple[float, ...], y_label: str, *, break_axis: bool = False) -> tuple[list[str], object]:
+def chart_axes(
+    y_min: float,
+    y_max: float,
+    ticks: tuple[float, ...],
+    y_label: str,
+    *,
+    break_axis: bool = False,
+    tick_prefix: str = "",
+) -> tuple[list[str], object]:
     top = 165
     bottom = 600
     left = 155
@@ -124,7 +142,7 @@ def chart_axes(y_min: float, y_max: float, ticks: tuple[float, ...], y_label: st
         y = y_for(tick)
         body.append(line(left, y, right, y, stroke=GRID, stroke_width=1.5))
         label = f"{tick:+g}" if y_min < 0 < y_max and tick != 0 else f"{tick:g}"
-        body.append(text(134, y + 8, label.replace("-", "−"), text_anchor="end", fill=MUTED, font_size=22))
+        body.append(text(134, y + 8, f"{tick_prefix}{label.replace('-', '−')}", text_anchor="end", fill=MUTED, font_size=22))
     body.extend(
         [
             line(left, top, left, bottom, stroke=INK, stroke_width=2),
@@ -236,6 +254,67 @@ def cost_chart() -> None:
     write_svg("policyc-cost-reduction.svg", 1130, 762, "PolicyC execution-cost reduction across compiler versions", description, body)
 
 
+def billed_cost_chart() -> None:
+    body = chart_frame(
+        "Measured billed cost per execution",
+        "Full policy vs compiled slice",
+        "Actual spend; tool fees included",
+    )
+    body.extend(
+        [
+            f'<rect x="40" y="89" width="17" height="17" fill="{GRAY}" stroke="{INK}" stroke-width="1.5" />',
+            text(70, 104, "Full policy", font_size=20, font_weight=600),
+            f'<rect x="205" y="89" width="17" height="17" fill="{SAGE}" stroke="{INK}" stroke-width="1.5" />',
+            text(235, 104, "Compiled slice", font_size=20, font_weight=600),
+        ]
+    )
+    add_direction_labels(body, more_is_better=False, bottom_y=625)
+    axes, y_for = chart_axes(
+        0,
+        0.0045,
+        (0.004, 0.003, 0.002, 0.001, 0),
+        "Billed cost ($ / execution)",
+        tick_prefix="$",
+    )
+    body.extend(axes)
+    positions = (225, 425, 625, 825, 1025)
+    bar_width = 48
+    for x, study in zip(positions, STUDIES, strict=True):
+        full_cost, compiled_cost = BILLED_COST_PER_EXECUTION[study.version]
+        for left, value, color in (
+            (x - 54, full_cost, GRAY),
+            (x + 6, compiled_cost, SAGE),
+        ):
+            y = y_for(value)
+            body.append(
+                f'<rect x="{left}" y="{y:.1f}" width="{bar_width}" height="{600 - y:.1f}" '
+                f'fill="{color}" stroke="{INK}" stroke-width="2" />'
+            )
+            body.append(text(left + bar_width / 2, y - 14, f"${value:.6f}", text_anchor="middle", font_size=15))
+        body.extend(
+            [
+                text(x, 660, study.version, text_anchor="middle", font_size=22, font_weight=650),
+                text(x, 691, f"−{study.billed_reduction:.2f}%", text_anchor="middle", fill=RUST, font_size=16, font_weight=600),
+            ]
+        )
+    description = "Actual measured billed cost per execution for the full policy and compiled slice was " + "; ".join(
+        f"{full_cost:.6f} dollars and {compiled_cost:.6f} dollars for compiler {study.version}, a {study.billed_reduction:.2f} percent reduction"
+        for study in STUDIES
+        for full_cost, compiled_cost in (BILLED_COST_PER_EXECUTION[study.version],)
+    ) + (
+        ". Versions 0.5 through 0.7 use all planned executions; versions 0.8 and 0.9 use complete pairs, matching each frozen audit's reported efficiency basis. "
+        "Both series are measured spend, not forecasts. Less cost is better; more is worse."
+    )
+    write_svg(
+        "policyc-billed-cost.svg",
+        1130,
+        762,
+        "PolicyC measured billed cost per execution",
+        description,
+        body,
+    )
+
+
 def latency_chart() -> None:
     body = chart_frame("End-to-end latency change", "Relative to full policy", "Different held-out set per version; sequence is descriptive")
     add_direction_labels(body, more_is_better=False)
@@ -268,48 +347,62 @@ def protocol_chart() -> None:
         text(40, 58, "Five frozen held-out studies", font_size=29, font_weight=650),
         text(1090, 58, "New case set after every compiler", text_anchor="end", fill=MUTED, font_size=22),
         line(40, 112, 1090, 112, stroke=INK, stroke_width=1.5),
-        text(55, 148, "Compiler", fill=MUTED, font_size=18, font_weight=600),
-        text(165, 148, "Cases", fill=MUTED, font_size=18, font_weight=600),
-        text(280, 148, "Trial slots", fill=MUTED, font_size=18, font_weight=600),
-        text(455, 148, "Complete pairs", fill=MUTED, font_size=18, font_weight=600),
-        text(655, 148, "Tool activity", fill=MUTED, font_size=18, font_weight=600),
-        text(1050, 148, "Paired run cost", text_anchor="end", fill=MUTED, font_size=18, font_weight=600),
+        text(55, 148, "Compiler", fill=MUTED, font_size=16, font_weight=600),
+        text(145, 148, "Cases", fill=MUTED, font_size=16, font_weight=600),
+        text(220, 148, "Trial slots", fill=MUTED, font_size=16, font_weight=600),
+        text(340, 148, "Complete pairs", fill=MUTED, font_size=16, font_weight=600),
+        text(515, 148, "Tool activity", fill=MUTED, font_size=16, font_weight=600),
+        text(835, 148, "Full / exec", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
+        text(965, 148, "Compiled / exec", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
+        text(1090, 148, "Run total", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
         line(40, 170, 1090, 170, stroke=GRID, stroke_width=1.5),
     ]
     centers = (215, 290, 365, 440, 515)
     separators = (245, 320, 395, 470, 545)
     for y, divider, study in zip(centers, separators, STUDIES, strict=True):
         activity = "No provider tools" if study.web_searches == 0 else f"{study.web_searches} web searches"
+        full_cost, compiled_cost = BILLED_COST_PER_EXECUTION[study.version]
         body.extend(
             [
-                text(55, y + 7, study.version, font_size=21, font_weight=650),
-                text(165, y + 7, str(study.cases), font_size=21),
-                text(280, y + 7, str(study.trial_slots), font_size=21),
-                text(455, y + 7, f"{study.complete_pairs} / {study.planned_pairs}", font_size=21),
-                text(655, y + 7, activity, font_size=20),
-                text(1050, y + 7, f"${study.cost:.4f}", text_anchor="end", font_size=21),
+                text(55, y + 7, study.version, font_size=20, font_weight=650),
+                text(145, y + 7, str(study.cases), font_size=19),
+                text(220, y + 7, str(study.trial_slots), font_size=19),
+                text(340, y + 7, f"{study.complete_pairs} / {study.planned_pairs}", font_size=19),
+                text(515, y + 7, activity, font_size=18),
+                text(835, y + 7, f"${full_cost:.6f}", text_anchor="end", font_size=17),
+                text(965, y + 7, f"${compiled_cost:.6f}", text_anchor="end", font_size=17),
+                text(1090, y + 7, f"${study.cost:.4f}", text_anchor="end", font_size=18),
                 line(40, divider, 1090, divider, stroke=GRID, stroke_width=1.5),
             ]
         )
     body.extend(
         [
             f'<rect x="40" y="558" width="1050" height="170" fill="#f4f3ef" stroke="{GRID}" stroke-width="1.5" />',
-            text(62, 589, "Compiler 0.6 semantic denominator", font_size=18, font_weight=600),
-            text(430, 589, "136 determinate pairs + 3 ungradable complete pairs", fill=MUTED, font_size=18),
-            text(62, 625, "Compiler 0.9 dispatch", font_size=18, font_weight=600),
-            text(430, 625, "359 of 360 calls issued; one trial stopped at the call ceiling", fill=MUTED, font_size=18),
-            text(62, 661, "Compiler 0.9 compile-time frontend", font_size=18, font_weight=600),
-            text(430, 661, f"{V09_EXTRACTION_READS} extractor calls · ${V09_EXTRACTION_COST:.4f}, reported separately", fill=MUTED, font_size=18),
-            text(62, 697, "Paired-execution total", font_size=18, font_weight=600),
-            text(430, 697, "280 cases · 1,680 planned trial slots · 103 searches · $4.9013", fill=MUTED, font_size=18),
+            text(62, 584, "Compiler 0.6 denominator", font_size=17, font_weight=600),
+            text(380, 584, "136 determinate pairs + 3 ungradable complete pairs", fill=MUTED, font_size=17),
+            text(62, 614, "Compiler 0.9 dispatch", font_size=17, font_weight=600),
+            text(380, 614, "359 of 360 calls issued; one stopped at the call ceiling", fill=MUTED, font_size=17),
+            text(62, 644, "Compiler 0.9 frontend", font_size=17, font_weight=600),
+            text(380, 644, f"{V09_EXTRACTION_READS} extractor calls · ${V09_EXTRACTION_COST:.4f}, reported separately", fill=MUTED, font_size=17),
+            text(62, 674, "Per-execution costs", font_size=17, font_weight=600),
+            text(380, 674, "Actual billed spend · each frozen audit's reported basis", fill=MUTED, font_size=17),
+            text(62, 704, "Paired-execution total", font_size=17, font_weight=600),
+            text(380, 704, "280 cases · 1,680 planned trial slots · 103 searches · $4.9013", fill=MUTED, font_size=17),
         ]
     )
     description = "; ".join(
-        f"Compiler {study.version} used {study.cases} cases, {study.trial_slots} planned trial slots, {study.complete_pairs} of {study.planned_pairs} complete pairs, {study.web_searches} web searches, and paired-execution cost {study.cost:.4f} dollars"
+        (
+            f"Compiler {study.version} used {study.cases} cases, {study.trial_slots} planned trial slots, "
+            f"{study.complete_pairs} of {study.planned_pairs} complete pairs, {study.web_searches} web searches, "
+            f"{full_cost:.6f} dollars per full-policy execution, {compiled_cost:.6f} dollars per compiled execution, "
+            f"and {study.cost:.4f} dollars across all issued paired-study calls"
+        )
         for study in STUDIES
+        for full_cost, compiled_cost in (BILLED_COST_PER_EXECUTION[study.version],)
     ) + (
         f". Compiler 0.9 also used {V09_EXTRACTION_READS} compile-time extractor calls costing "
-        f"{V09_EXTRACTION_COST:.4f} dollars, reported separately. Every version used a newly authored held-out set."
+        f"{V09_EXTRACTION_COST:.4f} dollars, reported separately. Per-execution costs follow each frozen audit's reported efficiency basis. "
+        "Every version used a newly authored held-out set."
     )
     write_svg("policyc-study-protocol.svg", 1130, 760, "PolicyC frozen held-out paired-execution protocol by compiler version", description, body)
 
@@ -472,10 +565,13 @@ def validate_data() -> None:
         determinate_pairs = study.both_pass + study.full_only + study.compiler_only + study.both_fail
         assert determinate_pairs + study.ungradable == study.complete_pairs
         assert study.both_pass + study.full_only == study.baseline_passes
+        full_cost, compiled_cost = BILLED_COST_PER_EXECUTION[study.version]
+        assert round((1 - (compiled_cost / full_cost)) * 100, 2) == study.billed_reduction
     assert sum(study.cases for study in STUDIES) == 280
     assert sum(study.trial_slots for study in STUDIES) == 1_680
     assert sum(study.web_searches for study in STUDIES) == 103
     assert round(sum(study.cost for study in STUDIES), 4) == 4.9013
+    assert set(BILLED_COST_PER_EXECUTION) == {study.version for study in STUDIES}
     assert V09_EXTRACTION_READS == 60
     assert round(V09_EXTRACTION_COST, 4) == 0.2678
 
@@ -486,6 +582,7 @@ def main() -> None:
     input_chart()
     preservation_chart()
     cost_chart()
+    billed_cost_chart()
     latency_chart()
     protocol_chart()
     paired_outcomes_chart()
