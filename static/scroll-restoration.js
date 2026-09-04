@@ -1,7 +1,7 @@
 (() => {
   if (!("scrollRestoration" in history)) return;
 
-  const url = `${location.pathname}${location.search}`;
+  const url = `${location.pathname}${location.search}${location.hash}`;
   const latestKey = `scroll-position:url:${url}`;
   const probeKey = "scroll-position:probe";
 
@@ -40,7 +40,6 @@
   });
 
   addEventListener("pageshow", () => {
-    if (location.hash) return;
 
     try {
       const saved =
