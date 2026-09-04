@@ -8,39 +8,6 @@
   "redirects": [
     {
       "source": "/static/resume.pdf",
-      "has": [
-        {
-          "type": "host",
-          "value": "^v[123]\\.bentgarcia\\.com$"
-        }
-      ],
-      "destination": "https://bentgarcia.com/resume.pdf",
-      "permanent": true
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "^v[123]\\.bentgarcia\\.com$"
-        }
-      ],
-      "destination": "https://bentgarcia.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "^v[123]\\.bentgarcia\\.com$"
-        }
-      ],
-      "destination": "https://bentgarcia.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/static/resume.pdf",
       "destination": "/resume.pdf",
       "permanent": true
     },
