@@ -53,6 +53,9 @@ STUDIES = (
     Study("0.9", 60, 360, 177, 180, 26, 1.17901190, 92.99, 75.91, 68.11, 82.30, 137, 17.21, 58.69, 13.36, 104, 33, 21, 19),
 )
 
+V09_EXTRACTION_READS = 60
+V09_EXTRACTION_COST = 0.26783625
+
 X_POSITIONS = (245, 450, 655, 860, 1065)
 
 
@@ -185,8 +188,8 @@ def preservation_chart() -> None:
 
 
 def cost_chart() -> None:
-    body = chart_frame("Observed and uncached cost", "Reduction vs full policy", "Different held-out set per version; sequence is descriptive")
-    body[3] = text(40, 105, "Different held-out set per version; sequence is descriptive", fill=MUTED, font_size=18)
+    body = chart_frame("Execution cost", "Reduction vs full policy", "Paired runs only; 0.9 extraction reported separately")
+    body[3] = text(40, 105, "Paired runs only; 0.9 extraction reported separately", fill=MUTED, font_size=18)
     body.extend(
         [
             f'<rect x="610" y="89" width="17" height="17" fill="{SAGE}" stroke="{INK}" stroke-width="1.5" />',
@@ -212,8 +215,12 @@ def cost_chart() -> None:
         f"{study.billed_reduction:.2f} percent for {study.version}" for study in STUDIES
     ) + ". Uncached-equivalent cost reduction was " + ", ".join(
         f"{study.uncached_reduction:.2f} percent for {study.version}" for study in STUDIES
-    ) + ". Every version used a different held-out set."
-    write_svg("policyc-cost-reduction.svg", 1130, 762, "PolicyC cost reduction across compiler versions", description, body)
+    ) + (
+        f". Compiler 0.9's {V09_EXTRACTION_READS} compile-time extractor calls cost "
+        f"{V09_EXTRACTION_COST:.4f} dollars and are reported separately, not netted into these execution-study reductions. "
+        "Every version used a different held-out set."
+    )
+    write_svg("policyc-cost-reduction.svg", 1130, 762, "PolicyC execution-cost reduction across compiler versions", description, body)
 
 
 def latency_chart() -> None:
@@ -252,7 +259,7 @@ def protocol_chart() -> None:
         text(280, 148, "Trial slots", fill=MUTED, font_size=18, font_weight=600),
         text(455, 148, "Complete pairs", fill=MUTED, font_size=18, font_weight=600),
         text(655, 148, "Tool activity", fill=MUTED, font_size=18, font_weight=600),
-        text(1050, 148, "Recorded cost", text_anchor="end", fill=MUTED, font_size=18, font_weight=600),
+        text(1050, 148, "Paired run cost", text_anchor="end", fill=MUTED, font_size=18, font_weight=600),
         line(40, 170, 1090, 170, stroke=GRID, stroke_width=1.5),
     ]
     centers = (215, 290, 365, 440, 515)
@@ -272,19 +279,25 @@ def protocol_chart() -> None:
         )
     body.extend(
         [
-            f'<rect x="40" y="575" width="1050" height="145" fill="#f4f3ef" stroke="{GRID}" stroke-width="1.5" />',
-            text(62, 611, "Compiler 0.6 semantic denominator", font_size=18, font_weight=600),
-            text(430, 611, "136 determinate pairs + 3 ungradable complete pairs", fill=MUTED, font_size=18),
-            text(62, 650, "Compiler 0.9 dispatch", font_size=18, font_weight=600),
-            text(430, 650, "359 of 360 calls issued; one trial stopped at the call ceiling", fill=MUTED, font_size=18),
-            text(62, 691, "Program total: 280 cases · 1,680 planned trial slots · 103 web searches · $4.9013", fill=MUTED, font_size=18),
+            f'<rect x="40" y="558" width="1050" height="170" fill="#f4f3ef" stroke="{GRID}" stroke-width="1.5" />',
+            text(62, 589, "Compiler 0.6 semantic denominator", font_size=18, font_weight=600),
+            text(430, 589, "136 determinate pairs + 3 ungradable complete pairs", fill=MUTED, font_size=18),
+            text(62, 625, "Compiler 0.9 dispatch", font_size=18, font_weight=600),
+            text(430, 625, "359 of 360 calls issued; one trial stopped at the call ceiling", fill=MUTED, font_size=18),
+            text(62, 661, "Compiler 0.9 compile-time frontend", font_size=18, font_weight=600),
+            text(430, 661, f"{V09_EXTRACTION_READS} extractor calls · ${V09_EXTRACTION_COST:.4f}, reported separately", fill=MUTED, font_size=18),
+            text(62, 697, "Paired-execution total", font_size=18, font_weight=600),
+            text(430, 697, "280 cases · 1,680 planned trial slots · 103 searches · $4.9013", fill=MUTED, font_size=18),
         ]
     )
     description = "; ".join(
-        f"Compiler {study.version} used {study.cases} cases, {study.trial_slots} planned trial slots, {study.complete_pairs} of {study.planned_pairs} complete pairs, {study.web_searches} web searches, and cost {study.cost:.4f} dollars"
+        f"Compiler {study.version} used {study.cases} cases, {study.trial_slots} planned trial slots, {study.complete_pairs} of {study.planned_pairs} complete pairs, {study.web_searches} web searches, and paired-execution cost {study.cost:.4f} dollars"
         for study in STUDIES
-    ) + ". Every version used a newly authored held-out set."
-    write_svg("policyc-study-protocol.svg", 1130, 760, "PolicyC frozen held-out study protocol by compiler version", description, body)
+    ) + (
+        f". Compiler 0.9 also used {V09_EXTRACTION_READS} compile-time extractor calls costing "
+        f"{V09_EXTRACTION_COST:.4f} dollars, reported separately. Every version used a newly authored held-out set."
+    )
+    write_svg("policyc-study-protocol.svg", 1130, 760, "PolicyC frozen held-out paired-execution protocol by compiler version", description, body)
 
 
 def paired_outcomes_chart() -> None:
@@ -404,7 +417,7 @@ def compiler_pipeline_v09() -> None:
         text(40, 362, "Policy", fill=MUTED, font_size=17, font_weight=600),
     ]
     box(body, 115, 115, 140, 110, SAGE, "Inputs", ("Request x", "Context + tools"))
-    box(body, 300, 115, 155, 110, BLUE, "Frontend", ("Extractor or", "deterministic reader"))
+    box(body, 300, 102, 155, 135, BLUE, "Frontend", ("Model extractor:", "1 call / request", "or regex reader"))
     box(body, 505, 100, 185, 140, BLUE, "RequestState", ("Authorization · limit", "Fields · format", "Purpose · tools"))
     box(body, 115, 305, 140, 110, SAGE, "Policy graph P", ("44 nodes", "Six domains"))
     box(body, 300, 305, 155, 110, BLUE, "Select + close", ("Triggers", "Requires edges"))
@@ -425,7 +438,7 @@ def compiler_pipeline_v09() -> None:
         [
             line(40, 455, 1090, 455, stroke=GRID, stroke_width=1.5),
             text(40, 500, "Typed boundary", font_size=19, font_weight=650),
-            text(230, 500, "The frontend reads the request once; every candidate uses the same recorded state.", fill=MUTED, font_size=18),
+            text(230, 500, "Held-out 0.9 used one model call per request, then persisted that state.", fill=MUTED, font_size=18),
             text(40, 545, "Semantic decisions", font_size=19, font_weight=650),
             text(230, 545, "Branches, obligation precedence, and tool lowering resolve before the printer.", fill=RUST, font_size=18),
         ]
@@ -435,7 +448,7 @@ def compiler_pipeline_v09() -> None:
         1130,
         580,
         "PolicyC compiler 0.9 typed intermediate representation pipeline",
-        "Compiler 0.9 reads the request and context once through a frontend into a typed RequestState. In parallel, it selects policies and closes dependencies. Partial evaluation combines the state with selected nodes, chooses declared branches, applies the obligation-precedence table, lowers unavailable tools, and records the trace. A decision-free printer emits the compact policy slice.",
+        "Compiler 0.9 reads the request and context once through a frontend into a typed RequestState. For held-out v5, the extractor frontend makes one model call per request at compile time and persists the result before either execution condition runs. In parallel, the compiler selects policies and closes dependencies. Partial evaluation combines the state with selected nodes, chooses declared branches, applies the obligation-precedence table, lowers unavailable tools, and records the trace. A decision-free printer emits the compact policy slice.",
         body,
     )
 
@@ -449,6 +462,8 @@ def validate_data() -> None:
     assert sum(study.trial_slots for study in STUDIES) == 1_680
     assert sum(study.web_searches for study in STUDIES) == 103
     assert round(sum(study.cost for study in STUDIES), 4) == 4.9013
+    assert V09_EXTRACTION_READS == 60
+    assert round(V09_EXTRACTION_COST, 4) == 0.2678
 
 
 def main() -> None:

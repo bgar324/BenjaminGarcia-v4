@@ -36,6 +36,7 @@ blog/policyc/index.html Blog article about PolicyC
 blog/logit/index.html  Blog article about Logit
 404.html              Custom 404 page
 styles.css            Layout, typography, and interaction styles
+scripts/generate-policyc-charts.py   Regenerates the PolicyC SVG figures
 static/favicon.svg
 static/annie-imessage-conversation.webp
 static/annie-deepseek-usage.webp
@@ -48,6 +49,7 @@ static/policyc-preservation.svg
 static/policyc-cost-reduction.svg
 static/policyc-latency.svg
 static/policyc-compiler-pipeline.svg
+static/policyc-compiler-pipeline-v09.svg
 static/policyc-study-protocol.svg
 static/policyc-paired-outcomes.svg
 manifest.webmanifest
@@ -80,6 +82,7 @@ Open [localhost:8000](http://localhost:8000).
 - Update the project collection in `projects/index.html`.
 - Update global visual styling and motion in `styles.css`.
 - Add portfolio articles under `blog/<slug>/index.html` and their images under `static/`.
+- Run `python3 scripts/generate-policyc-charts.py` after changing PolicyC study data or figure copy.
 - Replace `resume.pdf` or `policyc.pdf` to publish newer document versions at the same URLs.
 
 No environment variables are required.

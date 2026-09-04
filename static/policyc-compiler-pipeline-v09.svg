@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1130" height="580" viewBox="0 0 1130 580" role="img" aria-labelledby="title description">
   <title id="title">PolicyC compiler 0.9 typed intermediate representation pipeline</title>
-  <desc id="description">Compiler 0.9 reads the request and context once through a frontend into a typed RequestState. In parallel, it selects policies and closes dependencies. Partial evaluation combines the state with selected nodes, chooses declared branches, applies the obligation-precedence table, lowers unavailable tools, and records the trace. A decision-free printer emits the compact policy slice.</desc>
+  <desc id="description">Compiler 0.9 reads the request and context once through a frontend into a typed RequestState. For held-out v5, the extractor frontend makes one model call per request at compile time and persists the result before either execution condition runs. In parallel, the compiler selects policies and closes dependencies. Partial evaluation combines the state with selected nodes, chooses declared branches, applies the obligation-precedence table, lowers unavailable tools, and records the trace. A decision-free printer emits the compact policy slice.</desc>
 
   <rect width="1130" height="580" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
@@ -12,10 +12,11 @@
     <text x="185" y="145" text-anchor="middle" font-size="18" font-weight="650">Inputs</text>
     <text x="185" y="172" text-anchor="middle" fill="#6b6763" font-size="15">Request x</text>
     <text x="185" y="195" text-anchor="middle" fill="#6b6763" font-size="15">Context + tools</text>
-    <rect x="300" y="115" width="155" height="110" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
-    <text x="377.5" y="145" text-anchor="middle" font-size="18" font-weight="650">Frontend</text>
-    <text x="377.5" y="172" text-anchor="middle" fill="#6b6763" font-size="15">Extractor or</text>
-    <text x="377.5" y="195" text-anchor="middle" fill="#6b6763" font-size="15">deterministic reader</text>
+    <rect x="300" y="102" width="155" height="135" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="377.5" y="132" text-anchor="middle" font-size="18" font-weight="650">Frontend</text>
+    <text x="377.5" y="159" text-anchor="middle" fill="#6b6763" font-size="15">Model extractor:</text>
+    <text x="377.5" y="182" text-anchor="middle" fill="#6b6763" font-size="15">1 call / request</text>
+    <text x="377.5" y="205" text-anchor="middle" fill="#6b6763" font-size="15">or regex reader</text>
     <rect x="505" y="100" width="185" height="140" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
     <text x="597.5" y="130" text-anchor="middle" font-size="18" font-weight="650">RequestState</text>
     <text x="597.5" y="157" text-anchor="middle" fill="#6b6763" font-size="15">Authorization · limit</text>
@@ -63,7 +64,7 @@
     <path d="M1068 258 L1078 265 L1068 272 Z" fill="#2c2826" />
     <line x1="40" y1="455" x2="1090" y2="455" stroke="#d4d1cb" stroke-width="1.5" />
     <text x="40" y="500" font-size="19" font-weight="650">Typed boundary</text>
-    <text x="230" y="500" fill="#6b6763" font-size="18">The frontend reads the request once; every candidate uses the same recorded state.</text>
+    <text x="230" y="500" fill="#6b6763" font-size="18">Held-out 0.9 used one model call per request, then persisted that state.</text>
     <text x="40" y="545" font-size="19" font-weight="650">Semantic decisions</text>
     <text x="230" y="545" fill="#8f684e" font-size="18">Branches, obligation precedence, and tool lowering resolve before the printer.</text>
   </g>
