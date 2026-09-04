@@ -299,7 +299,7 @@ def billed_cost_chart() -> None:
             ]
         )
     description = "Actual measured billed cost per execution for the full-policy and compiler-slice conditions was " + "; ".join(
-        f"{full_cost:.6f} dollars and {compiled_cost:.6f} dollars for compiler {study.version}, a {study.billed_reduction:.2f} percent reduction"
+        f"{full_cost:.6f} dollars and {compiled_cost:.6f} dollars for compiler {study.version}, {study.billed_reduction:.2f} percent lower"
         for study in STUDIES
         for full_cost, compiled_cost in (BILLED_COST_PER_EXECUTION[study.version],)
     ) + (
