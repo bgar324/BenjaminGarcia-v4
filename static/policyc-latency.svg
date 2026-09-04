@@ -5,11 +5,11 @@
   <rect width="1130" height="762" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
     <rect x="1" y="1" width="1128" height="760" fill="none" stroke="#2c2826" stroke-width="1.5" />
-    <text x="40" y="58" font-size="29" font-weight="650">End-to-end latency</text>
-    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Change vs full policy</text>
+    <text x="40" y="58" font-size="29" font-weight="650">End-to-end latency change</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Relative to full policy</text>
     <text x="1090" y="105" text-anchor="end" fill="#6b6763" font-size="18">Different held-out set per version; sequence is descriptive</text>
-    <text x="155" y="142" fill="#8f684e" font-size="18" font-weight="600">↓ Less is better</text>
-    <text x="1090" y="142" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">More is worse ↑</text>
+    <text x="1080" y="142" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">↑ More is worse</text>
+    <text x="1080" y="590" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">↓ Less is better</text>
     <line x1="155" y1="165" x2="1090" y2="165" stroke="#d4d1cb" stroke-width="1.5" />
     <text x="134" y="173" text-anchor="end" fill="#6b6763" font-size="22">+20</text>
     <line x1="155" y1="261.667" x2="1090" y2="261.667" stroke="#d4d1cb" stroke-width="1.5" />

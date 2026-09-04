@@ -5,15 +5,15 @@
   <rect width="1130" height="762" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
     <rect x="1" y="1" width="1128" height="760" fill="none" stroke="#2c2826" stroke-width="1.5" />
-    <text x="40" y="58" font-size="29" font-weight="650">Execution cost</text>
-    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Reduction vs full policy</text>
+    <text x="40" y="58" font-size="29" font-weight="650">Execution-cost reduction</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Relative to full policy</text>
     <text x="40" y="105" fill="#6b6763" font-size="18">Paired runs only; 0.9 extraction reported separately</text>
     <rect x="610" y="89" width="17" height="17" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
     <text x="640" y="104" font-size="20" font-weight="600">Uncached-equivalent</text>
     <rect x="880" y="89" width="17" height="17" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.5" />
     <text x="910" y="104" font-size="20" font-weight="600">Actual billed</text>
-    <text x="155" y="142" fill="#8f684e" font-size="18" font-weight="600">↓ Less is worse</text>
-    <text x="1090" y="142" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">More is better ↑</text>
+    <text x="1080" y="142" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">↑ More is better</text>
+    <text x="1080" y="590" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">↓ Less is worse</text>
     <line x1="155" y1="165" x2="1090" y2="165" stroke="#d4d1cb" stroke-width="1.5" />
     <text x="134" y="173" text-anchor="end" fill="#6b6763" font-size="22">80</text>
     <line x1="155" y1="273.75" x2="1090" y2="273.75" stroke="#d4d1cb" stroke-width="1.5" />

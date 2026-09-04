@@ -100,12 +100,12 @@ def chart_frame(title_value: str, kicker: str, note: str) -> list[str]:
     ]
 
 def add_direction_labels(body: list[str], *, more_is_better: bool) -> None:
-    less_label = "↓ Less is worse" if more_is_better else "↓ Less is better"
-    more_label = "More is better ↑" if more_is_better else "More is worse ↑"
+    top_label = "↑ More is better" if more_is_better else "↑ More is worse"
+    bottom_label = "↓ Less is worse" if more_is_better else "↓ Less is better"
     body.extend(
         [
-            text(155, 142, less_label, fill=RUST, font_size=18, font_weight=600),
-            text(1090, 142, more_label, text_anchor="end", fill=RUST, font_size=18, font_weight=600),
+            text(1080, 142, top_label, text_anchor="end", fill=RUST, font_size=18, font_weight=600),
+            text(1080, 590, bottom_label, text_anchor="end", fill=RUST, font_size=18, font_weight=600),
         ]
     )
 
@@ -148,7 +148,7 @@ def add_versions(body: list[str], *, cases: bool = False, baseline: bool = False
 
 
 def input_chart() -> None:
-    body = chart_frame("Mean actual input tokens", "Reduction vs full policy", "Different held-out set per version; sequence is descriptive")
+    body = chart_frame("Input reduction", "Relative to full policy", "Different held-out set per version; sequence is descriptive")
     add_direction_labels(body, more_is_better=True)
     axes, y_for = chart_axes(85, 100, (100, 95, 90, 85), "Input reduction (%)", break_axis=True)
     body.extend(axes)
@@ -166,7 +166,7 @@ def input_chart() -> None:
 
 
 def preservation_chart() -> None:
-    body = chart_frame("Critical obligations", "Conditional preservation", "Bars show trial-level Wilson 95% intervals")
+    body = chart_frame("Critical-obligation preservation", "Conditional rate", "Bars show trial-level Wilson 95% intervals")
     add_direction_labels(body, more_is_better=True)
     axes, y_for = chart_axes(65, 100, (100, 95, 90, 85, 80, 75, 70, 65), "Preservation (%)", break_axis=True)
     body.extend(axes)
@@ -200,7 +200,7 @@ def preservation_chart() -> None:
 
 
 def cost_chart() -> None:
-    body = chart_frame("Execution cost", "Reduction vs full policy", "Paired runs only; 0.9 extraction reported separately")
+    body = chart_frame("Execution-cost reduction", "Relative to full policy", "Paired runs only; 0.9 extraction reported separately")
     body[3] = text(40, 105, "Paired runs only; 0.9 extraction reported separately", fill=MUTED, font_size=18)
     body.extend(
         [
@@ -237,7 +237,7 @@ def cost_chart() -> None:
 
 
 def latency_chart() -> None:
-    body = chart_frame("End-to-end latency", "Change vs full policy", "Different held-out set per version; sequence is descriptive")
+    body = chart_frame("End-to-end latency change", "Relative to full policy", "Different held-out set per version; sequence is descriptive")
     add_direction_labels(body, more_is_better=False)
     axes, y_for = chart_axes(-25, 20, (20, 10, 0, -10, -20, -25), "Latency change (%)")
     body.extend(axes)
