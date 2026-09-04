@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="0 0 1130 762" role="img" aria-labelledby="title description">
   <title id="title">PolicyC measured billed cost per execution</title>
-  <desc id="description">Actual measured billed cost per execution for the full policy and compiled slice was 0.002592 dollars and 0.001995 dollars for compiler 0.5, a 23.01 percent reduction; 0.003934 dollars and 0.002970 dollars for compiler 0.6, a 24.50 percent reduction; 0.002760 dollars and 0.002425 dollars for compiler 0.7, a 12.14 percent reduction; 0.002885 dollars and 0.002365 dollars for compiler 0.8, a 18.03 percent reduction; 0.003427 dollars and 0.002837 dollars for compiler 0.9, a 17.21 percent reduction. Versions 0.5 through 0.7 use all planned executions; versions 0.8 and 0.9 use complete pairs, matching each frozen audit&#x27;s reported efficiency basis. Both series are measured spend, not forecasts. Less cost is better; more is worse.</desc>
+  <desc id="description">Actual measured billed cost per execution for the full-policy and compiler-slice conditions was 0.002592 dollars and 0.001995 dollars for compiler 0.5, a 23.01 percent reduction; 0.003934 dollars and 0.002970 dollars for compiler 0.6, a 24.50 percent reduction; 0.002760 dollars and 0.002425 dollars for compiler 0.7, a 12.14 percent reduction; 0.002885 dollars and 0.002365 dollars for compiler 0.8, a 18.03 percent reduction; 0.003427 dollars and 0.002837 dollars for compiler 0.9, a 17.21 percent reduction. Versions 0.5 through 0.7 use all planned executions. Version 0.8 uses the same 163 complete pairs in both conditions, and version 0.9 uses the same 177 complete pairs. Compiler 0.9&#x27;s run total includes 179 issued full-policy calls and 180 issued compiler-slice calls; the unmatched calls are excluded from these normalized bars. Both series are observed spend, not forecasts. Less cost is better; more is worse.</desc>
 
   <rect width="1130" height="762" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
     <rect x="1" y="1" width="1128" height="760" fill="none" stroke="#2c2826" stroke-width="1.5" />
     <text x="40" y="58" font-size="29" font-weight="650">Measured billed cost per execution</text>
-    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Full policy vs compiled slice</text>
-    <text x="1090" y="105" text-anchor="end" fill="#6b6763" font-size="18">Actual spend; tool fees included</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Observed paired conditions</text>
+    <text x="1090" y="105" text-anchor="end" fill="#6b6763" font-size="18">Actual billed spend; tool fees included</text>
     <rect x="40" y="89" width="17" height="17" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
-    <text x="70" y="104" font-size="20" font-weight="600">Full policy</text>
-    <rect x="205" y="89" width="17" height="17" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
-    <text x="235" y="104" font-size="20" font-weight="600">Compiled slice</text>
+    <text x="70" y="104" font-size="20" font-weight="600">Full-policy billed</text>
+    <rect x="260" y="89" width="17" height="17" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="290" y="104" font-size="20" font-weight="600">Compiler-slice billed</text>
     <text x="1080" y="142" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">↑ More is worse</text>
     <text x="1080" y="625" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">↓ Less is better</text>
     <line x1="155" y1="213.333" x2="1090" y2="213.333" stroke="#d4d1cb" stroke-width="1.5" />

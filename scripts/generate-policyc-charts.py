@@ -249,6 +249,7 @@ def cost_chart() -> None:
     ) + (
         f". Compiler 0.9's {V09_EXTRACTION_READS} compile-time extractor calls cost "
         f"{V09_EXTRACTION_COST:.4f} dollars and are reported separately, not netted into these execution-study reductions. "
+        "Its 17.21 percent billed comparison uses the same 177 complete pairs in both conditions. "
         "Every version used a different held-out set. More reduction is better; less is worse."
     )
     write_svg("policyc-cost-reduction.svg", 1130, 762, "PolicyC execution-cost reduction across compiler versions", description, body)
@@ -257,15 +258,15 @@ def cost_chart() -> None:
 def billed_cost_chart() -> None:
     body = chart_frame(
         "Measured billed cost per execution",
-        "Full policy vs compiled slice",
-        "Actual spend; tool fees included",
+        "Observed paired conditions",
+        "Actual billed spend; tool fees included",
     )
     body.extend(
         [
             f'<rect x="40" y="89" width="17" height="17" fill="{GRAY}" stroke="{INK}" stroke-width="1.5" />',
-            text(70, 104, "Full policy", font_size=20, font_weight=600),
-            f'<rect x="205" y="89" width="17" height="17" fill="{SAGE}" stroke="{INK}" stroke-width="1.5" />',
-            text(235, 104, "Compiled slice", font_size=20, font_weight=600),
+            text(70, 104, "Full-policy billed", font_size=20, font_weight=600),
+            f'<rect x="260" y="89" width="17" height="17" fill="{SAGE}" stroke="{INK}" stroke-width="1.5" />',
+            text(290, 104, "Compiler-slice billed", font_size=20, font_weight=600),
         ]
     )
     add_direction_labels(body, more_is_better=False, bottom_y=625)
@@ -297,13 +298,14 @@ def billed_cost_chart() -> None:
                 text(x, 691, f"−{study.billed_reduction:.2f}%", text_anchor="middle", fill=RUST, font_size=16, font_weight=600),
             ]
         )
-    description = "Actual measured billed cost per execution for the full policy and compiled slice was " + "; ".join(
+    description = "Actual measured billed cost per execution for the full-policy and compiler-slice conditions was " + "; ".join(
         f"{full_cost:.6f} dollars and {compiled_cost:.6f} dollars for compiler {study.version}, a {study.billed_reduction:.2f} percent reduction"
         for study in STUDIES
         for full_cost, compiled_cost in (BILLED_COST_PER_EXECUTION[study.version],)
     ) + (
-        ". Versions 0.5 through 0.7 use all planned executions; versions 0.8 and 0.9 use complete pairs, matching each frozen audit's reported efficiency basis. "
-        "Both series are measured spend, not forecasts. Less cost is better; more is worse."
+        ". Versions 0.5 through 0.7 use all planned executions. Version 0.8 uses the same 163 complete pairs in both conditions, and version 0.9 uses the same 177 complete pairs. "
+        "Compiler 0.9's run total includes 179 issued full-policy calls and 180 issued compiler-slice calls; the unmatched calls are excluded from these normalized bars. "
+        "Both series are observed spend, not forecasts. Less cost is better; more is worse."
     )
     write_svg(
         "policyc-billed-cost.svg",
@@ -352,9 +354,12 @@ def protocol_chart() -> None:
         text(220, 148, "Trial slots", fill=MUTED, font_size=16, font_weight=600),
         text(340, 148, "Complete pairs", fill=MUTED, font_size=16, font_weight=600),
         text(515, 148, "Tool activity", fill=MUTED, font_size=16, font_weight=600),
-        text(835, 148, "Full / exec", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
-        text(965, 148, "Compiled / exec", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
-        text(1090, 148, "Run total", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
+        text(835, 137, "Full-policy", text_anchor="end", fill=MUTED, font_size=14, font_weight=600),
+        text(835, 158, "billed / exec", text_anchor="end", fill=MUTED, font_size=14, font_weight=600),
+        text(965, 137, "Compiler-slice", text_anchor="end", fill=MUTED, font_size=14, font_weight=600),
+        text(965, 158, "billed / exec", text_anchor="end", fill=MUTED, font_size=14, font_weight=600),
+        text(1090, 137, "All issued", text_anchor="end", fill=MUTED, font_size=14, font_weight=600),
+        text(1090, 158, "run total", text_anchor="end", fill=MUTED, font_size=14, font_weight=600),
         line(40, 170, 1090, 170, stroke=GRID, stroke_width=1.5),
     ]
     centers = (215, 290, 365, 440, 515)
@@ -381,11 +386,11 @@ def protocol_chart() -> None:
             text(62, 584, "Compiler 0.6 denominator", font_size=17, font_weight=600),
             text(380, 584, "136 determinate pairs + 3 ungradable complete pairs", fill=MUTED, font_size=17),
             text(62, 614, "Compiler 0.9 dispatch", font_size=17, font_weight=600),
-            text(380, 614, "359 of 360 calls issued; one stopped at the call ceiling", fill=MUTED, font_size=17),
+            text(380, 614, "179 full-policy + 180 compiler-slice calls; 359 of 360 issued", fill=MUTED, font_size=17),
             text(62, 644, "Compiler 0.9 frontend", font_size=17, font_weight=600),
             text(380, 644, f"{V09_EXTRACTION_READS} extractor calls · ${V09_EXTRACTION_COST:.4f}, reported separately", fill=MUTED, font_size=17),
-            text(62, 674, "Per-execution costs", font_size=17, font_weight=600),
-            text(380, 674, "Actual billed spend · each frozen audit's reported basis", fill=MUTED, font_size=17),
+            text(62, 674, "Per-execution basis", font_size=17, font_weight=600),
+            text(380, 674, "0.5–0.7 all trials · 0.8: 163 pairs · 0.9: 177 pairs", fill=MUTED, font_size=17),
             text(62, 704, "Paired-execution total", font_size=17, font_weight=600),
             text(380, 704, "280 cases · 1,680 planned trial slots · 103 searches · $4.9013", fill=MUTED, font_size=17),
         ]
@@ -394,15 +399,16 @@ def protocol_chart() -> None:
         (
             f"Compiler {study.version} used {study.cases} cases, {study.trial_slots} planned trial slots, "
             f"{study.complete_pairs} of {study.planned_pairs} complete pairs, {study.web_searches} web searches, "
-            f"{full_cost:.6f} dollars per full-policy execution, {compiled_cost:.6f} dollars per compiled execution, "
+            f"{full_cost:.6f} dollars per full-policy billed execution, {compiled_cost:.6f} dollars per compiler-slice billed execution, "
             f"and {study.cost:.4f} dollars across all issued paired-study calls"
         )
         for study in STUDIES
         for full_cost, compiled_cost in (BILLED_COST_PER_EXECUTION[study.version],)
     ) + (
         f". Compiler 0.9 also used {V09_EXTRACTION_READS} compile-time extractor calls costing "
-        f"{V09_EXTRACTION_COST:.4f} dollars, reported separately. Per-execution costs follow each frozen audit's reported efficiency basis. "
-        "Every version used a newly authored held-out set."
+        f"{V09_EXTRACTION_COST:.4f} dollars, reported separately. Versions 0.5 through 0.7 use all planned executions for their per-execution costs; "
+        "version 0.8 uses 163 complete pairs and version 0.9 uses 177 complete pairs. Compiler 0.9's run total contains 179 issued full-policy calls "
+        "and 180 issued compiler-slice calls, while its normalized cost columns use equal 177-call denominators. Every version used a newly authored held-out set."
     )
     write_svg("policyc-study-protocol.svg", 1130, 760, "PolicyC frozen held-out paired-execution protocol by compiler version", description, body)
 
