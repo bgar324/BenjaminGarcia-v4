@@ -18,6 +18,17 @@
       "permanent": true
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "v3.bentgarcia.com"
+        }
+      ],
+      "destination": "https://bentgarcia.com/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
