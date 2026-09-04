@@ -1,23 +1,41 @@
 (() => {
   if (!("scrollRestoration" in history)) return;
 
-  const key = `scroll-position:${location.pathname}${location.search}`;
+  const url = `${location.pathname}${location.search}`;
+  const latestKey = `scroll-position:url:${url}`;
+  const probeKey = "scroll-position:probe";
 
-  const probe = `${key}:probe`;
   try {
-    sessionStorage.setItem(probe, "");
-    sessionStorage.removeItem(probe);
+    sessionStorage.setItem(probeKey, "");
+    sessionStorage.removeItem(probeKey);
   } catch {
     return;
   }
 
+  const stateKey = "__scrollRestorationId";
+  const currentState =
+    history.state && typeof history.state === "object" ? history.state : {};
+  const existingEntryId =
+    typeof currentState[stateKey] === "string" ? currentState[stateKey] : null;
+  const entryId =
+    existingEntryId ??
+    `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+
+  if (!existingEntryId) {
+    history.replaceState({ ...currentState, [stateKey]: entryId }, "");
+  }
+
+  const entryKey = `scroll-position:entry:${entryId}`;
   history.scrollRestoration = "manual";
 
   addEventListener("pagehide", () => {
+    const position = `${scrollX},${scrollY}`;
+
     try {
-      sessionStorage.setItem(key, `${scrollX},${scrollY}`);
+      sessionStorage.setItem(entryKey, position);
+      sessionStorage.setItem(latestKey, position);
     } catch {
-      // Keep native navigation working when storage is unavailable.
+      history.scrollRestoration = "auto";
     }
   });
 
@@ -25,15 +43,25 @@
     if (location.hash) return;
 
     try {
-      const saved = sessionStorage.getItem(key);
+      const saved =
+        sessionStorage.getItem(entryKey) ?? sessionStorage.getItem(latestKey);
       if (!saved) return;
 
       const [x, y] = saved.split(",").map(Number);
-      if (Number.isFinite(x) && Number.isFinite(y)) {
-        requestAnimationFrame(() => scrollTo({ left: x, top: y, behavior: "instant" }));
+      if (!Number.isFinite(x) || !Number.isFinite(y)) {
+        history.scrollRestoration = "auto";
+        return;
       }
+
+      requestAnimationFrame(() => {
+        const root = document.documentElement;
+        const previousBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        scrollTo(x, y);
+        root.style.scrollBehavior = previousBehavior;
+      });
     } catch {
-      // Keep the page usable if stored state is invalid or unavailable.
+      history.scrollRestoration = "auto";
     }
   });
 })();
