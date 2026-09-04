@@ -14,11 +14,11 @@ This repository contains a deliberately minimal, static portfolio with five publ
 - `/blog/policyc` - a case study about testing request-specific policy compilation
 - `/blog/logit` - a case study about designing a workout logger that gets out of the way
 
-The interface uses a single-column charcoal layout, a conventional system-font scale, and underline-to-fill link interactions. There is no JavaScript, build step, framework, theme toggle, navigation shell, or UI state to maintain.
+The interface uses a single-column charcoal layout, a conventional system-font scale, and underline-to-fill link interactions. One small shared script restores each page's last scroll position within the current tab. There is no build step, framework, theme toggle, or navigation shell to maintain.
 
 ## Highlights
 
-- Plain HTML and CSS with zero JavaScript and zero dependencies
+- Plain HTML and CSS with one dependency-free scroll-restoration script
 - Responsive single-column layout for desktop and mobile
 - Accessible keyboard focus states and reduced-motion handling
 - Immediate content rendering with no entrance animation or font download
@@ -36,6 +36,7 @@ blog/policyc/index.html Blog article about PolicyC
 blog/logit/index.html  Blog article about Logit
 404.html              Custom 404 page
 styles.css            Layout, typography, and interaction styles
+static/scroll-restoration.js   Restores per-page scroll position within a tab
 scripts/generate-policyc-charts.py   Regenerates the PolicyC SVG figures
 static/favicon.svg
 static/annie-imessage-conversation.webp

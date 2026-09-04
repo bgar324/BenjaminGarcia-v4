@@ -19,7 +19,7 @@
   ],
   "headers": [
     {
-      "source": "/static/(.*)\\.(png|svg|ico|webp)",
+      "source": "/static/(.*)\\.(js|png|svg|ico|webp)",
       "headers": [
         {
           "key": "Cache-Control",
