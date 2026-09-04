@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="580" viewBox="0 0 1130 580" role="img" aria-labelledby="title description">
+  <title id="title">PolicyC compiler 0.9 typed intermediate representation pipeline</title>
+  <desc id="description">Compiler 0.9 reads the request and context once through a frontend into a typed RequestState. In parallel, it selects policies and closes dependencies. Partial evaluation combines the state with selected nodes, chooses declared branches, applies the obligation-precedence table, lowers unavailable tools, and records the trace. A decision-free printer emits the compact policy slice.</desc>
+
+  <rect width="1130" height="580" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
+    <text x="40" y="55" font-size="29" font-weight="650">How compiler 0.9 builds Pₓ</text>
+    <text x="1090" y="55" text-anchor="end" fill="#6b6763" font-size="22">Typed IR + partial evaluation</text>
+    <text x="40" y="172" fill="#6b6763" font-size="17" font-weight="600">Request</text>
+    <text x="40" y="362" fill="#6b6763" font-size="17" font-weight="600">Policy</text>
+    <rect x="115" y="115" width="140" height="110" rx="8" fill="#cad2b9" stroke="#2c2826" stroke-width="1.8" />
+    <text x="185" y="145" text-anchor="middle" font-size="18" font-weight="650">Inputs</text>
+    <text x="185" y="172" text-anchor="middle" fill="#6b6763" font-size="15">Request x</text>
+    <text x="185" y="195" text-anchor="middle" fill="#6b6763" font-size="15">Context + tools</text>
+    <rect x="300" y="115" width="155" height="110" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="377.5" y="145" text-anchor="middle" font-size="18" font-weight="650">Frontend</text>
+    <text x="377.5" y="172" text-anchor="middle" fill="#6b6763" font-size="15">Extractor or</text>
+    <text x="377.5" y="195" text-anchor="middle" fill="#6b6763" font-size="15">deterministic reader</text>
+    <rect x="505" y="100" width="185" height="140" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="597.5" y="130" text-anchor="middle" font-size="18" font-weight="650">RequestState</text>
+    <text x="597.5" y="157" text-anchor="middle" fill="#6b6763" font-size="15">Authorization · limit</text>
+    <text x="597.5" y="180" text-anchor="middle" fill="#6b6763" font-size="15">Fields · format</text>
+    <text x="597.5" y="203" text-anchor="middle" fill="#6b6763" font-size="15">Purpose · tools</text>
+    <rect x="115" y="305" width="140" height="110" rx="8" fill="#cad2b9" stroke="#2c2826" stroke-width="1.8" />
+    <text x="185" y="335" text-anchor="middle" font-size="18" font-weight="650">Policy graph P</text>
+    <text x="185" y="362" text-anchor="middle" fill="#6b6763" font-size="15">44 nodes</text>
+    <text x="185" y="385" text-anchor="middle" fill="#6b6763" font-size="15">Six domains</text>
+    <rect x="300" y="305" width="155" height="110" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="377.5" y="335" text-anchor="middle" font-size="18" font-weight="650">Select + close</text>
+    <text x="377.5" y="362" text-anchor="middle" fill="#6b6763" font-size="15">Triggers</text>
+    <text x="377.5" y="385" text-anchor="middle" fill="#6b6763" font-size="15">Requires edges</text>
+    <rect x="505" y="305" width="185" height="110" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="597.5" y="335" text-anchor="middle" font-size="18" font-weight="650">Selected nodes</text>
+    <text x="597.5" y="362" text-anchor="middle" fill="#6b6763" font-size="15">Branches</text>
+    <text x="597.5" y="385" text-anchor="middle" fill="#6b6763" font-size="15">Obligations</text>
+    <rect x="755" y="180" width="170" height="165" rx="8" fill="#cad2b9" stroke="#2c2826" stroke-width="1.8" />
+    <text x="840" y="210" text-anchor="middle" font-size="18" font-weight="650">Partial evaluation</text>
+    <text x="840" y="237" text-anchor="middle" fill="#6b6763" font-size="15">Choose branch</text>
+    <text x="840" y="260" text-anchor="middle" fill="#6b6763" font-size="15">Apply mask table</text>
+    <text x="840" y="283" text-anchor="middle" fill="#6b6763" font-size="15">Lower tools</text>
+    <text x="840" y="306" text-anchor="middle" fill="#6b6763" font-size="15">Record trace</text>
+    <rect x="960" y="220" width="100" height="90" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="1010" y="250" text-anchor="middle" font-size="18" font-weight="650">Printer</text>
+    <text x="1010" y="277" text-anchor="middle" fill="#6b6763" font-size="15">No policy</text>
+    <text x="1010" y="300" text-anchor="middle" fill="#6b6763" font-size="15">decisions</text>
+    <circle cx="1095" cy="265" r="17" fill="#cad2b9" stroke="#2c2826" stroke-width="2" />
+    <text x="1095" y="211" text-anchor="middle" font-size="20" font-weight="650">Pₓ</text>
+    <line x1="255" y1="170" x2="300" y2="170" stroke="#2c2826" stroke-width="2" />
+    <path d="M290 163 L300 170 L290 177 Z" fill="#2c2826" />
+    <line x1="455" y1="170" x2="505" y2="170" stroke="#2c2826" stroke-width="2" />
+    <path d="M495 163 L505 170 L495 177 Z" fill="#2c2826" />
+    <line x1="255" y1="360" x2="300" y2="360" stroke="#2c2826" stroke-width="2" />
+    <path d="M290 353 L300 360 L290 367 Z" fill="#2c2826" />
+    <line x1="455" y1="360" x2="505" y2="360" stroke="#2c2826" stroke-width="2" />
+    <path d="M495 353 L505 360 L495 367 Z" fill="#2c2826" />
+    <line x1="690" y1="170" x2="755" y2="225" stroke="#2c2826" stroke-width="2" />
+    <path d="M745 218 L755 225 L745 232 Z" fill="#2c2826" />
+    <line x1="690" y1="360" x2="755" y2="300" stroke="#2c2826" stroke-width="2" />
+    <path d="M745 293 L755 300 L745 307 Z" fill="#2c2826" />
+    <line x1="925" y1="265" x2="960" y2="265" stroke="#2c2826" stroke-width="2" />
+    <path d="M950 258 L960 265 L950 272 Z" fill="#2c2826" />
+    <line x1="1060" y1="265" x2="1078" y2="265" stroke="#2c2826" stroke-width="2" />
+    <path d="M1068 258 L1078 265 L1068 272 Z" fill="#2c2826" />
+    <line x1="40" y1="455" x2="1090" y2="455" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="40" y="500" font-size="19" font-weight="650">Typed boundary</text>
+    <text x="230" y="500" fill="#6b6763" font-size="18">The frontend reads the request once; every candidate uses the same recorded state.</text>
+    <text x="40" y="545" font-size="19" font-weight="650">Semantic decisions</text>
+    <text x="230" y="545" fill="#8f684e" font-size="18">Branches, obligation precedence, and tool lowering resolve before the printer.</text>
+  </g>
+</svg>

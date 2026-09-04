@@ -1,51 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="35 83 1130 762" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="0 0 1130 762" role="img" aria-labelledby="title description">
   <title id="title">PolicyC latency change across compiler versions</title>
-  <desc id="description">Relative to the full policy, compiler 0.5 was 19.95 percent faster, compiler 0.6 was 0.39 percent slower, and compiler 0.7 was 14.63 percent slower. Each compiler used a newly authored held-out set, so the connected points show a descriptive study sequence rather than controlled version-to-version gains.</desc>
-  <rect x="35" y="83" width="1130" height="762" fill="#fcfcfb" />
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#1c1c1a">
-    <rect x="36" y="84" width="1128" height="760" fill="none" stroke="#1c1c1a" stroke-width="1.5" />
-    <text x="72" y="142" font-size="30" font-weight="650">End-to-end latency</text>
-    <text x="1128" y="142" text-anchor="end" fill="#67645f" font-size="25">Change vs full policy</text>
-    <text x="1128" y="188" text-anchor="end" fill="#67645f" font-size="19">Different held-out set per version; sequence is descriptive</text>
+  <desc id="description">Relative to the full policy, compiler 0.5 was 19.95 percent faster, compiler 0.6 was 0.39 percent slower, compiler 0.7 was 14.63 percent slower, compiler 0.8 was 7.07 percent faster, compiler 0.9 was 13.36 percent slower. Each compiler used a different held-out set.</desc>
 
-    <g stroke="#cfcdc7" stroke-width="1.5">
-      <line x1="190" y1="250" x2="1090" y2="250" />
-      <line x1="190" y1="348" x2="1090" y2="348" />
-      <line x1="190" y1="446" x2="1090" y2="446" />
-      <line x1="190" y1="543" x2="1090" y2="543" />
-      <line x1="190" y1="641" x2="1090" y2="641" />
-      <line x1="190" y1="690" x2="1090" y2="690" />
-    </g>
-    <line x1="190" y1="446" x2="1090" y2="446" stroke="#67645f" stroke-width="2" stroke-dasharray="9 8" />
-    <text x="1080" y="430" text-anchor="end" fill="#67645f" font-size="20">same latency as full policy</text>
-    <g fill="#67645f" font-size="23" text-anchor="end">
-      <text x="168" y="258">+20</text>
-      <text x="168" y="356">+10</text>
-      <text x="168" y="454">0</text>
-      <text x="168" y="551">−10</text>
-      <text x="168" y="649">−20</text>
-      <text x="168" y="698">−25</text>
-    </g>
-    <line x1="190" y1="250" x2="190" y2="690" stroke="#1c1c1a" stroke-width="2" />
-    <line x1="190" y1="690" x2="1090" y2="690" stroke="#1c1c1a" stroke-width="2" />
-
-    <path d="M330 641 L640 442 L950 303" fill="none" stroke="#1c1c1a" stroke-width="3" />
-    <g fill="#d7a18d" stroke="#1c1c1a" stroke-width="2">
-      <circle cx="330" cy="641" r="13" />
-      <circle cx="640" cy="442" r="13" />
-      <circle cx="950" cy="303" r="13" />
-    </g>
-    <g font-size="22" text-anchor="middle">
-      <text x="330" y="607">19.95% faster</text>
-      <text x="640" y="489">0.39% slower</text>
-      <text x="950" y="269">14.63% slower</text>
-    </g>
-    <g font-size="24" font-weight="600" text-anchor="middle">
-      <text x="330" y="742">0.5</text>
-      <text x="640" y="742">0.6</text>
-      <text x="950" y="742">0.7</text>
-    </g>
-    <text x="640" y="814" text-anchor="middle" font-size="25">Compiler version</text>
-    <text x="90" y="495" text-anchor="middle" font-size="25" transform="rotate(-90 90 495)">Latency change (%)</text>
+  <rect width="1130" height="762" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
+    <rect x="1" y="1" width="1128" height="760" fill="none" stroke="#2c2826" stroke-width="1.5" />
+    <text x="40" y="58" font-size="29" font-weight="650">End-to-end latency</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Change vs full policy</text>
+    <text x="1090" y="105" text-anchor="end" fill="#6b6763" font-size="18">Different held-out set per version; sequence is descriptive</text>
+    <line x1="155" y1="165" x2="1090" y2="165" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="173" text-anchor="end" fill="#6b6763" font-size="22">+20</text>
+    <line x1="155" y1="261.667" x2="1090" y2="261.667" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="269.667" text-anchor="end" fill="#6b6763" font-size="22">+10</text>
+    <line x1="155" y1="358.333" x2="1090" y2="358.333" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="366.333" text-anchor="end" fill="#6b6763" font-size="22">0</text>
+    <line x1="155" y1="455" x2="1090" y2="455" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="463" text-anchor="end" fill="#6b6763" font-size="22">−10</text>
+    <line x1="155" y1="551.667" x2="1090" y2="551.667" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="559.667" text-anchor="end" fill="#6b6763" font-size="22">−20</text>
+    <line x1="155" y1="600" x2="1090" y2="600" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="608" text-anchor="end" fill="#6b6763" font-size="22">−25</text>
+    <line x1="155" y1="165" x2="155" y2="600" stroke="#2c2826" stroke-width="2" />
+    <line x1="155" y1="600" x2="1090" y2="600" stroke="#2c2826" stroke-width="2" />
+    <text x="625" y="731" text-anchor="middle" font-size="24">Compiler version</text>
+    <text x="52" y="390" text-anchor="middle" font-size="24" transform="rotate(-90 52 390)">Latency change (%)</text>
+    <line x1="155" y1="358.333" x2="1090" y2="358.333" stroke="#6b6763" stroke-width="2" stroke-dasharray="9 8" />
+    <text x="1080" y="346.333" text-anchor="end" fill="#6b6763" font-size="18">same latency as full policy</text>
+    <polyline points="245,551.2 450,354.6 655,216.9 860,426.7 1065,229.2" fill="none" stroke="#2c2826" stroke-width="3" />
+    <circle cx="245" cy="551.2" r="12" fill="#d7a18d" stroke="#2c2826" stroke-width="2" />
+    <text x="245" y="523.183" text-anchor="middle" font-size="18">19.95% faster</text>
+    <circle cx="450" cy="354.6" r="12" fill="#d7a18d" stroke="#2c2826" stroke-width="2" />
+    <text x="450" y="392.563" text-anchor="middle" font-size="18">0.39% slower</text>
+    <circle cx="655" cy="216.9" r="12" fill="#d7a18d" stroke="#2c2826" stroke-width="2" />
+    <text x="655" y="188.91" text-anchor="middle" font-size="18">14.63% slower</text>
+    <circle cx="860" cy="426.7" r="12" fill="#d7a18d" stroke="#2c2826" stroke-width="2" />
+    <text x="860" y="464.677" text-anchor="middle" font-size="18">7.07% faster</text>
+    <circle cx="1065" cy="229.2" r="12" fill="#d7a18d" stroke="#2c2826" stroke-width="2" />
+    <text x="1065" y="267.187" text-anchor="middle" font-size="18">13.36% slower</text>
+    <text x="245" y="646" text-anchor="middle" font-size="23" font-weight="650">0.5</text>
+    <text x="450" y="646" text-anchor="middle" font-size="23" font-weight="650">0.6</text>
+    <text x="655" y="646" text-anchor="middle" font-size="23" font-weight="650">0.7</text>
+    <text x="860" y="646" text-anchor="middle" font-size="23" font-weight="650">0.8</text>
+    <text x="1065" y="646" text-anchor="middle" font-size="23" font-weight="650">0.9</text>
   </g>
 </svg>

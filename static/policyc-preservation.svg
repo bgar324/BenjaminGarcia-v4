@@ -1,72 +1,71 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="35 83 1130 762" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="0 0 1130 762" role="img" aria-labelledby="title description">
   <title id="title">PolicyC conditional critical-obligation preservation across compiler versions</title>
-  <desc id="description">Conditional preservation was 85.98 percent for compiler 0.5 with a trial-level Wilson 95 percent interval of 78.15 to 91.32 percent, 86.49 percent for compiler 0.6 with an interval of 76.88 to 92.49 percent, and 79.75 percent for compiler 0.7 with an interval of 72.93 to 85.21 percent. Every result was below the 95 percent target. The intervals are descriptive because samples are clustered by case. Each compiler used a newly authored held-out set, so the connected points are not controlled version-to-version gains.</desc>
-  <rect x="35" y="83" width="1130" height="762" fill="#fcfcfb" />
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#1c1c1a">
-    <rect x="36" y="84" width="1128" height="760" fill="none" stroke="#1c1c1a" stroke-width="1.5" />
-    <text x="72" y="142" font-size="30" font-weight="650">Critical obligations</text>
-    <text x="1128" y="142" text-anchor="end" fill="#67645f" font-size="25">Conditional preservation</text>
-    <text x="1128" y="188" text-anchor="end" fill="#67645f" font-size="19">Bars show trial-level Wilson 95% intervals</text>
-    <text x="72" y="188" fill="#67645f" font-size="19">Different held-out set per version; sequence is descriptive</text>
+  <desc id="description">Conditional critical-obligation preservation by compiler was 85.98 percent for 0.5, with a trial-level Wilson 95 percent interval from 78.15 to 91.32 percent; 86.49 percent for 0.6, with a trial-level Wilson 95 percent interval from 76.88 to 92.49 percent; 79.75 percent for 0.7, with a trial-level Wilson 95 percent interval from 72.93 to 85.21 percent; 75.76 percent for 0.8, with a trial-level Wilson 95 percent interval from 67.79 to 82.27 percent; 75.91 percent for 0.9, with a trial-level Wilson 95 percent interval from 68.11 to 82.30 percent. Every result was below the 95 percent target. The intervals are descriptive because samples are clustered by case, and every version used a different held-out set.</desc>
 
-    <g stroke="#cfcdc7" stroke-width="1.5">
-      <line x1="190" y1="250" x2="1090" y2="250" />
-      <line x1="190" y1="323" x2="1090" y2="323" />
-      <line x1="190" y1="397" x2="1090" y2="397" />
-      <line x1="190" y1="470" x2="1090" y2="470" />
-      <line x1="190" y1="543" x2="1090" y2="543" />
-      <line x1="190" y1="617" x2="1090" y2="617" />
-      <line x1="190" y1="690" x2="1090" y2="690" />
-    </g>
-    <line x1="190" y1="323" x2="1090" y2="323" stroke="#8f684e" stroke-width="2" stroke-dasharray="9 8" />
-    <text x="1080" y="307" text-anchor="end" fill="#8f684e" font-size="20">95% target</text>
-    <g fill="#67645f" font-size="23" text-anchor="end">
-      <text x="168" y="258">100</text>
-      <text x="168" y="331">95</text>
-      <text x="168" y="405">90</text>
-      <text x="168" y="478">85</text>
-      <text x="168" y="551">80</text>
-      <text x="168" y="625">75</text>
-      <text x="168" y="698">70</text>
-      <text x="168" y="741">0</text>
-    </g>
-    <path d="M181 711 l9 -8 l-9 -8 l9 -8" fill="none" stroke="#1c1c1a" stroke-width="2" />
-    <line x1="190" y1="250" x2="190" y2="690" stroke="#1c1c1a" stroke-width="2" />
-    <line x1="190" y1="690" x2="1090" y2="690" stroke="#1c1c1a" stroke-width="2" />
-
-    <path d="M330 456 L640 448 L950 547" fill="none" stroke="#1c1c1a" stroke-width="3" />
-    <g stroke="#67645f" stroke-width="2">
-      <line x1="330" y1="377" x2="330" y2="571" />
-      <line x1="318" y1="377" x2="342" y2="377" />
-      <line x1="318" y1="571" x2="342" y2="571" />
-      <line x1="640" y1="360" x2="640" y2="589" />
-      <line x1="628" y1="360" x2="652" y2="360" />
-      <line x1="628" y1="589" x2="652" y2="589" />
-      <line x1="950" y1="467" x2="950" y2="647" />
-      <line x1="938" y1="467" x2="962" y2="467" />
-      <line x1="938" y1="647" x2="962" y2="647" />
-    </g>
-    <g fill="#c6d6e5" stroke="#1c1c1a" stroke-width="2">
-      <circle cx="330" cy="456" r="13" />
-      <circle cx="640" cy="448" r="13" />
-      <circle cx="950" cy="547" r="13" />
-    </g>
-    <g font-size="23" text-anchor="middle">
-      <text x="330" y="353">85.98%</text>
-      <text x="640" y="336">86.49%</text>
-      <text x="950" y="443">79.75%</text>
-    </g>
-    <g font-size="24" font-weight="600" text-anchor="middle">
-      <text x="330" y="742">0.5</text>
-      <text x="640" y="742">0.6</text>
-      <text x="950" y="742">0.7</text>
-    </g>
-    <g fill="#67645f" font-size="19" text-anchor="middle">
-      <text x="330" y="770">107 baseline passes</text>
-      <text x="640" y="770">74 baseline passes</text>
-      <text x="950" y="770">163 baseline passes</text>
-    </g>
-    <text x="640" y="814" text-anchor="middle" font-size="25">Compiler version</text>
-    <text x="90" y="495" text-anchor="middle" font-size="25" transform="rotate(-90 90 495)">Preservation (%)</text>
+  <rect width="1130" height="762" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
+    <rect x="1" y="1" width="1128" height="760" fill="none" stroke="#2c2826" stroke-width="1.5" />
+    <text x="40" y="58" font-size="29" font-weight="650">Critical obligations</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Conditional preservation</text>
+    <text x="1090" y="105" text-anchor="end" fill="#6b6763" font-size="18">Bars show trial-level Wilson 95% intervals</text>
+    <line x1="155" y1="165" x2="1090" y2="165" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="173" text-anchor="end" fill="#6b6763" font-size="22">100</text>
+    <line x1="155" y1="227.143" x2="1090" y2="227.143" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="235.143" text-anchor="end" fill="#6b6763" font-size="22">95</text>
+    <line x1="155" y1="289.286" x2="1090" y2="289.286" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="297.286" text-anchor="end" fill="#6b6763" font-size="22">90</text>
+    <line x1="155" y1="351.429" x2="1090" y2="351.429" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="359.429" text-anchor="end" fill="#6b6763" font-size="22">85</text>
+    <line x1="155" y1="413.571" x2="1090" y2="413.571" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="421.571" text-anchor="end" fill="#6b6763" font-size="22">80</text>
+    <line x1="155" y1="475.714" x2="1090" y2="475.714" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="483.714" text-anchor="end" fill="#6b6763" font-size="22">75</text>
+    <line x1="155" y1="537.857" x2="1090" y2="537.857" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="545.857" text-anchor="end" fill="#6b6763" font-size="22">70</text>
+    <line x1="155" y1="600" x2="1090" y2="600" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="608" text-anchor="end" fill="#6b6763" font-size="22">65</text>
+    <line x1="155" y1="165" x2="155" y2="600" stroke="#2c2826" stroke-width="2" />
+    <line x1="155" y1="600" x2="1090" y2="600" stroke="#2c2826" stroke-width="2" />
+    <text x="625" y="731" text-anchor="middle" font-size="24">Compiler version</text>
+    <text x="52" y="390" text-anchor="middle" font-size="24" transform="rotate(-90 52 390)">Preservation (%)</text>
+    <path d="M146 620 l9 -8 l-9 -8 l9 -8" fill="none" stroke="#2c2826" stroke-width="2" />
+    <line x1="155" y1="227.143" x2="1090" y2="227.143" stroke="#8f684e" stroke-width="2" stroke-dasharray="9 8" />
+    <text x="1080" y="215.143" text-anchor="end" fill="#8f684e" font-size="19">95% target</text>
+    <polyline points="245,339.2 450,332.9 655,416.7 860,466.3 1065,464.4" fill="none" stroke="#2c2826" stroke-width="3" />
+    <line x1="245" y1="272.88" x2="245" y2="436.564" stroke="#6b6763" stroke-width="2" />
+    <line x1="234" y1="272.88" x2="256" y2="272.88" stroke="#6b6763" stroke-width="2" />
+    <line x1="234" y1="436.564" x2="256" y2="436.564" stroke="#6b6763" stroke-width="2" />
+    <circle cx="245" cy="339.2" r="12" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <text x="245" y="312.249" text-anchor="middle" font-size="20">85.98%</text>
+    <line x1="450" y1="258.339" x2="450" y2="452.349" stroke="#6b6763" stroke-width="2" />
+    <line x1="439" y1="258.339" x2="461" y2="258.339" stroke="#6b6763" stroke-width="2" />
+    <line x1="439" y1="452.349" x2="461" y2="452.349" stroke="#6b6763" stroke-width="2" />
+    <circle cx="450" cy="332.9" r="12" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <text x="450" y="305.91" text-anchor="middle" font-size="20">86.49%</text>
+    <line x1="655" y1="348.819" x2="655" y2="501.441" stroke="#6b6763" stroke-width="2" />
+    <line x1="644" y1="348.819" x2="666" y2="348.819" stroke="#6b6763" stroke-width="2" />
+    <line x1="644" y1="501.441" x2="666" y2="501.441" stroke="#6b6763" stroke-width="2" />
+    <circle cx="655" cy="416.7" r="12" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <text x="655" y="389.679" text-anchor="middle" font-size="20">79.75%</text>
+    <line x1="860" y1="385.359" x2="860" y2="565.324" stroke="#6b6763" stroke-width="2" />
+    <line x1="849" y1="385.359" x2="871" y2="385.359" stroke="#6b6763" stroke-width="2" />
+    <line x1="849" y1="565.324" x2="871" y2="565.324" stroke="#6b6763" stroke-width="2" />
+    <circle cx="860" cy="466.3" r="12" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <text x="860" y="439.269" text-anchor="middle" font-size="20">75.76%</text>
+    <line x1="1065" y1="384.986" x2="1065" y2="561.347" stroke="#6b6763" stroke-width="2" />
+    <line x1="1054" y1="384.986" x2="1076" y2="384.986" stroke="#6b6763" stroke-width="2" />
+    <line x1="1054" y1="561.347" x2="1076" y2="561.347" stroke="#6b6763" stroke-width="2" />
+    <circle cx="1065" cy="464.4" r="12" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <text x="1065" y="437.404" text-anchor="middle" font-size="20">75.91%</text>
+    <text x="245" y="646" text-anchor="middle" font-size="23" font-weight="650">0.5</text>
+    <text x="245" y="679" text-anchor="middle" fill="#6b6763" font-size="16">107 full passes</text>
+    <text x="450" y="646" text-anchor="middle" font-size="23" font-weight="650">0.6</text>
+    <text x="450" y="679" text-anchor="middle" fill="#6b6763" font-size="16">74 full passes</text>
+    <text x="655" y="646" text-anchor="middle" font-size="23" font-weight="650">0.7</text>
+    <text x="655" y="679" text-anchor="middle" fill="#6b6763" font-size="16">163 full passes</text>
+    <text x="860" y="646" text-anchor="middle" font-size="23" font-weight="650">0.8</text>
+    <text x="860" y="679" text-anchor="middle" fill="#6b6763" font-size="16">132 full passes</text>
+    <text x="1065" y="646" text-anchor="middle" font-size="23" font-weight="650">0.9</text>
+    <text x="1065" y="679" text-anchor="middle" fill="#6b6763" font-size="16">137 full passes</text>
   </g>
 </svg>

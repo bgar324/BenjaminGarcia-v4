@@ -1,58 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1130" height="520" viewBox="0 0 1130 520" role="img" aria-labelledby="title description">
-  <title id="title">PolicyC request-conditioned compilation pipeline</title>
-  <desc id="description">A deterministic TypeScript compiler takes the structured policy graph, request, artifact context, and tool surface; matches and conservatively retains policies; adds every transitive dependency; orders the selected nodes; and emits the compact prompt. Exact closure over declared dependencies does not guarantee that emitted language preserves predicates, state, negation, or precedence.</desc>
+  <title id="title">PolicyC compilers 0.5 through 0.8 filter-first pipeline</title>
+  <desc id="description">Compilers 0.5 through 0.8 take the policy graph, request, context, and tools; match and retain policies; close dependencies; then specialize and emit a compact slice. Compiler 0.8 adds one regular-expression predicate, but most request state, limits, and precedence still live in matching and emitted prose.</desc>
+
   <rect width="1130" height="520" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
-    <text x="40" y="55" font-size="29" font-weight="650">How PolicyC builds Pₓ</text>
-    <text x="1090" y="55" text-anchor="end" fill="#6b6763" font-size="22">Deterministic TypeScript compiler</text>
-
+    <text x="40" y="55" font-size="29" font-weight="650">How compilers 0.5–0.8 build Pₓ</text>
+    <text x="1090" y="55" text-anchor="end" fill="#6b6763" font-size="22">Filter-first pipeline</text>
     <line x1="100" y1="205" x2="1030" y2="205" stroke="#2c2826" stroke-width="2" />
-    <g fill="#2c2826">
-      <path d="M210 198 L220 205 L210 212 Z" />
-      <path d="M447 198 L457 205 L447 212 Z" />
-      <path d="M677 198 L687 205 L677 212 Z" />
-      <path d="M907 198 L917 205 L907 212 Z" />
-    </g>
-    <g stroke="#2c2826" stroke-width="2">
-      <circle cx="100" cy="205" r="17" fill="#cad2b9" />
-      <circle cx="335" cy="205" r="14" fill="#c6d6e5" />
-      <circle cx="565" cy="205" r="14" fill="#c6d6e5" />
-      <circle cx="795" cy="205" r="14" fill="#c6d6e5" />
-      <circle cx="1030" cy="205" r="17" fill="#cad2b9" />
-    </g>
-
-    <g font-size="21" font-weight="650" text-anchor="middle">
-      <text x="100" y="148">Inputs</text>
-      <text x="335" y="148">Match and retain</text>
-      <text x="565" y="148">Dependency closure</text>
-      <text x="795" y="148">Compact emission</text>
-      <text x="1030" y="148">Pₓ</text>
-    </g>
-    <g fill="#6b6763" font-size="17" text-anchor="middle">
-      <text x="100" y="260">Policy graph P</text>
-      <text x="100" y="288">Request x</text>
-      <text x="100" y="316">Context + tools</text>
-
-      <text x="335" y="260">Lexical intents</text>
-      <text x="335" y="288">Trigger fields</text>
-      <text x="335" y="316">Critical safeguards</text>
-
-      <text x="565" y="260">Requires edges</text>
-      <text x="565" y="288">Transitive nodes</text>
-      <text x="565" y="316">Stable ordering</text>
-
-      <text x="795" y="260">Model-visible rules</text>
-      <text x="795" y="288">Compact context</text>
-      <text x="795" y="316">Hashed artifacts</text>
-
-      <text x="1030" y="260">Active policy slice</text>
-      <text x="1030" y="288">for this request</text>
-    </g>
-
+    <path d="M210 198 L220 205 L210 212 Z" fill="#2c2826" />
+    <path d="M447 198 L457 205 L447 212 Z" fill="#2c2826" />
+    <path d="M677 198 L687 205 L677 212 Z" fill="#2c2826" />
+    <path d="M907 198 L917 205 L907 212 Z" fill="#2c2826" />
+    <circle cx="100" cy="205" r="17" fill="#cad2b9" stroke="#2c2826" stroke-width="2" />
+    <circle cx="335" cy="205" r="14" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <circle cx="565" cy="205" r="14" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <circle cx="795" cy="205" r="14" fill="#c6d6e5" stroke="#2c2826" stroke-width="2" />
+    <circle cx="1030" cy="205" r="17" fill="#cad2b9" stroke="#2c2826" stroke-width="2" />
+    <text x="100" y="148" text-anchor="middle" font-size="20" font-weight="650">Inputs</text>
+    <text x="335" y="148" text-anchor="middle" font-size="20" font-weight="650">Match and retain</text>
+    <text x="565" y="148" text-anchor="middle" font-size="20" font-weight="650">Dependency closure</text>
+    <text x="795" y="148" text-anchor="middle" font-size="20" font-weight="650">Specialize + emit</text>
+    <text x="1030" y="148" text-anchor="middle" font-size="20" font-weight="650">Pₓ</text>
+    <text x="100" y="260" text-anchor="middle" fill="#6b6763" font-size="16">Policy graph P</text>
+    <text x="100" y="288" text-anchor="middle" fill="#6b6763" font-size="16">Request x</text>
+    <text x="100" y="316" text-anchor="middle" fill="#6b6763" font-size="16">Context + tools</text>
+    <text x="335" y="260" text-anchor="middle" fill="#6b6763" font-size="16">Lexical intents</text>
+    <text x="335" y="288" text-anchor="middle" fill="#6b6763" font-size="16">Trigger fields</text>
+    <text x="335" y="316" text-anchor="middle" fill="#6b6763" font-size="16">Critical safeguards</text>
+    <text x="565" y="260" text-anchor="middle" fill="#6b6763" font-size="16">Requires edges</text>
+    <text x="565" y="288" text-anchor="middle" fill="#6b6763" font-size="16">Transitive nodes</text>
+    <text x="565" y="316" text-anchor="middle" fill="#6b6763" font-size="16">Stable ordering</text>
+    <text x="795" y="260" text-anchor="middle" fill="#6b6763" font-size="16">0.8: one regex predicate</text>
+    <text x="795" y="288" text-anchor="middle" fill="#6b6763" font-size="16">Model-visible rules</text>
+    <text x="795" y="316" text-anchor="middle" fill="#6b6763" font-size="16">Compact context</text>
+    <text x="1030" y="260" text-anchor="middle" fill="#6b6763" font-size="16">Active policy slice</text>
+    <text x="1030" y="288" text-anchor="middle" fill="#6b6763" font-size="16">for this request</text>
     <line x1="40" y1="370" x2="1090" y2="370" stroke="#d4d1cb" stroke-width="1.5" />
     <text x="40" y="418" font-size="20" font-weight="650">Structural guarantee</text>
     <text x="265" y="418" fill="#6b6763" font-size="19">Every dependency declared in the graph is retained.</text>
-    <text x="40" y="466" font-size="20" font-weight="650">Open semantic risk</text>
-    <text x="265" y="466" fill="#8f684e" font-size="19">Emission can still lose predicates, satisfied state, negation, or precedence.</text>
+    <text x="40" y="466" font-size="20" font-weight="650">Remaining limitation</text>
+    <text x="265" y="466" fill="#8f684e" font-size="18">Most state, limits, and precedence still live in matching and emitted prose.</text>
   </g>
 </svg>

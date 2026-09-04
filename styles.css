@@ -400,14 +400,18 @@ a {
 #policyc-chart-input:checked ~ .article-chart-tabs label[for="policyc-chart-input"],
 #policyc-chart-preservation:checked ~ .article-chart-tabs label[for="policyc-chart-preservation"],
 #policyc-chart-cost:checked ~ .article-chart-tabs label[for="policyc-chart-cost"],
-#policyc-chart-latency:checked ~ .article-chart-tabs label[for="policyc-chart-latency"] {
+#policyc-chart-latency:checked ~ .article-chart-tabs label[for="policyc-chart-latency"],
+#policyc-architecture-legacy:checked ~ .article-chart-tabs label[for="policyc-architecture-legacy"],
+#policyc-architecture-v09:checked ~ .article-chart-tabs label[for="policyc-architecture-v09"] {
   color: var(--foreground);
 }
 
 #policyc-chart-input:focus-visible ~ .article-chart-tabs label[for="policyc-chart-input"],
 #policyc-chart-preservation:focus-visible ~ .article-chart-tabs label[for="policyc-chart-preservation"],
 #policyc-chart-cost:focus-visible ~ .article-chart-tabs label[for="policyc-chart-cost"],
-#policyc-chart-latency:focus-visible ~ .article-chart-tabs label[for="policyc-chart-latency"] {
+#policyc-chart-latency:focus-visible ~ .article-chart-tabs label[for="policyc-chart-latency"],
+#policyc-architecture-legacy:focus-visible ~ .article-chart-tabs label[for="policyc-architecture-legacy"],
+#policyc-architecture-v09:focus-visible ~ .article-chart-tabs label[for="policyc-architecture-v09"] {
   outline: 2px solid var(--foreground);
   outline-offset: -2px;
 }
@@ -420,7 +424,9 @@ a {
 #policyc-chart-input:checked ~ .article-chart-panels [data-chart="input"],
 #policyc-chart-preservation:checked ~ .article-chart-panels [data-chart="preservation"],
 #policyc-chart-cost:checked ~ .article-chart-panels [data-chart="cost"],
-#policyc-chart-latency:checked ~ .article-chart-panels [data-chart="latency"] {
+#policyc-chart-latency:checked ~ .article-chart-panels [data-chart="latency"],
+#policyc-architecture-legacy:checked ~ .article-chart-panels [data-chart="architecture-legacy"],
+#policyc-architecture-v09:checked ~ .article-chart-panels [data-chart="architecture-v09"] {
   display: block;
 }
 
@@ -433,6 +439,16 @@ a {
   width: 100%;
   height: auto;
   background: var(--background);
+}
+
+.article-architecture-switcher {
+  margin: 2rem 0 2.25rem;
+  padding: 0;
+  border: 0;
+}
+
+.article-architecture-switcher .article-chart-panel img {
+  border: 1px solid var(--foreground);
 }
 
 .article-body {
