@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="0 0 1130 762" role="img" aria-labelledby="title description">
   <title id="title">PolicyC execution-cost reduction across compiler versions</title>
-  <desc id="description">Actual billed-cost reduction by compiler was 23.01 percent for 0.5, 24.50 percent for 0.6, 12.14 percent for 0.7, 18.03 percent for 0.8, 17.21 percent for 0.9. Uncached-equivalent cost reduction was 67.80 percent for 0.5, 55.36 percent for 0.6, 59.46 percent for 0.7, 66.00 percent for 0.8, 58.69 percent for 0.9. Compiler 0.9&#x27;s 60 compile-time extractor calls cost 0.2678 dollars and are reported separately, not netted into these execution-study reductions. Every version used a different held-out set.</desc>
+  <desc id="description">Actual billed-cost reduction by compiler was 23.01 percent for 0.5, 24.50 percent for 0.6, 12.14 percent for 0.7, 18.03 percent for 0.8, 17.21 percent for 0.9. Uncached-equivalent cost reduction was 67.80 percent for 0.5, 55.36 percent for 0.6, 59.46 percent for 0.7, 66.00 percent for 0.8, 58.69 percent for 0.9. Compiler 0.9&#x27;s 60 compile-time extractor calls cost 0.2678 dollars and are reported separately, not netted into these execution-study reductions. Every version used a different held-out set. More reduction is better; less is worse.</desc>
 
   <rect width="1130" height="762" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
@@ -12,6 +12,8 @@
     <text x="640" y="104" font-size="20" font-weight="600">Uncached-equivalent</text>
     <rect x="880" y="89" width="17" height="17" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.5" />
     <text x="910" y="104" font-size="20" font-weight="600">Actual billed</text>
+    <text x="155" y="142" fill="#8f684e" font-size="18" font-weight="600">↓ Less is worse</text>
+    <text x="1090" y="142" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">More is better ↑</text>
     <line x1="155" y1="165" x2="1090" y2="165" stroke="#d4d1cb" stroke-width="1.5" />
     <text x="134" y="173" text-anchor="end" fill="#6b6763" font-size="22">80</text>
     <line x1="155" y1="273.75" x2="1090" y2="273.75" stroke="#d4d1cb" stroke-width="1.5" />

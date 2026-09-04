@@ -89,29 +89,29 @@
 
           <div class="article-chart-panels">
             <figure class="article-chart-panel" data-chart="input">
-              <a href="/static/policyc-input-reduction.svg?v=3" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC input-reduction chart at full size">
-                <img src="/static/policyc-input-reduction.svg?v=3" width="1130" height="762" decoding="async" alt="Mean actual input-token reduction by compiler: 98.23 percent for 0.5, 89.69 percent for 0.6, 93.75 percent for 0.7, 94.76 percent for 0.8, and 92.99 percent for 0.9." />
+              <a href="/static/policyc-input-reduction.svg?v=4" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC input-reduction chart at full size">
+                <img src="/static/policyc-input-reduction.svg?v=4" width="1130" height="762" decoding="async" alt="Mean actual input-token reduction by compiler: 98.23 percent for 0.5, 89.69 percent for 0.6, 93.75 percent for 0.7, 94.76 percent for 0.8, and 92.99 percent for 0.9. More reduction is better; less is worse." />
               </a>
               <figcaption>Every frozen compiler removed between 89.69% and 98.23% of mean input context. Each version used a new held-out set, so the line shows study order rather than controlled gains.</figcaption>
             </figure>
 
             <figure class="article-chart-panel" data-chart="preservation">
-              <a href="/static/policyc-preservation.svg?v=4" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC preservation chart at full size">
-                <img src="/static/policyc-preservation.svg?v=4" width="1130" height="762" decoding="async" alt="Conditional critical-obligation preservation by compiler: 85.98 percent for 0.5, 86.49 percent for 0.6, 79.75 percent for 0.7, 75.76 percent for 0.8, and 75.91 percent for 0.9. Trial-level Wilson intervals for every version remain below the 95 percent target." />
+              <a href="/static/policyc-preservation.svg?v=5" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC preservation chart at full size">
+                <img src="/static/policyc-preservation.svg?v=5" width="1130" height="762" decoding="async" alt="Conditional critical-obligation preservation by compiler: 85.98 percent for 0.5, 86.49 percent for 0.6, 79.75 percent for 0.7, 75.76 percent for 0.8, and 75.91 percent for 0.9. Trial-level Wilson intervals for every version remain below the 95 percent target. More preservation is better; less is worse." />
               </a>
               <figcaption>No frozen study reached the 95% preservation target. The Wilson intervals are trial-level and descriptive because each case contributed three samples.</figcaption>
             </figure>
 
             <figure class="article-chart-panel" data-chart="cost">
-              <a href="/static/policyc-cost-reduction.svg?v=4" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC cost-reduction chart at full size">
-                <img src="/static/policyc-cost-reduction.svg?v=4" width="1130" height="762" decoding="async" alt="Paired-execution billed-cost reduction by compiler was 23.01 percent for 0.5, 24.50 percent for 0.6, 12.14 percent for 0.7, 18.03 percent for 0.8, and 17.21 percent for 0.9. Uncached-equivalent cost reduction was 67.80, 55.36, 59.46, 66.00, and 58.69 percent. Compiler 0.9 used 60 compile-time extractor calls costing 0.2678 dollars, reported separately." />
+              <a href="/static/policyc-cost-reduction.svg?v=5" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC cost-reduction chart at full size">
+                <img src="/static/policyc-cost-reduction.svg?v=5" width="1130" height="762" decoding="async" alt="Paired-execution billed-cost reduction by compiler was 23.01 percent for 0.5, 24.50 percent for 0.6, 12.14 percent for 0.7, 18.03 percent for 0.8, and 17.21 percent for 0.9. Uncached-equivalent cost reduction was 67.80, 55.36, 59.46, 66.00, and 58.69 percent. More reduction is better; less is worse. Compiler 0.9 used 60 compile-time extractor calls costing 0.2678 dollars, reported separately." />
               </a>
               <figcaption>Prompt caching and tool fees narrowed the observed bill. These percentages cover paired execution only; compiler 0.9's 60 compile-time extractor calls cost $0.2678 separately.</figcaption>
             </figure>
 
             <figure class="article-chart-panel" data-chart="latency">
-              <a href="/static/policyc-latency.svg?v=3" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC latency chart at full size">
-                <img src="/static/policyc-latency.svg?v=3" width="1130" height="762" decoding="async" alt="Latency change relative to the full policy: compiler 0.5 was 19.95 percent faster, 0.6 was 0.39 percent slower, 0.7 was 14.63 percent slower, 0.8 was 7.07 percent faster, and 0.9 was 13.36 percent slower." />
+              <a href="/static/policyc-latency.svg?v=4" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC latency chart at full size">
+                <img src="/static/policyc-latency.svg?v=4" width="1130" height="762" decoding="async" alt="Latency change relative to the full policy: compiler 0.5 was 19.95 percent faster, 0.6 was 0.39 percent slower, 0.7 was 14.63 percent slower, 0.8 was 7.07 percent faster, and 0.9 was 13.36 percent slower. Less latency change is better; more is worse." />
               </a>
               <figcaption>Less input did not guarantee less wall-clock time. Only 0.5 and 0.8 were faster than their full-policy conditions.</figcaption>
             </figure>

@@ -99,6 +99,16 @@ def chart_frame(title_value: str, kicker: str, note: str) -> list[str]:
         text(1090, 105, note, text_anchor="end", fill=MUTED, font_size=18),
     ]
 
+def add_direction_labels(body: list[str], *, more_is_better: bool) -> None:
+    less_label = "↓ Less is worse" if more_is_better else "↓ Less is better"
+    more_label = "More is better ↑" if more_is_better else "More is worse ↑"
+    body.extend(
+        [
+            text(155, 142, less_label, fill=RUST, font_size=18, font_weight=600),
+            text(1090, 142, more_label, text_anchor="end", fill=RUST, font_size=18, font_weight=600),
+        ]
+    )
+
 
 def chart_axes(y_min: float, y_max: float, ticks: tuple[float, ...], y_label: str, *, break_axis: bool = False) -> tuple[list[str], object]:
     top = 165
@@ -139,6 +149,7 @@ def add_versions(body: list[str], *, cases: bool = False, baseline: bool = False
 
 def input_chart() -> None:
     body = chart_frame("Mean actual input tokens", "Reduction vs full policy", "Different held-out set per version; sequence is descriptive")
+    add_direction_labels(body, more_is_better=True)
     axes, y_for = chart_axes(85, 100, (100, 95, 90, 85), "Input reduction (%)", break_axis=True)
     body.extend(axes)
     points = [(x, y_for(study.input_reduction)) for x, study in zip(X_POSITIONS, STUDIES, strict=True)]
@@ -150,12 +161,13 @@ def input_chart() -> None:
     add_versions(body, cases=True)
     description = "Mean actual input-token reduction relative to the full policy was " + ", ".join(
         f"{study.input_reduction:.2f} percent for compiler {study.version}" for study in STUDIES
-    ) + ". Each version used a different held-out set, so the connected points show study sequence rather than controlled version-to-version gains."
+    ) + ". Each version used a different held-out set, so the connected points show study sequence rather than controlled version-to-version gains. More reduction is better; less is worse."
     write_svg("policyc-input-reduction.svg", 1130, 762, "PolicyC input-token reduction across compiler versions", description, body)
 
 
 def preservation_chart() -> None:
     body = chart_frame("Critical obligations", "Conditional preservation", "Bars show trial-level Wilson 95% intervals")
+    add_direction_labels(body, more_is_better=True)
     axes, y_for = chart_axes(65, 100, (100, 95, 90, 85, 80, 75, 70, 65), "Preservation (%)", break_axis=True)
     body.extend(axes)
     target_y = y_for(95)
@@ -183,7 +195,7 @@ def preservation_chart() -> None:
     description = "Conditional critical-obligation preservation by compiler was " + "; ".join(
         f"{study.preservation:.2f} percent for {study.version}, with a trial-level Wilson 95 percent interval from {study.wilson_low:.2f} to {study.wilson_high:.2f} percent"
         for study in STUDIES
-    ) + ". Every result was below the 95 percent target. The intervals are descriptive because samples are clustered by case, and every version used a different held-out set."
+    ) + ". Every result was below the 95 percent target. The intervals are descriptive because samples are clustered by case, and every version used a different held-out set. More preservation is better; less is worse."
     write_svg("policyc-preservation.svg", 1130, 762, "PolicyC conditional critical-obligation preservation across compiler versions", description, body)
 
 
@@ -198,6 +210,7 @@ def cost_chart() -> None:
             text(910, 104, "Actual billed", font_size=20, font_weight=600),
         ]
     )
+    add_direction_labels(body, more_is_better=True)
     axes, y_for = chart_axes(0, 80, (80, 60, 40, 20, 0), "Cost reduction (%)")
     body.extend(axes)
     uncached = [(x, y_for(study.uncached_reduction)) for x, study in zip(X_POSITIONS, STUDIES, strict=True)]
@@ -218,13 +231,14 @@ def cost_chart() -> None:
     ) + (
         f". Compiler 0.9's {V09_EXTRACTION_READS} compile-time extractor calls cost "
         f"{V09_EXTRACTION_COST:.4f} dollars and are reported separately, not netted into these execution-study reductions. "
-        "Every version used a different held-out set."
+        "Every version used a different held-out set. More reduction is better; less is worse."
     )
     write_svg("policyc-cost-reduction.svg", 1130, 762, "PolicyC execution-cost reduction across compiler versions", description, body)
 
 
 def latency_chart() -> None:
     body = chart_frame("End-to-end latency", "Change vs full policy", "Different held-out set per version; sequence is descriptive")
+    add_direction_labels(body, more_is_better=False)
     axes, y_for = chart_axes(-25, 20, (20, 10, 0, -10, -20, -25), "Latency change (%)")
     body.extend(axes)
     zero_y = y_for(0)
@@ -245,7 +259,7 @@ def latency_chart() -> None:
     description = "Relative to the full policy, " + ", ".join(
         f"compiler {study.version} was {abs(study.latency_change):.2f} percent {'faster' if study.latency_change < 0 else 'slower'}"
         for study in STUDIES
-    ) + ". Each compiler used a different held-out set."
+    ) + ". Each compiler used a different held-out set. Less latency change is better; more is worse."
     write_svg("policyc-latency.svg", 1130, 762, "PolicyC latency change across compiler versions", description, body)
 
 

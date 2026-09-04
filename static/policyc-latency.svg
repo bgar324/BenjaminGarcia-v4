@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="0 0 1130 762" role="img" aria-labelledby="title description">
   <title id="title">PolicyC latency change across compiler versions</title>
-  <desc id="description">Relative to the full policy, compiler 0.5 was 19.95 percent faster, compiler 0.6 was 0.39 percent slower, compiler 0.7 was 14.63 percent slower, compiler 0.8 was 7.07 percent faster, compiler 0.9 was 13.36 percent slower. Each compiler used a different held-out set.</desc>
+  <desc id="description">Relative to the full policy, compiler 0.5 was 19.95 percent faster, compiler 0.6 was 0.39 percent slower, compiler 0.7 was 14.63 percent slower, compiler 0.8 was 7.07 percent faster, compiler 0.9 was 13.36 percent slower. Each compiler used a different held-out set. Less latency change is better; more is worse.</desc>
 
   <rect width="1130" height="762" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
@@ -8,6 +8,8 @@
     <text x="40" y="58" font-size="29" font-weight="650">End-to-end latency</text>
     <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Change vs full policy</text>
     <text x="1090" y="105" text-anchor="end" fill="#6b6763" font-size="18">Different held-out set per version; sequence is descriptive</text>
+    <text x="155" y="142" fill="#8f684e" font-size="18" font-weight="600">↓ Less is better</text>
+    <text x="1090" y="142" text-anchor="end" fill="#8f684e" font-size="18" font-weight="600">More is worse ↑</text>
     <line x1="155" y1="165" x2="1090" y2="165" stroke="#d4d1cb" stroke-width="1.5" />
     <text x="134" y="173" text-anchor="end" fill="#6b6763" font-size="22">+20</text>
     <line x1="155" y1="261.667" x2="1090" y2="261.667" stroke="#d4d1cb" stroke-width="1.5" />
