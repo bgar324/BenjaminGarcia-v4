@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="580" viewBox="0 0 1130 580" role="img" aria-labelledby="title description">
+  <title id="title">Polaris model-reader pipeline</title>
+  <desc id="description">Polaris keeps the policy&#x27;s original clauses: a hand-audited map of 61 clauses is deduplicated and pruned only on a structural fact the case declares, giving a verbatim slice of about three thousand tokens with every condition still conditional. A separate model call reads that slice and the request and writes request-specific directives; under contract 1 it finds the conditions itself, under contract 2 it answers each condition listed from a frozen source-first index exactly once. Only the directives are appended to the slice for the answer call. No regular expression or request state sits on the path from request to directive, and an empty reading renders the bare slice.</desc>
+
+  <rect width="1130" height="580" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
+    <text x="40" y="55" font-size="29" font-weight="650">How Polaris builds Pₓ + Dₓ</text>
+    <text x="1090" y="55" text-anchor="end" fill="#6b6763" font-size="22">Verbatim slice + a model that reads it</text>
+    <text x="40" y="172" fill="#6b6763" font-size="17" font-weight="600">Policy</text>
+    <text x="40" y="362" fill="#6b6763" font-size="17" font-weight="600">Request</text>
+    <rect x="115" y="115" width="150" height="110" rx="8" fill="#cad2b9" stroke="#2c2826" stroke-width="1.8" />
+    <text x="190" y="145" text-anchor="middle" font-size="18" font-weight="650">Source P</text>
+    <text x="190" y="172" text-anchor="middle" fill="#6b6763" font-size="15">61 clauses, verbatim</text>
+    <text x="190" y="195" text-anchor="middle" fill="#6b6763" font-size="15">hash-checked</text>
+    <rect x="310" y="102" width="165" height="135" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="392.5" y="132" text-anchor="middle" font-size="18" font-weight="650">Structural slice</text>
+    <text x="392.5" y="159" text-anchor="middle" fill="#6b6763" font-size="15">Dedupe boilerplate</text>
+    <text x="392.5" y="182" text-anchor="middle" fill="#6b6763" font-size="15">Prune only on a</text>
+    <text x="392.5" y="205" text-anchor="middle" fill="#6b6763" font-size="15">declared fact</text>
+    <rect x="520" y="100" width="150" height="140" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="595" y="130" text-anchor="middle" font-size="18" font-weight="650">Pₓ</text>
+    <text x="595" y="157" text-anchor="middle" fill="#6b6763" font-size="15">~3,000 tokens</text>
+    <text x="595" y="180" text-anchor="middle" fill="#6b6763" font-size="15">Conditions kept</text>
+    <text x="595" y="203" text-anchor="middle" fill="#6b6763" font-size="15">conditional</text>
+    <rect x="115" y="305" width="150" height="110" rx="8" fill="#cad2b9" stroke="#2c2826" stroke-width="1.8" />
+    <text x="190" y="335" text-anchor="middle" font-size="18" font-weight="650">Request x</text>
+    <text x="190" y="362" text-anchor="middle" fill="#6b6763" font-size="15">Context + tools</text>
+    <rect x="310" y="305" width="165" height="110" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="392.5" y="335" text-anchor="middle" font-size="18" font-weight="650">Condition index</text>
+    <text x="392.5" y="362" text-anchor="middle" fill="#6b6763" font-size="15">16 conditions</text>
+    <text x="392.5" y="385" text-anchor="middle" fill="#6b6763" font-size="15">frozen, source-first</text>
+    <rect x="715" y="180" width="180" height="165" rx="8" fill="#cad2b9" stroke="#2c2826" stroke-width="1.8" />
+    <text x="805" y="210" text-anchor="middle" font-size="18" font-weight="650">Semantic reader</text>
+    <text x="805" y="237" text-anchor="middle" fill="#6b6763" font-size="15">One model call</text>
+    <text x="805" y="260" text-anchor="middle" fill="#6b6763" font-size="15">Reads Pₓ + x</text>
+    <text x="805" y="283" text-anchor="middle" fill="#6b6763" font-size="15">Contract 1: finds</text>
+    <text x="805" y="306" text-anchor="middle" fill="#6b6763" font-size="15">Contract 2: answers list</text>
+    <rect x="940" y="200" width="120" height="125" rx="8" fill="#c6d6e5" stroke="#2c2826" stroke-width="1.8" />
+    <text x="1000" y="230" text-anchor="middle" font-size="18" font-weight="650">Dₓ</text>
+    <text x="1000" y="257" text-anchor="middle" fill="#6b6763" font-size="15">Directives only</text>
+    <text x="1000" y="280" text-anchor="middle" fill="#6b6763" font-size="15">Verdicts stay</text>
+    <text x="1000" y="303" text-anchor="middle" fill="#6b6763" font-size="15">in the artifact</text>
+    <line x1="265" y1="170" x2="310" y2="170" stroke="#2c2826" stroke-width="2" />
+    <path d="M300 163 L310 170 L300 177 Z" fill="#2c2826" />
+    <line x1="475" y1="170" x2="520" y2="170" stroke="#2c2826" stroke-width="2" />
+    <path d="M510 163 L520 170 L510 177 Z" fill="#2c2826" />
+    <line x1="670" y1="170" x2="715" y2="230" stroke="#2c2826" stroke-width="2" />
+    <path d="M705 223 L715 230 L705 237 Z" fill="#2c2826" />
+    <line x1="265" y1="360" x2="288" y2="360" stroke="#2c2826" stroke-width="2" />
+    <line x1="288" y1="360" x2="288" y2="445" stroke="#2c2826" stroke-width="2" />
+    <line x1="288" y1="445" x2="700" y2="445" stroke="#2c2826" stroke-width="2" />
+    <line x1="700" y1="445" x2="780" y2="345" stroke="#2c2826" stroke-width="2" />
+    <path d="M770 338 L780 345 L770 352 Z" fill="#2c2826" />
+    <line x1="475" y1="360" x2="715" y2="320" stroke="#2c2826" stroke-width="2" />
+    <path d="M705 313 L715 320 L705 327 Z" fill="#2c2826" />
+    <line x1="895" y1="262" x2="940" y2="262" stroke="#2c2826" stroke-width="2" />
+    <path d="M930 255 L940 262 L930 269 Z" fill="#2c2826" />
+    <line x1="40" y1="455" x2="1090" y2="455" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="40" y="500" font-size="19" font-weight="650">Answer call</text>
+    <text x="230" y="500" fill="#6b6763" font-size="18">(Pₓ + Dₓ, x) → y. No regex or request state anywhere on the request → directive path.</text>
+    <text x="40" y="545" font-size="19" font-weight="650">Degrades safely</text>
+    <text x="230" y="545" fill="#8f684e" font-size="18">An empty reading renders the bare slice. The reader never manufactures a directive.</text>
+  </g>
+</svg>

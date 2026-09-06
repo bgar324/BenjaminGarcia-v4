@@ -54,6 +54,10 @@ static/policyc-compiler-pipeline.svg
 static/policyc-compiler-pipeline-v09.svg
 static/policyc-study-protocol.svg
 static/policyc-paired-outcomes.svg
+static/policyc-polaris-pipeline.svg
+static/policyc-canary-protocol.svg
+static/policyc-canary-arms.svg
+static/policyc-reader-economics.svg
 manifest.webmanifest
 sitemap.xml
 robots.txt

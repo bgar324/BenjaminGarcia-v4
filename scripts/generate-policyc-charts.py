@@ -66,6 +66,9 @@ BILLED_COST_PER_EXECUTION = {
 V09_EXTRACTION_READS = 60
 V09_EXTRACTION_COST = 0.26783625
 
+# Full policy versus itself on held-out v5: P(second sample passes | first sample passes), 177 ordered pairs, 13 of 60 cases split.
+SELF_CONSISTENCY = 90.4
+
 X_POSITIONS = (245, 450, 655, 860, 1065)
 
 
@@ -189,10 +192,13 @@ def preservation_chart() -> None:
     axes, y_for = chart_axes(65, 100, (100, 95, 90, 85, 80, 75, 70, 65), "Preservation (%)", break_axis=True)
     body.extend(axes)
     target_y = y_for(95)
+    baseline_y = y_for(SELF_CONSISTENCY)
     body.extend(
         [
             line(155, target_y, 1090, target_y, stroke=RUST, stroke_width=2, stroke_dasharray="9 8"),
-            text(1080, target_y - 12, "95% target", text_anchor="end", fill=RUST, font_size=19),
+            text(1080, target_y - 12, "95% preregistered target", text_anchor="end", fill=RUST, font_size=19),
+            line(155, baseline_y, 1090, baseline_y, stroke=INK, stroke_width=2, stroke_dasharray="3 7"),
+            text(1080, baseline_y + 24, f"{SELF_CONSISTENCY:.1f}% full policy vs. itself (held-out v5)", text_anchor="end", fill=INK, font_size=19),
         ]
     )
     points = [(x, y_for(study.preservation)) for x, study in zip(X_POSITIONS, STUDIES, strict=True)]
@@ -213,7 +219,11 @@ def preservation_chart() -> None:
     description = "Conditional critical-obligation preservation by compiler was " + "; ".join(
         f"{study.preservation:.2f} percent for {study.version}, with a trial-level Wilson 95 percent interval from {study.wilson_low:.2f} to {study.wilson_high:.2f} percent"
         for study in STUDIES
-    ) + ". Every result was below the 95 percent target. The intervals are descriptive because samples are clustered by case, and every version used a different held-out set. More preservation is better; less is worse."
+    ) + (
+        f". Every result was below the 95 percent target. A second dashed line at {SELF_CONSISTENCY:.1f} percent marks how often one sample of the full policy "
+        "reproduced another sample's pass on held-out v5, the reference's own self-consistency; it is a baseline, not a ceiling. "
+        "The intervals are descriptive because samples are clustered by case, and every version used a different held-out set. More preservation is better; less is worse."
+    )
     write_svg("policyc-preservation.svg", 1130, 762, "PolicyC conditional critical-obligation preservation across compiler versions", description, body)
 
 
@@ -566,6 +576,292 @@ def compiler_pipeline_v09() -> None:
     )
 
 
+# --- Polaris: the model-reader line (canaries 3-5) ------------------------------------------------
+
+
+@dataclass(frozen=True)
+class Arm:
+    label: str
+    passes: int
+    unsafe: int
+    reask: int
+    kept: str
+
+
+# Canary 3: 8 fresh cases, 2 samples, 16 trials per arm; kept = full-policy passes reproduced, paired by sample, of 6.
+CANARY3_ARMS = (
+    Arm("Compiler 0.10 slice", 2, 0, 8, "1/6"),
+    Arm("Clause slice", 5, 2, 3, "2/6"),
+    Arm("Full policy", 6, 3, 2, "2/6 vs. itself"),
+    Arm("Model reader", 6, 0, 2, "4/6"),
+)
+
+# Canary 5 answer run (no reader): 8 fresh cases, 2 samples, 16 trials per arm; kept of the full policy's 5 passes; in-run full vs. itself 4/5.
+CANARY5_ARMS = (
+    Arm("Compiler 0.10 slice", 4, 0, 8, "4/5"),
+    Arm("Clause slice", 4, 0, 7, "4/5"),
+    Arm("Full policy", 5, 2, 0, "4/5 vs. itself"),
+    Arm("Condition list", 3, 0, 4, "3/5"),
+)
+
+
+@dataclass(frozen=True)
+class Reader:
+    label: str
+    contract: int
+    cost: float
+    latency: float
+    reads: bool
+    note: str
+
+
+# Reader cost and median latency per case, from each run's report.json; "reads" = read the fresh confirmations correctly.
+READERS = (
+    Reader("mini, default", 1, 0.0059, 24.0, True, "canary 3: 3 of 4 confirmations read"),
+    Reader("mini, default", 2, 0.0077, 30.6, True, "canary 5: every confirmed action read"),
+    Reader("mini, minimal", 1, 0.0026, 11.2, False, "canary 4: 2 of 5, contradicts itself"),
+    Reader("mini, minimal", 2, 0.0024, 10.0, False, "canary 5: \u201cyes\u201d on all 8, asks anyway"),
+    Reader("nano, low", 2, 0.0009, 8.9, False, "canary 5: 3 of 8 readings invalid"),
+    Reader("nano, low", 1, 0.00047, 5.3, False, "canary 4: \u201cproceed\u201d on the privileged send"),
+    Reader("nano, minimal", 2, 0.0003, 3.4, False, "canary 5: noise"),
+    Reader("nano, minimal", 1, 0.00014, 1.1, False, "canary 4: empty readings on 6 of 8"),
+)
+
+FULL_ANSWER_COST = 0.0046  # full-policy answer, mean per call, canary 3
+READER_BREAK_EVEN = 0.001  # what the reader may cost for the pipeline to undercut the full policy
+
+
+@dataclass(frozen=True)
+class Canary:
+    label: str
+    cases: int
+    arms: str
+    calls: int
+    cost: float
+    tested: str
+    outcome: str
+
+
+CANARIES = (
+    Canary("1", 4, "full · clause · compiler", 29, 0.0616, "Does the model apply a preserved condition?", "No: re-asked on the confirmed send"),
+    Canary("2", 8, "+ evidence bare · apply", 80, 0.1639, "Does quoted evidence beside the rule help?", "Worse: evidence became a checklist"),
+    Canary("3", 8, "+ model reader", 92, 0.4110, "Does a model reading the clauses read?", "Yes: 3 of 4 fresh confirmations, 0 unsafe"),
+    Canary("4", 8, "3 cheaper readers, no answers", 24, 0.0260, "Can a cheaper reader keep the reading?", "No: all killed at the ledger gate"),
+    Canary("5", 8, "4 readers · condition list", 96, 0.2450, "Does removing the search fix it?", "No: cheap readers still did not read"),
+)
+
+
+def panel_title(body: list[str], y: int, title_value: str, kicker: str) -> None:
+    body.append(text(40, y, title_value, font_size=24, font_weight=650))
+    body.append(text(1090, y, kicker, text_anchor="end", fill=MUTED, font_size=18))
+
+
+def arms_panel(body: list[str], top: int, arms: tuple[Arm, ...], kept_heading: str) -> None:
+    plot_top = top + 24
+    plot_bottom = top + 264
+    left = 150
+    scale = (plot_bottom - plot_top) / 16
+
+    def y_for(value: int) -> float:
+        return plot_bottom - value * scale
+
+    for tick in (0, 4, 8, 12, 16):
+        y = y_for(tick)
+        body.append(line(left, y, 1090, y, stroke=GRID, stroke_width=1.5))
+        body.append(text(left - 16, y + 7, str(tick), text_anchor="end", fill=MUTED, font_size=18))
+    body.append(line(left, plot_top, left, plot_bottom, stroke=INK, stroke_width=2))
+    body.append(line(left, plot_bottom, 1090, plot_bottom, stroke=INK, stroke_width=2))
+    body.append(text(58, (plot_top + plot_bottom) / 2, "Trials of 16", text_anchor="middle", font_size=19, transform=f"rotate(-90 58 {(plot_top + plot_bottom) / 2:g})"))
+    group_width = (1090 - left) / len(arms)
+    bar_width = 44
+    for index, arm in enumerate(arms):
+        center = left + group_width * (index + 0.5)
+        for offset, (value, color) in enumerate(((arm.passes, SAGE), (arm.unsafe, CORAL), (arm.reask, GRAY))):
+            x = center - 1.5 * bar_width - 6 + offset * (bar_width + 6)
+            height = value * scale
+            body.append(f'<rect x="{x:.1f}" y="{plot_bottom - height:.1f}" width="{bar_width}" height="{height:.1f}" fill="{color}" stroke="{INK}" stroke-width="1.5" />')
+            body.append(text(x + bar_width / 2, plot_bottom - height - 8, str(value), text_anchor="middle", font_size=18))
+        body.append(text(center, plot_bottom + 30, arm.label, text_anchor="middle", font_size=19, font_weight=650))
+        body.append(text(center, plot_bottom + 56, f"{kept_heading} {arm.kept}", text_anchor="middle", fill=MUTED, font_size=16))
+
+
+def canary_arms_chart() -> None:
+    body = [
+        text(40, 58, "Which prompt did what the policy says", font_size=29, font_weight=650),
+        text(1090, 58, "Blind-graded canaries, 16 trials per arm", text_anchor="end", fill=MUTED, font_size=22),
+        text(40, 98, "Eight fresh cases each, two samples, isolated author and grader, rubric locked before any output. Direction, not rate.", fill=MUTED, font_size=18),
+    ]
+    legend = ((40, SAGE, "All rubric items pass"), (330, CORAL, "Unsafe action"), (540, GRAY, "Redundant re-ask"))
+    for x, color, label in legend:
+        body.extend(
+            [
+                f'<rect x="{x}" y="128" width="17" height="17" fill="{color}" stroke="{INK}" />',
+                text(x + 28, 143, label, font_size=18, font_weight=600),
+            ]
+        )
+    panel_title(body, 200, "Canary 3: a model reads the clauses and writes directives", "Kept = full-policy passes reproduced, of 6")
+    arms_panel(body, 210, CANARY3_ARMS, "kept")
+    panel_title(body, 580, "Canary 5: conditions listed in the answer prompt, no reader", "Kept of 5 full passes; full vs. itself 4/5")
+    arms_panel(body, 590, CANARY5_ARMS, "kept")
+    body.append(text(40, 948, "Canary 5: three confirmed cases were blanked for every arm by a harness effect (lookup-first tool schemas; calls are recorded, not executed).", fill=MUTED, font_size=16))
+    description = (
+        "Canary 3, sixteen trials per arm: the compiler 0.10 slice passed 2 with 0 unsafe actions and 8 redundant re-asks and kept 1 of 6 full-policy passes; "
+        "the clause slice passed 5 with 2 unsafe and 3 re-asks and kept 2 of 6; the full policy passed 6 with 3 unsafe and 2 re-asks and reproduced 2 of 6 of its own other sample's passes; "
+        "the model reader passed 6 with 0 unsafe and 2 re-asks and kept 4 of 6. "
+        "Canary 5 answer run without a reader: the compiler slice passed 4 with 0 unsafe and 8 re-asks and kept 4 of 5; the clause slice passed 4 with 0 unsafe and 7 re-asks and kept 4 of 5; "
+        "the full policy passed 5 with 2 unsafe and 0 re-asks and reproduced 4 of 5 of its own; the condition list passed 3 with 0 unsafe and 4 re-asks and kept 3 of 5. "
+        "Eight cases and two samples per canary; these are directions, not rates."
+    )
+    write_svg("policyc-canary-arms.svg", 1130, 970, "PolicyC canary 3 and canary 5 arm outcomes", description, body)
+
+
+def reader_economics_chart() -> None:
+    body = [
+        text(40, 58, "What a reader costs, and whether it reads", font_size=29, font_weight=650),
+        text(1090, 58, "Per request, gpt-5-mini / gpt-5-nano readers", text_anchor="end", fill=MUTED, font_size=22),
+        text(40, 98, "Cost per case on a log scale. Only the two default-effort readers read the fresh confirmations; both cost more than the full-policy answer.", fill=MUTED, font_size=18),
+    ]
+    legend = ((40, SAGE, "Read the confirmations"), (330, GRAY, "Did not read"))
+    for x, color, label in legend:
+        body.extend(
+            [
+                f'<rect x="{x}" y="128" width="17" height="17" fill="{color}" stroke="{INK}" />',
+                text(x + 28, 143, label, font_size=18, font_weight=600),
+            ]
+        )
+    import math
+
+    plot_left = 300
+    plot_right = 860
+    log_min = math.log10(0.0001)
+    log_max = math.log10(0.01)
+
+    def x_for(cost: float) -> float:
+        return plot_left + (math.log10(cost) - log_min) / (log_max - log_min) * (plot_right - plot_left)
+
+    top = 190
+    row_height = 54
+    bottom = top + row_height * len(READERS)
+    for tick in (0.0001, 0.001, 0.01):
+        x = x_for(tick)
+        body.append(line(x, top - 10, x, bottom, stroke=GRID, stroke_width=1.5))
+        body.append(text(x, bottom + 30, f"${tick:g}", text_anchor="middle", fill=MUTED, font_size=18))
+    for value, label, color, dy in ((READER_BREAK_EVEN, "break-even reader budget", RUST, -18), (FULL_ANSWER_COST, "full-policy answer $0.0046", INK, -40)):
+        x = x_for(value)
+        body.append(line(x, top - 10, x, bottom, stroke=color, stroke_width=2, stroke_dasharray="9 8"))
+        body.append(text(x, top + dy, label, text_anchor="middle", fill=color, font_size=17, font_weight=600))
+    body.append(line(plot_left, bottom, plot_right, bottom, stroke=INK, stroke_width=2))
+    body.append(text((plot_left + plot_right) / 2, bottom + 62, "Reader cost per case (log scale)", text_anchor="middle", font_size=20))
+    for index, reader in enumerate(READERS):
+        y = top + row_height * index
+        width = x_for(reader.cost) - plot_left
+        color = SAGE if reader.reads else GRAY
+        body.append(f'<rect x="{plot_left}" y="{y + 10}" width="{width:.1f}" height="30" fill="{color}" stroke="{INK}" stroke-width="1.5" />')
+        body.append(text(plot_left - 14, y + 31, f"{reader.label} · contract {reader.contract}", text_anchor="end", font_size=18, font_weight=600))
+        body.append(text(plot_left + width + 12, y + 25, f"${reader.cost:.5f} · {reader.latency:g} s", font_size=17))
+        body.append(text(plot_left + width + 12, y + 44, reader.note, fill=MUTED, font_size=14))
+    body.append(text(40, bottom + 108, "Contract 1: the reader finds the request-dependent conditions in the clause slice.", fill=MUTED, font_size=16))
+    body.append(text(40, bottom + 132, "Contract 2: the conditions are listed from a frozen source-first index and the reader answers each one once.", fill=MUTED, font_size=16))
+    body.append(text(40, bottom + 156, "Break-even: the reader arm\u2019s answer already costs $0.0035 and 7.6 s against the full policy\u2019s $0.0046 and 8.0 s,", fill=MUTED, font_size=16))
+    body.append(text(40, bottom + 180, "leaving about $0.001 and under a second for the read.", fill=MUTED, font_size=16))
+    description = "Reader cost per case and median latency: " + "; ".join(
+        f"{reader.label} under contract {reader.contract} cost {reader.cost:.5f} dollars and took {reader.latency:g} seconds and {'read' if reader.reads else 'did not read'} the fresh confirmations ({reader.note})"
+        for reader in READERS
+    ) + (
+        f". The break-even reader budget is about {READER_BREAK_EVEN} dollars; the full-policy answer costs about {FULL_ANSWER_COST} dollars. "
+        "Only the two default-effort gpt-5-mini readers read, and both cost more than the full-policy answer."
+    )
+    write_svg("policyc-reader-economics.svg", 1130, 830, "PolicyC reader cost per case against whether the reader read the request", description, body)
+
+
+def canary_protocol_chart() -> None:
+    body = [
+        text(40, 58, "Five canaries", font_size=29, font_weight=650),
+        text(1090, 58, "Small, isolated, blind-graded, kill conditions fixed first", text_anchor="end", fill=MUTED, font_size=22),
+        line(40, 112, 1090, 112, stroke=INK, stroke_width=1.5),
+        text(55, 148, "Canary", fill=MUTED, font_size=16, font_weight=600),
+        text(140, 148, "Cases", fill=MUTED, font_size=16, font_weight=600),
+        text(215, 148, "Arms", fill=MUTED, font_size=16, font_weight=600),
+        text(505, 148, "Question", fill=MUTED, font_size=16, font_weight=600),
+        text(890, 148, "Calls", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
+        text(985, 148, "Cost", text_anchor="end", fill=MUTED, font_size=16, font_weight=600),
+        line(40, 170, 1090, 170, stroke=GRID, stroke_width=1.5),
+    ]
+    y = 200
+    for canary in CANARIES:
+        body.extend(
+            [
+                text(55, y + 7, canary.label, font_size=20, font_weight=650),
+                text(140, y + 7, str(canary.cases), font_size=19),
+                text(215, y + 7, canary.arms, font_size=17),
+                text(505, y + 7, canary.tested, font_size=17),
+                text(890, y + 7, str(canary.calls), text_anchor="end", font_size=18),
+                text(985, y + 7, f"${canary.cost:.4f}", text_anchor="end", font_size=18),
+                text(505, y + 33, canary.outcome, fill=RUST, font_size=16),
+                line(40, y + 52, 1090, y + 52, stroke=GRID, stroke_width=1.5),
+            ]
+        )
+        y += 82
+    body.extend(
+        [
+            f'<rect x="40" y="{y + 8}" width="1050" height="118" fill="#f4f3ef" stroke="{GRID}" stroke-width="1.5" />',
+            text(62, y + 36, "Answer model", font_size=17, font_weight=600),
+            text(300, y + 36, "gpt-5-mini-2025-08-07 in every arm; readers were gpt-5-mini or gpt-5-nano at a stated reasoning effort", fill=MUTED, font_size=17),
+            text(62, y + 66, "Evidence class", font_size=17, font_weight=600),
+            text(300, y + 66, "Development canaries: direction, not rate. Every case set is spent after one use.", fill=MUTED, font_size=17),
+            text(62, y + 96, "Total", font_size=17, font_weight=600),
+            text(300, y + 96, f"{sum(c.calls for c in CANARIES)} paid calls \u00b7 ${sum(c.cost for c in CANARIES):.3f}, plus the five held-out studies\u2019 $4.9013", fill=MUTED, font_size=17),
+        ]
+    )
+    description = "; ".join(
+        f"Canary {c.label} used {c.cases} cases and the arms {c.arms} over {c.calls} paid calls costing {c.cost:.4f} dollars to ask: {c.tested} Outcome: {c.outcome}"
+        for c in CANARIES
+    ) + ". Every canary used gpt-5-mini as the answer model, an isolated author, a rubric locked before any output, and, from canary 2 on, a separate isolated blind grader."
+    write_svg("policyc-canary-protocol.svg", 1130, 760, "PolicyC canary protocol and outcomes", description, body)
+
+
+def polaris_pipeline() -> None:
+    body = [
+        text(40, 55, "How Polaris builds P\u2093 + D\u2093", font_size=29, font_weight=650),
+        text(1090, 55, "Verbatim slice + a model that reads it", text_anchor="end", fill=MUTED, font_size=22),
+        text(40, 172, "Policy", fill=MUTED, font_size=17, font_weight=600),
+        text(40, 362, "Request", fill=MUTED, font_size=17, font_weight=600),
+    ]
+    box(body, 115, 115, 150, 110, SAGE, "Source P", ("61 clauses, verbatim", "hash-checked"))
+    box(body, 310, 102, 165, 135, BLUE, "Structural slice", ("Dedupe boilerplate", "Prune only on a", "declared fact"))
+    box(body, 520, 100, 150, 140, BLUE, "P\u2093", ("~3,000 tokens", "Conditions kept", "conditional"))
+    box(body, 115, 305, 150, 110, SAGE, "Request x", ("Context + tools",))
+    box(body, 310, 305, 165, 110, BLUE, "Condition index", ("16 conditions", "frozen, source-first"))
+    box(body, 715, 180, 180, 165, SAGE, "Semantic reader", ("One model call", "Reads P\u2093 + x", "Contract 1: finds", "Contract 2: answers list"))
+    box(body, 940, 200, 120, 125, BLUE, "D\u2093", ("Directives only", "Verdicts stay", "in the artifact"))
+    arrow(body, 265, 170, 310, 170)
+    arrow(body, 475, 170, 520, 170)
+    arrow(body, 670, 170, 715, 230)
+    body.append(line(265, 360, 288, 360, stroke=INK, stroke_width=2))
+    body.append(line(288, 360, 288, 445, stroke=INK, stroke_width=2))
+    body.append(line(288, 445, 700, 445, stroke=INK, stroke_width=2))
+    arrow(body, 700, 445, 780, 345)
+    arrow(body, 475, 360, 715, 320)
+    arrow(body, 895, 262, 940, 262)
+    body.extend(
+        [
+            line(40, 455, 1090, 455, stroke=GRID, stroke_width=1.5),
+            text(40, 500, "Answer call", font_size=19, font_weight=650),
+            text(230, 500, "(P\u2093 + D\u2093, x) \u2192 y. No regex or request state anywhere on the request \u2192 directive path.", fill=MUTED, font_size=18),
+            text(40, 545, "Degrades safely", font_size=19, font_weight=650),
+            text(230, 545, "An empty reading renders the bare slice. The reader never manufactures a directive.", fill=RUST, font_size=18),
+        ]
+    )
+    write_svg(
+        "policyc-polaris-pipeline.svg",
+        1130,
+        580,
+        "Polaris model-reader pipeline",
+        "Polaris keeps the policy's original clauses: a hand-audited map of 61 clauses is deduplicated and pruned only on a structural fact the case declares, giving a verbatim slice of about three thousand tokens with every condition still conditional. A separate model call reads that slice and the request and writes request-specific directives; under contract 1 it finds the conditions itself, under contract 2 it answers each condition listed from a frozen source-first index exactly once. Only the directives are appended to the slice for the answer call. No regular expression or request state sits on the path from request to directive, and an empty reading renders the bare slice.",
+        body,
+    )
+
+
 def validate_data() -> None:
     for study in STUDIES:
         determinate_pairs = study.both_pass + study.full_only + study.compiler_only + study.both_fail
@@ -580,6 +876,15 @@ def validate_data() -> None:
     assert set(BILLED_COST_PER_EXECUTION) == {study.version for study in STUDIES}
     assert V09_EXTRACTION_READS == 60
     assert round(V09_EXTRACTION_COST, 4) == 0.2678
+    for arms in (CANARY3_ARMS, CANARY5_ARMS):
+        assert len(arms) == 4
+        for arm in arms:
+            assert 0 <= arm.passes <= 16 and 0 <= arm.unsafe <= 16 and 0 <= arm.reask <= 16
+    assert sum(1 for reader in READERS if reader.reads) == 2
+    assert all(reader.cost > FULL_ANSWER_COST for reader in READERS if reader.reads)
+    assert all(reader.cost < FULL_ANSWER_COST for reader in READERS if not reader.reads)
+    assert round(sum(canary.cost for canary in CANARIES), 4) == 0.9075
+    assert sum(canary.calls for canary in CANARIES) == 321
 
 
 def main() -> None:
@@ -594,6 +899,10 @@ def main() -> None:
     paired_outcomes_chart()
     historical_pipeline()
     compiler_pipeline_v09()
+    polaris_pipeline()
+    canary_arms_chart()
+    reader_economics_chart()
+    canary_protocol_chart()
 
 
 if __name__ == "__main__":

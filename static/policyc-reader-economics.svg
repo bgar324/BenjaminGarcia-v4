@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="830" viewBox="0 0 1130 830" role="img" aria-labelledby="title description">
+  <title id="title">PolicyC reader cost per case against whether the reader read the request</title>
+  <desc id="description">Reader cost per case and median latency: mini, default under contract 1 cost 0.00590 dollars and took 24 seconds and read the fresh confirmations (canary 3: 3 of 4 confirmations read); mini, default under contract 2 cost 0.00770 dollars and took 30.6 seconds and read the fresh confirmations (canary 5: every confirmed action read); mini, minimal under contract 1 cost 0.00260 dollars and took 11.2 seconds and did not read the fresh confirmations (canary 4: 2 of 5, contradicts itself); mini, minimal under contract 2 cost 0.00240 dollars and took 10 seconds and did not read the fresh confirmations (canary 5: “yes” on all 8, asks anyway); nano, low under contract 2 cost 0.00090 dollars and took 8.9 seconds and did not read the fresh confirmations (canary 5: 3 of 8 readings invalid); nano, low under contract 1 cost 0.00047 dollars and took 5.3 seconds and did not read the fresh confirmations (canary 4: “proceed” on the privileged send); nano, minimal under contract 2 cost 0.00030 dollars and took 3.4 seconds and did not read the fresh confirmations (canary 5: noise); nano, minimal under contract 1 cost 0.00014 dollars and took 1.1 seconds and did not read the fresh confirmations (canary 4: empty readings on 6 of 8). The break-even reader budget is about 0.001 dollars; the full-policy answer costs about 0.0046 dollars. Only the two default-effort gpt-5-mini readers read, and both cost more than the full-policy answer.</desc>
+
+  <rect width="1130" height="830" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
+    <text x="40" y="58" font-size="29" font-weight="650">What a reader costs, and whether it reads</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Per request, gpt-5-mini / gpt-5-nano readers</text>
+    <text x="40" y="98" fill="#6b6763" font-size="18">Cost per case on a log scale. Only the two default-effort readers read the fresh confirmations; both cost more than the full-policy answer.</text>
+    <rect x="40" y="128" width="17" height="17" fill="#cad2b9" stroke="#2c2826" />
+    <text x="68" y="143" font-size="18" font-weight="600">Read the confirmations</text>
+    <rect x="330" y="128" width="17" height="17" fill="#aaa6a0" stroke="#2c2826" />
+    <text x="358" y="143" font-size="18" font-weight="600">Did not read</text>
+    <line x1="300" y1="180" x2="300" y2="622" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="300" y="652" text-anchor="middle" fill="#6b6763" font-size="18">$0.0001</text>
+    <line x1="580" y1="180" x2="580" y2="622" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="580" y="652" text-anchor="middle" fill="#6b6763" font-size="18">$0.001</text>
+    <line x1="860" y1="180" x2="860" y2="622" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="860" y="652" text-anchor="middle" fill="#6b6763" font-size="18">$0.01</text>
+    <line x1="580" y1="180" x2="580" y2="622" stroke="#8f684e" stroke-width="2" stroke-dasharray="9 8" />
+    <text x="580" y="172" text-anchor="middle" fill="#8f684e" font-size="17" font-weight="600">break-even reader budget</text>
+    <line x1="765.572" y1="180" x2="765.572" y2="622" stroke="#2c2826" stroke-width="2" stroke-dasharray="9 8" />
+    <text x="765.572" y="150" text-anchor="middle" fill="#2c2826" font-size="17" font-weight="600">full-policy answer $0.0046</text>
+    <line x1="300" y1="622" x2="860" y2="622" stroke="#2c2826" stroke-width="2" />
+    <text x="580" y="684" text-anchor="middle" font-size="20">Reader cost per case (log scale)</text>
+    <rect x="300" y="200" width="495.8" height="30" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="221" text-anchor="end" font-size="18" font-weight="600">mini, default · contract 1</text>
+    <text x="807.839" y="215" font-size="17">$0.00590 · 24 s</text>
+    <text x="807.839" y="234" fill="#6b6763" font-size="14">canary 3: 3 of 4 confirmations read</text>
+    <rect x="300" y="254" width="528.2" height="30" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="275" text-anchor="end" font-size="18" font-weight="600">mini, default · contract 2</text>
+    <text x="840.217" y="269" font-size="17">$0.00770 · 30.6 s</text>
+    <text x="840.217" y="288" fill="#6b6763" font-size="14">canary 5: every confirmed action read</text>
+    <rect x="300" y="308" width="396.2" height="30" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="329" text-anchor="end" font-size="18" font-weight="600">mini, minimal · contract 1</text>
+    <text x="708.193" y="323" font-size="17">$0.00260 · 11.2 s</text>
+    <text x="708.193" y="342" fill="#6b6763" font-size="14">canary 4: 2 of 5, contradicts itself</text>
+    <rect x="300" y="362" width="386.5" height="30" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="383" text-anchor="end" font-size="18" font-weight="600">mini, minimal · contract 2</text>
+    <text x="698.459" y="377" font-size="17">$0.00240 · 10 s</text>
+    <text x="698.459" y="396" fill="#6b6763" font-size="14">canary 5: “yes” on all 8, asks anyway</text>
+    <rect x="300" y="416" width="267.2" height="30" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="437" text-anchor="end" font-size="18" font-weight="600">nano, low · contract 2</text>
+    <text x="579.188" y="431" font-size="17">$0.00090 · 8.9 s</text>
+    <text x="579.188" y="450" fill="#6b6763" font-size="14">canary 5: 3 of 8 readings invalid</text>
+    <rect x="300" y="470" width="188.2" height="30" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="491" text-anchor="end" font-size="18" font-weight="600">nano, low · contract 1</text>
+    <text x="500.187" y="485" font-size="17">$0.00047 · 5.3 s</text>
+    <text x="500.187" y="504" fill="#6b6763" font-size="14">canary 4: “proceed” on the privileged send</text>
+    <rect x="300" y="524" width="133.6" height="30" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="545" text-anchor="end" font-size="18" font-weight="600">nano, minimal · contract 2</text>
+    <text x="445.594" y="539" font-size="17">$0.00030 · 3.4 s</text>
+    <text x="445.594" y="558" fill="#6b6763" font-size="14">canary 5: noise</text>
+    <rect x="300" y="578" width="40.9" height="30" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="286" y="599" text-anchor="end" font-size="18" font-weight="600">nano, minimal · contract 1</text>
+    <text x="352.916" y="593" font-size="17">$0.00014 · 1.1 s</text>
+    <text x="352.916" y="612" fill="#6b6763" font-size="14">canary 4: empty readings on 6 of 8</text>
+    <text x="40" y="730" fill="#6b6763" font-size="16">Contract 1: the reader finds the request-dependent conditions in the clause slice.</text>
+    <text x="40" y="754" fill="#6b6763" font-size="16">Contract 2: the conditions are listed from a frozen source-first index and the reader answers each one once.</text>
+    <text x="40" y="778" fill="#6b6763" font-size="16">Break-even: the reader arm’s answer already costs $0.0035 and 7.6 s against the full policy’s $0.0046 and 8.0 s,</text>
+    <text x="40" y="802" fill="#6b6763" font-size="16">leaving about $0.001 and under a second for the read.</text>
+  </g>
+</svg>

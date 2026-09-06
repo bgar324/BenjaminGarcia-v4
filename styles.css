@@ -403,7 +403,8 @@ a {
 #policyc-chart-billed:checked ~ .article-chart-tabs label[for="policyc-chart-billed"],
 #policyc-chart-latency:checked ~ .article-chart-tabs label[for="policyc-chart-latency"],
 #policyc-architecture-legacy:checked ~ .article-chart-tabs label[for="policyc-architecture-legacy"],
-#policyc-architecture-v09:checked ~ .article-chart-tabs label[for="policyc-architecture-v09"] {
+#policyc-architecture-v09:checked ~ .article-chart-tabs label[for="policyc-architecture-v09"],
+#policyc-architecture-polaris:checked ~ .article-chart-tabs label[for="policyc-architecture-polaris"] {
   color: var(--foreground);
 }
 
@@ -413,7 +414,8 @@ a {
 #policyc-chart-billed:focus-visible ~ .article-chart-tabs label[for="policyc-chart-billed"],
 #policyc-chart-latency:focus-visible ~ .article-chart-tabs label[for="policyc-chart-latency"],
 #policyc-architecture-legacy:focus-visible ~ .article-chart-tabs label[for="policyc-architecture-legacy"],
-#policyc-architecture-v09:focus-visible ~ .article-chart-tabs label[for="policyc-architecture-v09"] {
+#policyc-architecture-v09:focus-visible ~ .article-chart-tabs label[for="policyc-architecture-v09"],
+#policyc-architecture-polaris:focus-visible ~ .article-chart-tabs label[for="policyc-architecture-polaris"] {
   outline: 2px solid var(--foreground);
   outline-offset: -2px;
 }
@@ -429,7 +431,8 @@ a {
 #policyc-chart-billed:checked ~ .article-chart-panels [data-chart="billed"],
 #policyc-chart-latency:checked ~ .article-chart-panels [data-chart="latency"],
 #policyc-architecture-legacy:checked ~ .article-chart-panels [data-chart="architecture-legacy"],
-#policyc-architecture-v09:checked ~ .article-chart-panels [data-chart="architecture-v09"] {
+#policyc-architecture-v09:checked ~ .article-chart-panels [data-chart="architecture-v09"],
+#policyc-architecture-polaris:checked ~ .article-chart-panels [data-chart="architecture-polaris"] {
   display: block;
 }
 

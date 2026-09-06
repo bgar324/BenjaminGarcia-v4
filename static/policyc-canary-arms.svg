@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1130" height="970" viewBox="0 0 1130 970" role="img" aria-labelledby="title description">
+  <title id="title">PolicyC canary 3 and canary 5 arm outcomes</title>
+  <desc id="description">Canary 3, sixteen trials per arm: the compiler 0.10 slice passed 2 with 0 unsafe actions and 8 redundant re-asks and kept 1 of 6 full-policy passes; the clause slice passed 5 with 2 unsafe and 3 re-asks and kept 2 of 6; the full policy passed 6 with 3 unsafe and 2 re-asks and reproduced 2 of 6 of its own other sample&#x27;s passes; the model reader passed 6 with 0 unsafe and 2 re-asks and kept 4 of 6. Canary 5 answer run without a reader: the compiler slice passed 4 with 0 unsafe and 8 re-asks and kept 4 of 5; the clause slice passed 4 with 0 unsafe and 7 re-asks and kept 4 of 5; the full policy passed 5 with 2 unsafe and 0 re-asks and reproduced 4 of 5 of its own; the condition list passed 3 with 0 unsafe and 4 re-asks and kept 3 of 5. Eight cases and two samples per canary; these are directions, not rates.</desc>
+
+  <rect width="1130" height="970" fill="#fcfcfb" />
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
+    <text x="40" y="58" font-size="29" font-weight="650">Which prompt did what the policy says</text>
+    <text x="1090" y="58" text-anchor="end" fill="#6b6763" font-size="22">Blind-graded canaries, 16 trials per arm</text>
+    <text x="40" y="98" fill="#6b6763" font-size="18">Eight fresh cases each, two samples, isolated author and grader, rubric locked before any output. Direction, not rate.</text>
+    <rect x="40" y="128" width="17" height="17" fill="#cad2b9" stroke="#2c2826" />
+    <text x="68" y="143" font-size="18" font-weight="600">All rubric items pass</text>
+    <rect x="330" y="128" width="17" height="17" fill="#d7a18d" stroke="#2c2826" />
+    <text x="358" y="143" font-size="18" font-weight="600">Unsafe action</text>
+    <rect x="540" y="128" width="17" height="17" fill="#aaa6a0" stroke="#2c2826" />
+    <text x="568" y="143" font-size="18" font-weight="600">Redundant re-ask</text>
+    <text x="40" y="200" font-size="24" font-weight="650">Canary 3: a model reads the clauses and writes directives</text>
+    <text x="1090" y="200" text-anchor="end" fill="#6b6763" font-size="18">Kept = full-policy passes reproduced, of 6</text>
+    <line x1="150" y1="474" x2="1090" y2="474" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="481" text-anchor="end" fill="#6b6763" font-size="18">0</text>
+    <line x1="150" y1="414" x2="1090" y2="414" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="421" text-anchor="end" fill="#6b6763" font-size="18">4</text>
+    <line x1="150" y1="354" x2="1090" y2="354" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="361" text-anchor="end" fill="#6b6763" font-size="18">8</text>
+    <line x1="150" y1="294" x2="1090" y2="294" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="301" text-anchor="end" fill="#6b6763" font-size="18">12</text>
+    <line x1="150" y1="234" x2="1090" y2="234" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="241" text-anchor="end" fill="#6b6763" font-size="18">16</text>
+    <line x1="150" y1="234" x2="150" y2="474" stroke="#2c2826" stroke-width="2" />
+    <line x1="150" y1="474" x2="1090" y2="474" stroke="#2c2826" stroke-width="2" />
+    <text x="58" y="354" text-anchor="middle" font-size="19" transform="rotate(-90 58 354)">Trials of 16</text>
+    <rect x="195.5" y="444.0" width="44" height="30.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="217.5" y="436" text-anchor="middle" font-size="18">2</text>
+    <rect x="245.5" y="474.0" width="44" height="0.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="267.5" y="466" text-anchor="middle" font-size="18">0</text>
+    <rect x="295.5" y="354.0" width="44" height="120.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="317.5" y="346" text-anchor="middle" font-size="18">8</text>
+    <text x="267.5" y="504" text-anchor="middle" font-size="19" font-weight="650">Compiler 0.10 slice</text>
+    <text x="267.5" y="530" text-anchor="middle" fill="#6b6763" font-size="16">kept 1/6</text>
+    <rect x="430.5" y="399.0" width="44" height="75.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="452.5" y="391" text-anchor="middle" font-size="18">5</text>
+    <rect x="480.5" y="444.0" width="44" height="30.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="502.5" y="436" text-anchor="middle" font-size="18">2</text>
+    <rect x="530.5" y="429.0" width="44" height="45.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="552.5" y="421" text-anchor="middle" font-size="18">3</text>
+    <text x="502.5" y="504" text-anchor="middle" font-size="19" font-weight="650">Clause slice</text>
+    <text x="502.5" y="530" text-anchor="middle" fill="#6b6763" font-size="16">kept 2/6</text>
+    <rect x="665.5" y="384.0" width="44" height="90.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="687.5" y="376" text-anchor="middle" font-size="18">6</text>
+    <rect x="715.5" y="429.0" width="44" height="45.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="737.5" y="421" text-anchor="middle" font-size="18">3</text>
+    <rect x="765.5" y="444.0" width="44" height="30.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="787.5" y="436" text-anchor="middle" font-size="18">2</text>
+    <text x="737.5" y="504" text-anchor="middle" font-size="19" font-weight="650">Full policy</text>
+    <text x="737.5" y="530" text-anchor="middle" fill="#6b6763" font-size="16">kept 2/6 vs. itself</text>
+    <rect x="900.5" y="384.0" width="44" height="90.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="922.5" y="376" text-anchor="middle" font-size="18">6</text>
+    <rect x="950.5" y="474.0" width="44" height="0.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="972.5" y="466" text-anchor="middle" font-size="18">0</text>
+    <rect x="1000.5" y="444.0" width="44" height="30.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="1022.5" y="436" text-anchor="middle" font-size="18">2</text>
+    <text x="972.5" y="504" text-anchor="middle" font-size="19" font-weight="650">Model reader</text>
+    <text x="972.5" y="530" text-anchor="middle" fill="#6b6763" font-size="16">kept 4/6</text>
+    <text x="40" y="580" font-size="24" font-weight="650">Canary 5: conditions listed in the answer prompt, no reader</text>
+    <text x="1090" y="580" text-anchor="end" fill="#6b6763" font-size="18">Kept of 5 full passes; full vs. itself 4/5</text>
+    <line x1="150" y1="854" x2="1090" y2="854" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="861" text-anchor="end" fill="#6b6763" font-size="18">0</text>
+    <line x1="150" y1="794" x2="1090" y2="794" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="801" text-anchor="end" fill="#6b6763" font-size="18">4</text>
+    <line x1="150" y1="734" x2="1090" y2="734" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="741" text-anchor="end" fill="#6b6763" font-size="18">8</text>
+    <line x1="150" y1="674" x2="1090" y2="674" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="681" text-anchor="end" fill="#6b6763" font-size="18">12</text>
+    <line x1="150" y1="614" x2="1090" y2="614" stroke="#d4d1cb" stroke-width="1.5" />
+    <text x="134" y="621" text-anchor="end" fill="#6b6763" font-size="18">16</text>
+    <line x1="150" y1="614" x2="150" y2="854" stroke="#2c2826" stroke-width="2" />
+    <line x1="150" y1="854" x2="1090" y2="854" stroke="#2c2826" stroke-width="2" />
+    <text x="58" y="734" text-anchor="middle" font-size="19" transform="rotate(-90 58 734)">Trials of 16</text>
+    <rect x="195.5" y="794.0" width="44" height="60.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="217.5" y="786" text-anchor="middle" font-size="18">4</text>
+    <rect x="245.5" y="854.0" width="44" height="0.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="267.5" y="846" text-anchor="middle" font-size="18">0</text>
+    <rect x="295.5" y="734.0" width="44" height="120.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="317.5" y="726" text-anchor="middle" font-size="18">8</text>
+    <text x="267.5" y="884" text-anchor="middle" font-size="19" font-weight="650">Compiler 0.10 slice</text>
+    <text x="267.5" y="910" text-anchor="middle" fill="#6b6763" font-size="16">kept 4/5</text>
+    <rect x="430.5" y="794.0" width="44" height="60.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="452.5" y="786" text-anchor="middle" font-size="18">4</text>
+    <rect x="480.5" y="854.0" width="44" height="0.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="502.5" y="846" text-anchor="middle" font-size="18">0</text>
+    <rect x="530.5" y="749.0" width="44" height="105.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="552.5" y="741" text-anchor="middle" font-size="18">7</text>
+    <text x="502.5" y="884" text-anchor="middle" font-size="19" font-weight="650">Clause slice</text>
+    <text x="502.5" y="910" text-anchor="middle" fill="#6b6763" font-size="16">kept 4/5</text>
+    <rect x="665.5" y="779.0" width="44" height="75.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="687.5" y="771" text-anchor="middle" font-size="18">5</text>
+    <rect x="715.5" y="824.0" width="44" height="30.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="737.5" y="816" text-anchor="middle" font-size="18">2</text>
+    <rect x="765.5" y="854.0" width="44" height="0.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="787.5" y="846" text-anchor="middle" font-size="18">0</text>
+    <text x="737.5" y="884" text-anchor="middle" font-size="19" font-weight="650">Full policy</text>
+    <text x="737.5" y="910" text-anchor="middle" fill="#6b6763" font-size="16">kept 4/5 vs. itself</text>
+    <rect x="900.5" y="809.0" width="44" height="45.0" fill="#cad2b9" stroke="#2c2826" stroke-width="1.5" />
+    <text x="922.5" y="801" text-anchor="middle" font-size="18">3</text>
+    <rect x="950.5" y="854.0" width="44" height="0.0" fill="#d7a18d" stroke="#2c2826" stroke-width="1.5" />
+    <text x="972.5" y="846" text-anchor="middle" font-size="18">0</text>
+    <rect x="1000.5" y="794.0" width="44" height="60.0" fill="#aaa6a0" stroke="#2c2826" stroke-width="1.5" />
+    <text x="1022.5" y="786" text-anchor="middle" font-size="18">4</text>
+    <text x="972.5" y="884" text-anchor="middle" font-size="19" font-weight="650">Condition list</text>
+    <text x="972.5" y="910" text-anchor="middle" fill="#6b6763" font-size="16">kept 3/5</text>
+    <text x="40" y="948" fill="#6b6763" font-size="16">Canary 5: three confirmed cases were blanked for every arm by a harness effect (lookup-first tool schemas; calls are recorded, not executed).</text>
+  </g>
+</svg>

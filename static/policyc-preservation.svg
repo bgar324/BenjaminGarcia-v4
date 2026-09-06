@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1130" height="762" viewBox="0 0 1130 762" role="img" aria-labelledby="title description">
   <title id="title">PolicyC conditional critical-obligation preservation across compiler versions</title>
-  <desc id="description">Conditional critical-obligation preservation by compiler was 85.98 percent for 0.5, with a trial-level Wilson 95 percent interval from 78.15 to 91.32 percent; 86.49 percent for 0.6, with a trial-level Wilson 95 percent interval from 76.88 to 92.49 percent; 79.75 percent for 0.7, with a trial-level Wilson 95 percent interval from 72.93 to 85.21 percent; 75.76 percent for 0.8, with a trial-level Wilson 95 percent interval from 67.79 to 82.27 percent; 75.91 percent for 0.9, with a trial-level Wilson 95 percent interval from 68.11 to 82.30 percent. Every result was below the 95 percent target. The intervals are descriptive because samples are clustered by case, and every version used a different held-out set. More preservation is better; less is worse.</desc>
+  <desc id="description">Conditional critical-obligation preservation by compiler was 85.98 percent for 0.5, with a trial-level Wilson 95 percent interval from 78.15 to 91.32 percent; 86.49 percent for 0.6, with a trial-level Wilson 95 percent interval from 76.88 to 92.49 percent; 79.75 percent for 0.7, with a trial-level Wilson 95 percent interval from 72.93 to 85.21 percent; 75.76 percent for 0.8, with a trial-level Wilson 95 percent interval from 67.79 to 82.27 percent; 75.91 percent for 0.9, with a trial-level Wilson 95 percent interval from 68.11 to 82.30 percent. Every result was below the 95 percent target. A second dashed line at 90.4 percent marks how often one sample of the full policy reproduced another sample&#x27;s pass on held-out v5, the reference&#x27;s own self-consistency; it is a baseline, not a ceiling. The intervals are descriptive because samples are clustered by case, and every version used a different held-out set. More preservation is better; less is worse.</desc>
 
   <rect width="1130" height="762" fill="#fcfcfb" />
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#2c2826">
@@ -32,7 +32,9 @@
     <text x="52" y="390" text-anchor="middle" font-size="24" transform="rotate(-90 52 390)">Preservation (%)</text>
     <path d="M146 620 l9 -8 l-9 -8 l9 -8" fill="none" stroke="#2c2826" stroke-width="2" />
     <line x1="155" y1="227.143" x2="1090" y2="227.143" stroke="#8f684e" stroke-width="2" stroke-dasharray="9 8" />
-    <text x="1080" y="215.143" text-anchor="end" fill="#8f684e" font-size="19">95% target</text>
+    <text x="1080" y="215.143" text-anchor="end" fill="#8f684e" font-size="19">95% preregistered target</text>
+    <line x1="155" y1="284.314" x2="1090" y2="284.314" stroke="#2c2826" stroke-width="2" stroke-dasharray="3 7" />
+    <text x="1080" y="308.314" text-anchor="end" fill="#2c2826" font-size="19">90.4% full policy vs. itself (held-out v5)</text>
     <polyline points="245,339.2 450,332.9 655,416.7 860,466.3 1065,464.4" fill="none" stroke="#2c2826" stroke-width="3" />
     <line x1="245" y1="272.88" x2="245" y2="436.564" stroke="#6b6763" stroke-width="2" />
     <line x1="234" y1="272.88" x2="256" y2="272.88" stroke="#6b6763" stroke-width="2" />

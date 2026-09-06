@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Building PolicyC, a policy compiler | Benjamin Garcia</title>
-    <meta name="description" content="How PolicyC became a typed compiler in 0.9, what five frozen studies found, and why smaller prompts still lost critical behavior." />
+    <meta name="description" content="Six compiler versions, five frozen studies, and five canaries: why smaller policy prompts lost critical behavior, how a model reading the policy's own clauses recovered it, and what that reading costs." />
     <meta name="color-scheme" content="light" />
     <meta name="referrer" content="origin-when-cross-origin" />
     <meta name="author" content="Benjamin Garcia" />
@@ -13,14 +13,14 @@
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg?v=3" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png?v=2" />
     <link rel="manifest" href="/manifest.webmanifest?v=3" />
-    <link rel="stylesheet" href="/styles.css?v=28" />
+    <link rel="stylesheet" href="/styles.css?v=29" />
     <script src="/static/scroll-restoration.js?v=3" defer></script>
     <meta name="theme-color" content="#fcfcfb" />
     <meta property="og:type" content="article" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://www.bentgarcia.com/blog/policyc" />
     <meta property="og:title" content="Building PolicyC, a policy compiler" />
-    <meta property="og:description" content="How PolicyC became a typed compiler in 0.9, what five frozen studies found, and why smaller prompts still lost critical behavior." />
+    <meta property="og:description" content="Six compiler versions, five frozen studies, and five canaries: why smaller policy prompts lost critical behavior, how a model reading the policy's own clauses recovered it, and what that reading costs." />
     <meta property="og:site_name" content="Benjamin Garcia" />
     <meta property="og:image" content="https://www.bentgarcia.com/static/og.png?v=4" />
     <meta property="og:image:width" content="1200" />
@@ -30,7 +30,7 @@
     <meta property="article:author" content="Benjamin Garcia" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Building PolicyC, a policy compiler" />
-    <meta name="twitter:description" content="How PolicyC became a typed compiler in 0.9, what five frozen studies found, and why smaller prompts still lost critical behavior." />
+    <meta name="twitter:description" content="Six compiler versions, five frozen studies, and five canaries: why smaller policy prompts lost critical behavior, how a model reading the policy's own clauses recovered it, and what that reading costs." />
     <meta name="twitter:image" content="https://www.bentgarcia.com/static/og.png?v=4" />
     <meta name="format-detection" content="address=no,email=no,telephone=no" />
     <script type="application/ld+json">
@@ -38,14 +38,14 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "Building PolicyC, a policy compiler",
-        "description": "How PolicyC became a typed compiler in 0.9, what five frozen studies found, and why smaller prompts still lost critical behavior.",
+        "description": "Six compiler versions, five frozen studies, and five canaries: why smaller policy prompts lost critical behavior, how a model reading the policy's own clauses recovered it, and what that reading costs.",
         "url": "https://www.bentgarcia.com/blog/policyc",
         "mainEntityOfPage": "https://www.bentgarcia.com/blog/policyc",
         "datePublished": "2026-09-03",
-        "dateModified": "2026-09-04",
+        "dateModified": "2026-09-06",
         "inLanguage": "en-US",
         "image": "https://www.bentgarcia.com/static/og.png?v=4",
-        "keywords": ["PolicyC", "policy compilation", "LLM", "prompt engineering", "TypeScript", "Python", "OpenAI", "evaluation"],
+        "keywords": ["PolicyC", "Polaris", "policy compilation", "LLM", "prompt engineering", "TypeScript", "Python", "OpenAI", "evaluation"],
         "author": {
           "@type": "Person",
           "name": "Benjamin Garcia",
@@ -99,10 +99,10 @@
             </figure>
 
             <figure class="article-chart-panel" data-chart="preservation">
-              <a href="/static/policyc-preservation.svg?v=6" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC preservation chart at full size">
-                <img src="/static/policyc-preservation.svg?v=6" width="1130" height="762" decoding="async" alt="Conditional critical-obligation preservation by compiler: 85.98 percent for 0.5, 86.49 percent for 0.6, 79.75 percent for 0.7, 75.76 percent for 0.8, and 75.91 percent for 0.9. Trial-level Wilson intervals for every version remain below the 95 percent target. More preservation is better; less is worse." />
+              <a href="/static/policyc-preservation.svg?v=7" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC preservation chart at full size">
+                <img src="/static/policyc-preservation.svg?v=7" width="1130" height="762" decoding="async" alt="Conditional critical-obligation preservation by compiler: 85.98 percent for 0.5, 86.49 percent for 0.6, 79.75 percent for 0.7, 75.76 percent for 0.8, and 75.91 percent for 0.9. Trial-level Wilson intervals for every version remain below the 95 percent target. A second dashed line at 90.4 percent marks how often one full-policy sample reproduced another's pass on held-out v5. More preservation is better; less is worse." />
               </a>
-              <figcaption>No frozen study reached the 95% preservation target. The Wilson intervals are trial-level and descriptive because each case contributed three samples.</figcaption>
+              <figcaption>No frozen study reached the 95% target. The lower dashed line is the reference's own self-consistency: on held-out v5, a second sample of the full policy reproduced the first sample's pass 90.4% of the time. A baseline, not a ceiling.</figcaption>
             </figure>
 
             <figure class="article-chart-panel" data-chart="cost">
@@ -147,10 +147,12 @@
               <legend class="visually-hidden">PolicyC compiler architecture by version</legend>
               <input class="article-chart-control" type="radio" name="policyc-architecture" id="policyc-architecture-legacy" />
               <input class="article-chart-control" type="radio" name="policyc-architecture" id="policyc-architecture-v09" checked />
+              <input class="article-chart-control" type="radio" name="policyc-architecture" id="policyc-architecture-polaris" />
 
               <div class="article-chart-tabs">
                 <label for="policyc-architecture-legacy">Compilers 0.5–0.8</label>
-                <label for="policyc-architecture-v09">Compiler 0.9</label>
+                <label for="policyc-architecture-v09">Compilers 0.9–0.10</label>
+                <label for="policyc-architecture-polaris">Polaris reader</label>
               </div>
 
               <div class="article-chart-panels">
@@ -165,7 +167,14 @@
                   <a href="/static/policyc-compiler-pipeline-v09.svg?v=2" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC 0.9 compiler pipeline figure at full size">
                     <img src="/static/policyc-compiler-pipeline-v09.svg?v=2" width="1130" height="580" loading="lazy" decoding="async" alt="PolicyC compiler 0.9 reads the request once into a typed RequestState while selecting and closing policy nodes. For the held-out study, its model-assisted extractor makes one compile-time call per request and persists that state before either execution condition runs. Partial evaluation chooses declared branches, applies obligation precedence, lowers unavailable tools, and passes a resolved program to a printer that makes no policy decisions." />
                   </a>
-                  <figcaption id="policyc-pipeline-v09-caption"><strong>Figure 1B.</strong> Compiler 0.9 separates reading, selection, semantic evaluation, and printing. Its held-out frontend made one model call per request and persisted the resulting state before either execution condition ran.</figcaption>
+                  <figcaption id="policyc-pipeline-v09-caption"><strong>Figure 1B.</strong> Compiler 0.9 separates reading, selection, semantic evaluation, and printing; 0.10 extends the state and the field contracts without changing the shape. The held-out frontend made one model call per request and persisted the resulting state before either execution condition ran.</figcaption>
+                </figure>
+
+                <figure class="article-chart-panel" data-chart="architecture-polaris" aria-labelledby="policyc-pipeline-polaris-caption">
+                  <a href="/static/policyc-polaris-pipeline.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the Polaris model-reader pipeline figure at full size">
+                    <img src="/static/policyc-polaris-pipeline.svg?v=1" width="1130" height="580" loading="lazy" decoding="async" alt="Polaris keeps the policy's original 61 clauses, deduplicates repeated boilerplate, and prunes only on a structural fact the case declares, giving a verbatim slice of about three thousand tokens. A separate model call reads that slice and the request and writes request-specific directives; under contract 2 it answers each condition listed from a frozen source-first index exactly once. Only the directives are appended for the answer call, and an empty reading renders the bare slice." />
+                  </a>
+                  <figcaption id="policyc-pipeline-polaris-caption"><strong>Figure 1C.</strong> Polaris, the second approach. The policy stays in its own words; a model reads the slice and the request and writes directives. Nothing deterministic sits between the request and the directive.</figcaption>
                 </figure>
               </div>
             </fieldset>
@@ -254,12 +263,78 @@
             <p>Latency moved in every direction. Compiler 0.8 was 7.07% faster than its full-policy condition, while 0.9 was 13.36% slower. Smaller context was useful, but it was not a direct proxy for the bill or wall-clock speed.</p>
           </section>
 
-          <section aria-labelledby="future-heading">
-            <h2 id="future-heading">Compiler 0.10 has to generalize before 1.0</h2>
-            <p>Compiler 0.9 settled the architecture. Version 0.10 needs to extend the state and policy representation where held-out v5 found gaps: current-information language, field contracts for artifact edits, the consequence of external disclosure, and the difference between a tool limit and a scope or format request.</p>
-            <p>The development protocol matters as much as the code. Every new branch, trigger, field contract, or extractor-prompt revision now needs a held-back slice written by someone who has not seen the change. The author scores that slice once after the change is final. If the result is poor, the slice is spent and a new one must test the revision.</p>
-            <p>The gate stays fixed: at least 95% conditional preservation, a Wilson lower bound of at least 90%, no more than three regressed cases, at least 90% input reduction, at least 15% billed-cost reduction, and at least 90% paired coverage. One fresh pass makes the compiler a 1.0 candidate. A second consecutive pass earns 1.0.</p>
-            <p>Five studies have settled the efficiency question for this synthetic system. The open question is whether PolicyC can represent what each rule requires, prove that the request satisfies it, and keep that behavior on phrasing its author never saw.</p>
+          <section aria-labelledby="compiler-010-heading">
+            <h2 id="compiler-010-heading">Compiler 0.10 failed its gate before it cost anything</h2>
+            <p>Version 0.10 extended the state where v5 found gaps: current-information language, field contracts for artifact edits, the consequence of external disclosure, effect-aware masking so a pending confirmation suppresses acting tools but keeps reads. It passed every visible test.</p>
+            <p>Before I paid for a sixth study, I scored the deterministic reader once against five hidden slices someone else had written: 180 rows, 440 assertions. It matched 333 of 440, and 93 of 180 rows fully. That is frontend label agreement, not preservation, and it is a failed gate. The slices were spent on the score and never diagnosed. No paid run was made from 0.10.</p>
+            <p>Three regularities were now visible across 0.7, 0.8, and 0.9. Each version fixed the classes its development set named and lost to the classes the next fresh set named. Each fix fitted to a spent case generalized worst. And the compiled prompt's size and its behavior were governed by different things: a prompt at 3% of the original could still ask for a confirmation the user had just given.</p>
+            <blockquote><p>I stopped building architectures and started isolating mechanisms.</p></blockquote>
+          </section>
+
+          <section aria-labelledby="noise-heading">
+            <h2 id="noise-heading">The reference only agrees with itself 90% of the time</h2>
+            <p>The preservation metric conditions on one sample of the full policy passing. Nobody had asked how often a second sample of the full policy passes. The v5 grades already had three full-policy samples per case, so the answer cost nothing: over 177 ordered pairs, a second sample reproduced the first sample's pass 90.4% of the time. Thirteen of 60 cases split.</p>
+            <p>A byte-identical copy of the full prompt would have failed my 95% gate. Compiler 0.9's 75.91% is 14.5 points below the reference's self-consistency, not 19 below the gate. That is the honest comparison, and it is why the preservation chart at the top of this article now carries a second line.</p>
+            <p>One correction I had to make to my own language: 90.4% is a baseline, not a ceiling. A different representation can be more stable, or more correct, than the reference and exceed it. From here every result I report has three numbers side by side: did the arm do what the policy says, did it do what the full prompt did, and how often does the full prompt agree with itself.</p>
+          </section>
+
+          <section aria-labelledby="polaris-heading">
+            <h2 id="polaris-heading">Polaris: keep the policy's words and let a model read them</h2>
+            <p>Every compiler so far rewrote the policy before any branch ran. Tracing five cases stage by stage showed that authoring was where conditions died: "confirmation when appropriate" became always ask; "notes only when they help" became a mandatory format; "prefer drafts" became "do not draft." Only 18 of 97 visible cases ever took a branch. The other 79 shipped those defaults.</p>
+            <p>So I built an emission path that keeps the source's own bytes. A hand-audited map of 61 clauses, one per paragraph, line-anchored and hash-checked, with dependencies that travel and a rule that a clause can be removed only by a structural fact the case declares. I called the second approach Polaris.</p>
+            <p>The first thing it measured was embarrassing. The clause slice is 3,259 tokens, 80% below the full policy, and it is the same prompt for every visible case. Nothing was pruned; the whole reduction is deduplication. The synthetic policy repeats nine boilerplate lines in twenty sections: 13,371 of its 16,123 tokens. Real policy prose is about 2,450 tokens. A real prompt that does not repeat itself would gain almost nothing from this, and some of my 90%+ reductions had been this corpus's redundancy all along.</p>
+            <p>Then two small paid canaries, each with an isolated author writing fresh cases and a rubric before any output existed, and kill conditions fixed in advance. Canary 1: given the verbatim confirmation rule and a send the user had reviewed word for word, the clause slice re-asked in both samples. So did the compiler. Preserving a condition did not make the model apply it. Canary 2: quoting the request's own evidence beside the rule made it worse. The evidence arms re-asked on four of six satisfied samples against the full policy's two, and they re-asked about the exact items the quote had just established.</p>
+            <dl class="article-log" aria-label="Canary 2 evidence binding failure">
+              <div><dt>request</dt><dd><code>attendees confirmed, same link, no recurrence</code></dd></div>
+              <div><dt>emitted</dt><dd><code>rule + the user's sentence, quoted</code></dd></div>
+              <div><dt>result</dt><dd><code>"keep the same attendees, same link, no recurrence — please confirm"</code></dd></div>
+            </dl>
+            <blockquote><p>The model re-verifies facts. It follows directives. Everything I built after this emits directives or nothing.</p></blockquote>
+            <figure class="article-dashboard article-diagram" aria-labelledby="policyc-canary-protocol-caption">
+              <a href="/static/policyc-canary-protocol.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC canary protocol table at full size">
+                <img src="/static/policyc-canary-protocol.svg?v=1" width="1130" height="760" loading="lazy" decoding="async" alt="Five canaries. Canary 1: 4 cases, full, clause, and compiler arms, 29 calls, 0.0616 dollars, asked whether the model applies a preserved condition; no, it re-asked on the confirmed send. Canary 2: 8 cases, adding two evidence-binding arms, 80 calls, 0.1639 dollars; quoted evidence made it worse. Canary 3: 8 cases, adding the model reader, 92 calls, 0.411 dollars; the reader read 3 of 4 fresh confirmations with 0 unsafe actions. Canary 4: 8 cases, 3 cheaper readers, 24 calls, 0.026 dollars; all killed at the ledger gate. Canary 5: 8 cases, 4 readers and the condition list, 96 calls, 0.245 dollars; cheap readers still did not read. 321 paid calls and 0.907 dollars in total." />
+              </a>
+              <figcaption id="policyc-canary-protocol-caption"><strong>Figure 4.</strong> The canaries. Each one had a question, an isolated author, a rubric locked before any output, and, from canary 2 on, a separate isolated blind grader. Eight cases is direction, not rate, and every set is spent after one use.</figcaption>
+            </figure>
+          </section>
+
+          <section aria-labelledby="reader-heading">
+            <h2 id="reader-heading">Canary 3: a model read what the regex could not</h2>
+            <p>The third canary held the clause slice fixed and added one thing: a gpt-5-mini call that reads the verbatim clauses and the request, resolves the policy's own conditions, and writes directives. Only the directives are appended. No <code>RequestState</code>, no regex, no enumerated authorization vocabulary anywhere on the path. The reader prompt was written before any case existed and never revised.</p>
+            <p>On the four fresh confirmation phrasings the author wrote ("word for word the text is…", "read it back and it is exactly…", "carry on…"), the deterministic frontend read <code>authorization: absent</code> on every one, so the compiler asked on every sample. The model reader read three as confirmed, wrote "proceed, do not ask for further confirmation," and the answering model acted on all six corresponding trials. Its one miss was in the safe direction.</p>
+            <figure class="article-dashboard article-diagram" aria-labelledby="policyc-canary-arms-caption">
+              <a href="/static/policyc-canary-arms.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC canary arms chart at full size">
+                <img src="/static/policyc-canary-arms.svg?v=1" width="1130" height="970" loading="lazy" decoding="async" alt="Canary 3, sixteen trials per arm: the compiler slice passed 2 with 0 unsafe actions and 8 redundant re-asks and kept 1 of 6 full-policy passes; the clause slice passed 5 with 2 unsafe and 3 re-asks and kept 2 of 6; the full policy passed 6 with 3 unsafe and 2 re-asks and reproduced 2 of 6 of its own; the model reader passed 6 with 0 unsafe and 2 re-asks and kept 4 of 6. Canary 5 without a reader: compiler 4 passes, 8 re-asks, kept 4 of 5; clause slice 4 passes, 7 re-asks, kept 4 of 5; full policy 5 passes with 2 unsafe actions, reproduced 4 of 5 of its own; condition list 3 passes, 4 re-asks, kept 3 of 5." />
+              </a>
+              <figcaption id="policyc-canary-arms-caption"><strong>Figure 5.</strong> Top: the model reader matched the full policy's passes, took no unsafe action where the full policy took three, and kept 4 of the full policy's 6 passes where the compiler kept 1. Bottom: canary 5's answer run, where the conditions were listed in the answer prompt with no reader.</figcaption>
+            </figure>
+            <p>The reader arm did not merely mimic the full policy. It was safer. The full policy forwarded privileged counsel material once and overwrote spreadsheet formulas twice; the reader's directive said to inspect the range first, and the model left it alone. Six versions had spent their effort reconstructing natural-language policy state with the wrong reader. What generalized was a model reading the policy's own sentences, because the ways a person says "I approve" are not enumerable.</p>
+            <p>Then the catch. The reader call cost $0.0059 and 24 seconds per request, two thousand of its tokens reasoning. The full-policy answer costs $0.0046 and 8 seconds, because 71% of that 17k-token prompt is served from cache at a tenth of the fresh price. The pipeline was twice the cost and four times the latency of doing nothing, with a prompt 80% smaller.</p>
+            <blockquote><p>The problem inverted. Old Polaris was cheap and brittle. Model-reader Polaris was behaviorally right and twice as expensive as the thing it replaced.</p></blockquote>
+          </section>
+
+          <section aria-labelledby="cheap-heading">
+            <h2 id="cheap-heading">Cheaper readers kept the rule and lost the request</h2>
+            <p>The break-even budget followed from the arithmetic: the reader arm's own answer already ran at $0.0035 and 7.6 seconds, so the reader could spend about $0.001 and under a second for the pipeline to beat the full policy on both. Canary 4 held the reader contract fixed and varied only the model and reasoning effort, with a gate before any answer run: a reader that told the assistant to obtain confirmation on more than one of the five confirmed actions was killed.</p>
+            <p>All three were. Mini at minimal effort, with zero reasoning tokens, wrote seven contradictory resolutions on one confirmed forward and settled on "only after the user confirms." Nano at minimal returned an empty reading on every confirmed action. Nano at low effort read every confirmed action as "ask" and the privileged external send as "proceed." Every cheap reader was right on the unconfirmed cases and wrong on the confirmed ones. They kept the rule and lost the request, which is exactly what the regex had done.</p>
+            <p>I thought the failure was search: finding the request-dependent rules in three thousand tokens of clauses. So I audited the whole policy once, offline, for every sentence whose effect depends on what the request says, froze sixteen conditions over twelve clauses, and wrote a second reader contract. The conditions of the retained clauses are listed for the reader, and it must answer each exactly once with a verdict, a quote, and a directive; the runtime rejects anything else. Alongside, a single-call arm lists the same sentences in the answer prompt with no reader at all, to ask whether a separate reader was needed.</p>
+            <figure class="article-dashboard article-diagram" aria-labelledby="policyc-reader-economics-caption">
+              <a href="/static/policyc-reader-economics.svg?v=1" target="_blank" rel="noopener noreferrer" aria-label="Open the PolicyC reader economics chart at full size">
+                <img src="/static/policyc-reader-economics.svg?v=1" width="1130" height="830" loading="lazy" decoding="async" alt="Reader cost per case on a log scale. gpt-5-mini at default effort cost 0.0059 dollars and 24 seconds under contract 1 and 0.0077 dollars and 30.6 seconds under contract 2, and read the confirmations both times, above the full-policy answer's 0.0046 dollars. mini at minimal effort cost 0.0026 and 0.0024 dollars and did not read. nano at low effort cost 0.00047 and 0.0009 dollars and did not read. nano at minimal effort cost 0.00014 and 0.0003 dollars and did not read. The break-even reader budget is about 0.001 dollars." />
+              </a>
+              <figcaption id="policyc-reader-economics-caption"><strong>Figure 6.</strong> Every reader I tried, by cost per request. The only two that read the fresh confirmations are the two above the full-policy answer's cost. Everything under the break-even line did not read.</figcaption>
+            </figure>
+            <p>Canary 5 made the failure countable instead of a judgment call, because the author also wrote the expected verdict for every listed condition before any output existed. The reference reader agreed with the labels on 25 of 33, got every confirmed action's specific condition right, and got dearer: listing thirteen conditions made the one reader that reads think for 2,680 tokens. Mini at minimal filled the schema with "yes" on all eight cases and asked anyway in every directive. Nano at low could not even answer the list. Removing the search did not restore the comparison.</p>
+            <p>The single-call worklist did not substitute either. On a confirmed archive, with "Confirmation should specify the target, scope, operation, and consequence" sitting in its prompt under an instruction to resolve it first, it re-asked on both samples. It cut redundant re-asks against the bare slice and cost a third less than the full policy, and it kept fewer of the full policy's passes than the bare slice did.</p>
+            <blockquote><p>A resolution the model performs for itself does not behave like a directive it is given.</p></blockquote>
+            <p>One harness lesson I am keeping: my runtime records tool calls and does not execute them, and the author's tool schemas exposed identifier parameters. On three of five confirmed cases, every arm's only call was a lookup, the full policy included. Those cases said nothing about anyone. The next brief requires tools that let the requested action be taken in one call from what the request itself supplies.</p>
+          </section>
+
+          <section aria-labelledby="stop-heading">
+            <h2 id="stop-heading">Where I stopped</h2>
+            <p>Ten paid studies, about $6.90 of provider spend, one pinned model. What they established: most policy text is inactive for most requests, and a compiled prompt removes it reliably, though on a redundant corpus much of that is deduplication. Deterministic compilation preserves three quarters to six sevenths of the reference's critical passes against a reference that reproduces itself nine times in ten. And the gap is made of reading, not slicing: the model acts on directives, the directive that generalizes comes from a model reading the policy's own sentences, and that reading costs about what the whole full-policy answer costs. Every attempt to buy it cheaper produced a reader that kept the rule and lost the request.</p>
+            <p>What it does not establish: any preservation rate for the reader architecture, which has eight cases behind it; whether the reference reader's directives change behavior under the second contract, which I designed and did not run; anything about another provider, where caching or reasoning prices could move the arithmetic either way.</p>
+            <p>I stopped here because the bound has a mechanism attached, and because the next question is not mine to answer with a synthetic policy: whether the price of reading the request falls with better models, cached readings across repeated requests, or a deterministic fast path with a semantic fallback on the ambiguous fraction of traffic. Everything needed to answer it is in the repository: the frozen sets, the locked rubrics and labels, the condition index over the source, a reader contract that makes a reading a checkable verdict, a gate that decides before money is spent, and every raw response.</p>
           </section>
         </div>
 
