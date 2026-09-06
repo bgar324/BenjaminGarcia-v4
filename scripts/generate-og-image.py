@@ -78,6 +78,7 @@ def read_copy() -> dict[str, str]:
     canonical = capture(
         r'<link rel="canonical" href="([^"]+)"', source, "canonical URL"
     )
+    host = canonical.split("//", 1)[-1].strip("/")
     return {
         "eyebrow": capture(
             r'<meta property="og:site_name" content="([^"]+)"', source, "site name"
@@ -88,7 +89,8 @@ def read_copy() -> dict[str, str]:
         "lead": capture(
             r'<p class="intro-copy">(.*?)</p>', source, "intro paragraph"
         ),
-        "domain": canonical.split("//", 1)[-1].strip("/"),
+        # The card prints the bare domain even though the canonical host is www.
+        "domain": host.removeprefix("www."),
     }
 
 

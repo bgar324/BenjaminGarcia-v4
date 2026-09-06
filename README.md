@@ -2,7 +2,7 @@
 
 Personal portfolio for Benjamin Garcia, written in plain HTML and CSS and deployed on Vercel.
 
-Live site: [bentgarcia.com](https://bentgarcia.com)
+Live site: [bentgarcia.com](https://www.bentgarcia.com)
 
 ## Overview
 
